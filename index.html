@@ -1,0 +1,4790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>PRO EARN — Admin</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#eaf8ff;
+  color:#123047;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.loginPage{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at top,#d9f5ff,#eaf8ff 50%,#d8f1ff);
+}
+
+.loginBox{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border:1px solid #b7d8e7;
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 20px 50px rgba(30,100,140,.15);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:26px;
+  font-weight:900;
+  color:#0d6794;
+  margin-bottom:8px;
+}
+
+.logoIcon{
+  width:50px;
+  height:50px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#0d6794;
+  color:white;
+  font-size:25px;
+}
+
+.loginBox h1{
+  margin-top:20px;
+  font-size:28px;
+}
+
+.loginBox p{
+  color:#66808f;
+  margin-top:7px;
+  line-height:1.5;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  margin:15px 0 7px;
+}
+
+input,
+select{
+  width:100%;
+  padding:14px 15px;
+  border:1px solid #aac9d8;
+  border-radius:14px;
+  outline:none;
+  background:white;
+  color:#123047;
+}
+
+input:focus,
+select:focus{
+  border-color:#1888b8;
+  box-shadow:0 0 0 3px rgba(24,136,184,.10);
+}
+
+.primary{
+  border:0;
+  background:#087eaa;
+  color:white;
+  padding:13px 18px;
+  border-radius:13px;
+  font-weight:900;
+  margin-top:12px;
+}
+
+.primary:hover{
+  background:#06698e;
+}
+
+.secondary{
+  border:1px solid #aac9d8;
+  background:white;
+  color:#185b78;
+  padding:12px 16px;
+  border-radius:13px;
+  font-weight:800;
+}
+
+.errorBox{
+  margin-top:15px;
+  padding:13px;
+  border-radius:13px;
+  background:#fff0f0;
+  border:1px solid #e5aaaa;
+  color:#a62e2e;
+  line-height:1.5;
+}
+
+.successBox{
+  margin-top:15px;
+  padding:13px;
+  border-radius:13px;
+  background:#effff5;
+  border:1px solid #91d0a9;
+  color:#23734a;
+}
+
+/* =========================
+   ADMIN LAYOUT
+========================= */
+
+.adminApp{
+  display:none;
+  min-height:100vh;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:260px;
+  background:#083d56;
+  color:white;
+  padding:22px 15px;
+  z-index:100;
+  overflow-y:auto;
+}
+
+.sideBrand{
+  display:flex;
+  gap:11px;
+  align-items:center;
+  padding:8px 10px 24px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  margin-bottom:15px;
+}
+
+.sideBrandIcon{
+  width:45px;
+  height:45px;
+  background:white;
+  color:#087eaa;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+}
+
+.sideBrand b{
+  display:block;
+  font-size:18px;
+}
+
+.sideBrand small{
+  display:block;
+  opacity:.65;
+  margin-top:3px;
+}
+
+.navBtn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#d9f4ff;
+  text-align:left;
+  padding:13px 14px;
+  border-radius:13px;
+  margin-bottom:6px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.navBtn:hover,
+.navBtn.active{
+  background:#0b6385;
+  color:white;
+}
+
+.badge{
+  margin-left:auto;
+  min-width:25px;
+  height:25px;
+  padding:0 7px;
+  border-radius:20px;
+  background:#f3c94b;
+  color:#594600;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+}
+
+.sideBottom{
+  margin-top:30px;
+  padding-top:15px;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+
+.main{
+  margin-left:260px;
+  min-height:100vh;
+}
+
+.topbar{
+  min-height:88px;
+  background:white;
+  border-bottom:1px solid #c5dfeb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 28px;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.topTitle small{
+  color:#6d8998;
+  font-weight:800;
+}
+
+.topTitle h1{
+  font-size:25px;
+  margin-top:4px;
+}
+
+.topActions{
+  display:flex;
+  gap:9px;
+}
+
+.refreshBtn{
+  border:1px solid #a9cbd9;
+  background:#f8fdff;
+  color:#17617d;
+  padding:11px 15px;
+  border-radius:12px;
+  font-weight:900;
+}
+
+.content{
+  padding:25px;
+  max-width:1500px;
+  margin:auto;
+}
+
+/* =========================
+   NOTICES
+========================= */
+
+.notice{
+  padding:14px 16px;
+  border-radius:15px;
+  margin-bottom:18px;
+  background:#f5fbfe;
+  border:1px solid #b9dce9;
+  line-height:1.5;
+}
+
+.notice.success{
+  background:#effff5;
+  border-color:#92d0aa;
+  color:#23734a;
+}
+
+.notice.error{
+  background:#fff1f1;
+  border-color:#e2a4a4;
+  color:#a02c2c;
+}
+
+/* =========================
+   KPI
+========================= */
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:20px;
+}
+
+.kpi{
+  background:white;
+  border:1px solid #b9dbe8;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 8px 25px rgba(25,100,130,.06);
+}
+
+.kpiIcon{
+  font-size:27px;
+}
+
+.kpi small{
+  display:block;
+  color:#6b8795;
+  font-weight:900;
+  margin-top:12px;
+}
+
+.kpi strong{
+  display:block;
+  font-size:28px;
+  margin-top:5px;
+  color:#075e82;
+}
+
+/* =========================
+   PANELS
+========================= */
+
+.panel{
+  background:white;
+  border:1px solid #b8d9e7;
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 8px 25px rgba(25,100,130,.05);
+}
+
+.panelHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+
+.panelHead h2{
+  font-size:21px;
+}
+
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.statBox{
+  padding:18px;
+  border-radius:16px;
+  background:#f3fbff;
+  border:1px solid #c3e0ea;
+}
+
+.statBox small{
+  color:#718b98;
+  font-weight:800;
+}
+
+.statBox b{
+  display:block;
+  font-size:23px;
+  margin-top:5px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search{
+  max-width:430px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.tableWrap{
+  overflow-x:auto;
+  border:1px solid #c4dfe9;
+  border-radius:16px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+th{
+  background:#eaf8fd;
+  color:#526c79;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+}
+
+th,
+td{
+  padding:15px 13px;
+  border-bottom:1px solid #d5e8ef;
+  text-align:left;
+  vertical-align:middle;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+.memberName{
+  font-weight:900;
+}
+
+.sub{
+  color:#77909c;
+  font-size:12px;
+  margin-top:4px;
+  word-break:break-all;
+}
+
+.wallet{
+  font-weight:900;
+  color:#08794d;
+}
+
+.status{
+  display:inline-flex;
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:900;
+  text-transform:capitalize;
+}
+
+.pending{
+  background:#fff6d9;
+  color:#8a6c11;
+  border:1px solid #e0c65e;
+}
+
+.approved{
+  background:#eafff0;
+  color:#247447;
+  border:1px solid #91d2a8;
+}
+
+.rejected{
+  background:#fff0f0;
+  color:#a63333;
+  border:1px solid #dda0a0;
+}
+
+.actionRow{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.viewBtn,
+.approveBtn,
+.rejectBtn,
+.increaseBtn{
+  border-radius:11px;
+  padding:9px 12px;
+  font-weight:900;
+  border:1px solid;
+}
+
+.viewBtn{
+  background:#edfaff;
+  color:#176a8c;
+  border-color:#9bcbdc;
+}
+
+.approveBtn{
+  background:#edfff3;
+  color:#247647;
+  border-color:#8ac9a2;
+}
+
+.rejectBtn{
+  background:#fff1f1;
+  color:#a33737;
+  border-color:#dda0a0;
+}
+
+.increaseBtn{
+  background:#f0f8ff;
+  color:#16658a;
+  border-color:#9dcde1;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  text-align:center;
+  padding:35px 15px;
+  color:#76909c;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(2,30,45,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:1000;
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modalBox{
+  width:100%;
+  max-width:560px;
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
+}
+
+.modalBox h2{
+  margin-bottom:10px;
+}
+
+.close{
+  float:right;
+  border:0;
+  background:#eef7fa;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  font-size:25px;
+  color:#456;
+}
+
+.detail{
+  background:#f5fbfe;
+  border:1px solid #c7e1ea;
+  border-radius:15px;
+  padding:15px;
+  margin-top:12px;
+}
+
+.detailLine{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:8px 0;
+  border-bottom:1px solid #d8e9ef;
+}
+
+.detailLine:last-child{
+  border-bottom:0;
+}
+
+.detailLine span:first-child{
+  color:#718894;
+}
+
+.detailLine b{
+  text-align:right;
+  word-break:break-word;
+}
+
+.quickBtns{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.quickBtns button{
+  border:1px solid #9dcde0;
+  background:#effaff;
+  color:#16688c;
+  border-radius:10px;
+  padding:9px 13px;
+  font-weight:900;
+}
+
+.modalActions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobileMenu{
+  display:none;
+  border:1px solid #abcbd8;
+  background:white;
+  border-radius:12px;
+  padding:10px 13px;
+  font-size:21px;
+}
+
+@media(max-width:1000px){
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:760px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+    width:270px;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobileMenu{
+    display:block;
+  }
+
+  .topbar{
+    padding:14px 16px;
+  }
+
+  .topTitle h1{
+    font-size:20px;
+  }
+
+  .topTitle small{
+    font-size:10px;
+  }
+
+  .content{
+    padding:15px;
+  }
+
+  .kpis{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .kpi{
+    padding:15px;
+  }
+
+  .kpi strong{
+    font-size:21px;
+  }
+
+  .grid2{
+    grid-template-columns:1fr;
+  }
+
+  .panel{
+    padding:15px;
+    border-radius:18px;
+  }
+
+  .topActions .secondary{
+    display:none;
+  }
+}
+
+@media(max-width:450px){
+  .kpis{
+    grid-template-columns:1fr;
+  }
+
+  .topbar{
+    gap:8px;
+  }
+
+  .topTitle{
+    flex:1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div id="loginPage" class="loginPage">
+
+  <div class="loginBox">
+
+    <div class="logo">
+      <div class="logoIcon">🛡️</div>
+      <div>PRO EARN</div>
+    </div>
+
+    <h1>Admin Login</h1>
+
+    <p>
+      Sign in with the authorized Firebase admin account.
+    </p>
+
+    <form id="loginForm">
+
+      <label>Email</label>
+      <input
+        id="loginEmail"
+        type="email"
+        required
+        autocomplete="username"
+        placeholder="Admin email"
+      >
+
+      <label>Password</label>
+      <input
+        id="loginPassword"
+        type="password"
+        required
+        autocomplete="current-password"
+        placeholder="Password"
+      >
+
+      <button
+        id="loginBtn"
+        class="primary"
+        type="submit"
+        style="width:100%"
+      >
+        Login to Admin
+      </button>
+
+    </form>
+
+    <div id="loginMsg"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     ADMIN APP
+========================= -->
+
+<div id="adminApp" class="adminApp">
+
+  <!-- SIDEBAR -->
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sideBrand">
+
+      <div class="sideBrandIcon">🛡️</div>
+
+      <div>
+        <b>PRO EARN</b>
+        <small>ADMIN PANEL</small>
+      </div>
+
+    </div>
+
+
+    <button
+      class="navBtn active"
+      data-section="dashboard"
+      onclick="showSection('dashboard',this)"
+    >
+      📊 Dashboard
+    </button>
+
+
+    <button
+      class="navBtn"
+      data-section="members"
+      onclick="showSection('members',this)"
+    >
+      👥 Members
+    </button>
+
+
+    <button
+      class="navBtn"
+      data-section="plans"
+      onclick="showSection('plans',this)"
+    >
+      📋 Plan Requests
+      <span id="planBadge" class="badge">0</span>
+    </button>
+
+
+    <button
+      class="navBtn"
+      data-section="withdrawals"
+      onclick="showSection('withdrawals',this)"
+    >
+      💸 Withdrawals
+      <span id="withdrawBadge" class="badge">0</span>
+    </button>
+
+
+    <button
+      class="navBtn"
+      data-section="history"
+      onclick="showSection('history',this)"
+    >
+      🧾 Complete History
+    </button>
+
+
+    <div class="sideBottom">
+
+      <button
+        class="navBtn"
+        onclick="logoutAdmin()"
+      >
+        🚪 Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div style="display:flex;align-items:center;gap:10px">
+
+        <button
+          class="mobileMenu"
+          onclick="toggleSidebar()"
+        >
+          ☰
+        </button>
+
+        <div class="topTitle">
+
+          <small>PRO EARN CONTROL CENTER</small>
+
+          <h1 id="pageTitle">
+            Dashboard
+          </h1>
+
+        </div>
+
+      </div>
+
+
+      <div class="topActions">
+
+        <button
+          class="refreshBtn"
+          onclick="loadAllData()"
+        >
+          ↻ Refresh
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <div class="content">
+
+      <div id="globalMsg"></div>
+
+
+      <!-- DASHBOARD -->
+
+      <section id="section-dashboard">
+
+        <div class="kpis">
+
+          <div class="kpi">
+            <div class="kpiIcon">👥</div>
+            <small>TOTAL MEMBERS</small>
+            <strong id="totalMembers">0</strong>
+          </div>
+
+          <div class="kpi">
+            <div class="kpiIcon">💰</div>
+            <small>TOTAL WALLET</small>
+            <strong id="totalWallet">Rs. 0</strong>
+          </div>
+
+          <div class="kpi">
+            <div class="kpiIcon">🤝</div>
+            <small>TOTAL REFERRALS</small>
+            <strong id="totalReferrals">0</strong>
+          </div>
+
+          <div class="kpi">
+            <div class="kpiIcon">⏳</div>
+            <small>PENDING ACTIONS</small>
+            <strong id="pendingActions">0</strong>
+          </div>
+
+        </div>
+
+
+        <div class="grid2">
+
+          <div class="panel">
+
+            <div class="panelHead">
+              <h2>📌 Admin Snapshot</h2>
+            </div>
+
+            <div class="grid2">
+
+              <div class="statBox">
+                <small>PLAN REQUESTS</small>
+                <b id="dashPlans">0</b>
+              </div>
+
+              <div class="statBox">
+                <small>APPROVED PLANS</small>
+                <b id="dashApprovedPlans">0</b>
+              </div>
+
+              <div class="statBox">
+                <small>PENDING PLANS</small>
+                <b id="dashPendingPlans">0</b>
+              </div>
+
+              <div class="statBox">
+                <small>PENDING WITHDRAWALS</small>
+                <b id="dashPendingWithdrawals">0</b>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <div class="panelHead">
+              <h2>⚡ Quick Actions</h2>
+            </div>
+
+            <button
+              class="primary"
+              style="width:100%"
+              onclick="showSection('members')"
+            >
+              👥 View Members
+            </button>
+
+            <button
+              class="primary"
+              style="width:100%"
+              onclick="showSection('plans')"
+            >
+              📋 Review Plan Requests
+            </button>
+
+            <button
+              class="primary"
+              style="width:100%"
+              onclick="showSection('withdrawals')"
+            >
+              💸 Review Withdrawals
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- MEMBERS -->
+
+      <section
+        id="section-members"
+        style="display:none"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>
+              👥 All Members
+              (<span id="memberCount">0</span>)
+            </h2>
+
+            <input
+              id="memberSearch"
+              class="search"
+              placeholder="Search UID / name / phone / email..."
+              oninput="renderMembers()"
+            >
+
+          </div>
+
+          <div id="membersTable"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- PLANS -->
+
+      <section
+        id="section-plans"
+        style="display:none"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>📋 Plan Requests</h2>
+
+            <select
+              id="planFilter"
+              style="max-width:200px"
+              onchange="renderPlans()"
+            >
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+
+          </div>
+
+          <div id="plansTable"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- WITHDRAWALS -->
+
+      <section
+        id="section-withdrawals"
+        style="display:none"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>💸 Withdrawal Requests</h2>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+              <input
+                id="withdrawSearch"
+                class="search"
+                style="max-width:300px"
+                placeholder="Search UID / name / number / email..."
+                oninput="renderWithdrawals()"
+              >
+
+              <select
+                id="withdrawFilter"
+                style="max-width:160px"
+                onchange="renderWithdrawals()"
+              >
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+
+            </div>
+
+          </div>
+
+          <div id="withdrawalsTable"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- HISTORY -->
+
+      <section
+        id="section-history"
+        style="display:none"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>🧾 Complete Activity</h2>
+
+            <input
+              id="historySearch"
+              class="search"
+              placeholder="Search activity..."
+              oninput="renderHistory()"
+            >
+
+          </div>
+
+          <div id="historyTable"></div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- =========================
+     MEMBER MODAL
+========================= -->
+
+<div id="memberModal" class="modal">
+
+  <div class="modalBox">
+
+    <button
+      class="close"
+      onclick="closeModal('memberModal')"
+    >
+      ×
+    </button>
+
+    <h2>👤 Member Details</h2>
+
+    <div id="memberDetails"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     REFERRAL MODAL
+========================= -->
+
+<div id="referralModal" class="modal">
+
+  <div class="modalBox">
+
+    <button
+      class="close"
+      onclick="closeModal('referralModal')"
+    >
+      ×
+    </button>
+
+    <h2>➕ Increase Member Count</h2>
+
+    <div id="referralInfo"></div>
+
+    <label>Increase By</label>
+
+    <input
+      id="referralIncrease"
+      type="number"
+      min="1"
+      step="1"
+      value="1"
+      placeholder="Enter number"
+    >
+
+    <div class="quickBtns">
+
+      <button onclick="setReferralIncrease(1)">+1</button>
+
+      <button onclick="setReferralIncrease(5)">+5</button>
+
+      <button onclick="setReferralIncrease(10)">+10</button>
+
+      <button onclick="setReferralIncrease(20)">+20</button>
+
+    </div>
+
+    <div
+      id="referralMsg"
+      style="margin-top:12px"
+    ></div>
+
+    <div class="modalActions">
+
+      <button
+        class="secondary"
+        onclick="closeModal('referralModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="primary"
+        onclick="saveReferralIncrease()"
+      >
+        Save Increase
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     ACTION MODAL
+========================= -->
+
+<div id="actionModal" class="modal">
+
+  <div class="modalBox">
+
+    <button
+      class="close"
+      onclick="closeModal('actionModal')"
+    >
+      ×
+    </button>
+
+    <h2 id="actionTitle">Confirm Action</h2>
+
+    <div
+      id="actionDetails"
+      class="detail"
+    ></div>
+
+    <label id="actionReasonLabel">
+      Note / Reason
+    </label>
+
+    <input
+      id="actionReason"
+      placeholder="Optional note"
+    >
+
+    <div
+      id="actionMsg"
+      style="margin-top:12px"
+    ></div>
+
+    <div class="modalActions">
+
+      <button
+        class="secondary"
+        onclick="closeModal('actionModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        id="actionConfirmBtn"
+        class="primary"
+        onclick="confirmAction()"
+      >
+        Confirm
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+  runTransaction
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyA43W8SRPUeoDXpNWhD_sZcEDdpI9Hov8s",
+
+  authDomain:
+    "pro-earn-81f64.firebaseapp.com",
+
+  projectId:
+    "pro-earn-81f64",
+
+  storageBucket:
+    "pro-earn-81f64.firebasestorage.app",
+
+  messagingSenderId:
+    "617371449142",
+
+  appId:
+    "1:617371449142:web:9974ae12a54c20bb1ee597",
+
+  measurementId:
+    "G-7Y2J707H21"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let currentAdmin = null;
+
+let isAdmin = false;
+
+let usersData = [];
+
+let plansData = [];
+
+let withdrawalsData = [];
+
+let workData = [];
+
+let historyData = [];
+
+let currentReferralUid = null;
+
+let currentAction = null;
+
+let loading = false;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id => document.getElementById(id);
+
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/[&<>"']/g, char => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    }[char]));
+
+}
+
+
+function money(value){
+
+  return "Rs. " + (Number(value) || 0).toLocaleString();
+
+}
+
+
+function statusBadge(status){
+
+  const s = String(status || "pending").toLowerCase();
+
+  return `
+    <span class="status ${esc(s)}">
+      ${esc(s)}
+    </span>
+  `;
+
+}
+
+
+function formatDate(value){
+
+  if(!value) return "—";
+
+  try{
+
+    if(
+      typeof value === "object" &&
+      value.seconds
+    ){
+
+      return new Date(
+        Number(value.seconds) * 1000
+      ).toLocaleString();
+
+    }
+
+    const d = new Date(value);
+
+    if(!isNaN(d.getTime())){
+
+      return d.toLocaleString();
+
+    }
+
+  }catch(e){}
+
+  return String(value);
+
+}
+
+
+function showMessage(message,type="success"){
+
+  $("globalMsg").innerHTML = `
+    <div class="notice ${type}">
+      ${esc(message)}
+    </div>
+  `;
+
+  setTimeout(()=>{
+
+    $("globalMsg").innerHTML = "";
+
+  },5000);
+
+}
+
+
+function firebaseError(error){
+
+  console.error(error);
+
+  const code = error?.code || "";
+
+  if(code.includes("permission-denied")){
+
+    return "Firebase permission denied. Make sure this account is an authorized admin and Firestore Rules allow admin access.";
+
+  }
+
+  if(code.includes("not-found")){
+
+    return "The Firebase document was not found.";
+
+  }
+
+  if(code.includes("unauthenticated")){
+
+    return "Your admin session has expired. Please login again.";
+
+  }
+
+  return error?.message || "Something went wrong.";
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+$("loginForm").addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+    const email =
+      $("loginEmail").value.trim();
+
+    const password =
+      $("loginPassword").value;
+
+    if(!email || !password){
+
+      $("loginMsg").innerHTML =
+        `<div class="errorBox">
+          Please enter email and password.
+        </div>`;
+
+      return;
+
+    }
+
+    $("loginBtn").disabled = true;
+
+    $("loginBtn").textContent =
+      "Logging in...";
+
+    $("loginMsg").innerHTML = "";
+
+    try{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    }catch(error){
+
+      $("loginMsg").innerHTML =
+        `<div class="errorBox">
+          ${esc(firebaseError(error))}
+        </div>`;
+
+      $("loginBtn").disabled = false;
+
+      $("loginBtn").textContent =
+        "Login to Admin";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   ADMIN CHECK
+========================================================= */
+
+async function verifyAdmin(){
+
+  const user = auth.currentUser;
+
+  if(!user){
+
+    return false;
+
+  }
+
+  try{
+
+    const adminRef =
+      doc(db,"admins",user.uid);
+
+    const adminSnap =
+      await getDoc(adminRef);
+
+    if(!adminSnap.exists()){
+
+      return false;
+
+    }
+
+    const data =
+      adminSnap.data();
+
+    return (
+      data.role === "admin" &&
+      data.active === true
+    );
+
+  }catch(error){
+
+    console.error(
+      "Admin verification error:",
+      error
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(!user){
+
+      currentAdmin = null;
+
+      isAdmin = false;
+
+      $("loginPage").style.display =
+        "flex";
+
+      $("adminApp").style.display =
+        "none";
+
+      return;
+
+    }
+
+    currentAdmin = user;
+
+    const allowed =
+      await verifyAdmin();
+
+    if(!allowed){
+
+      isAdmin = false;
+
+      await signOut(auth);
+
+      $("loginPage").style.display =
+        "flex";
+
+      $("adminApp").style.display =
+        "none";
+
+      $("loginMsg").innerHTML =
+        `<div class="errorBox">
+          Admin access denied. This Firebase account is not an active admin.
+        </div>`;
+
+      return;
+
+    }
+
+    isAdmin = true;
+
+    $("loginPage").style.display =
+      "none";
+
+    $("adminApp").style.display =
+      "block";
+
+    await loadAllData();
+
+  }
+);
+
+
+/* =========================================================
+   LOAD FIREBASE DATA
+========================================================= */
+
+window.loadAllData = async function(){
+
+  if(loading) return;
+
+  if(!isAdmin){
+
+    showMessage(
+      "Admin authorization required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  loading = true;
+
+  try{
+
+    $("globalMsg").innerHTML =
+      `<div class="notice">
+        Loading Firebase data...
+      </div>`;
+
+    const [
+      usersSnap,
+      plansSnap,
+      withdrawalsSnap,
+      workSnap
+    ] = await Promise.all([
+
+      getDocs(
+        collection(db,"users")
+      ),
+
+      getDocs(
+        collection(db,"planRequests")
+      ),
+
+      getDocs(
+        collection(db,"withdrawals")
+      ),
+
+      getDocs(
+        collection(db,"workRecords")
+      )
+
+    ]);
+
+
+    /*
+      IMPORTANT:
+      Every Firestore document gets its
+      REAL Firestore document ID as `docId`.
+
+      We DO NOT use the custom `id`
+      field inside the withdrawal object
+      as the Firestore document ID.
+    */
+
+    usersData =
+      usersSnap.docs.map(d => ({
+        docId:d.id,
+        ...d.data()
+      }));
+
+
+    plansData =
+      plansSnap.docs.map(d => ({
+        docId:d.id,
+        ...d.data()
+      }));
+
+
+    withdrawalsData =
+      withdrawalsSnap.docs.map(d => ({
+        docId:d.id,
+        ...d.data()
+      }));
+
+
+    workData =
+      workSnap.docs.map(d => ({
+        docId:d.id,
+        ...d.data()
+      }));
+
+
+    buildHistory();
+
+
+    renderDashboard();
+
+    renderMembers();
+
+    renderPlans();
+
+    renderWithdrawals();
+
+    renderHistory();
+
+
+    $("globalMsg").innerHTML =
+      `<div class="notice success">
+        Firebase data loaded successfully.
+      </div>`;
+
+    setTimeout(()=>{
+
+      $("globalMsg").innerHTML = "";
+
+    },3500);
+
+  }catch(error){
+
+    console.error(error);
+
+    $("globalMsg").innerHTML =
+      `<div class="notice error">
+        ${esc(firebaseError(error))}
+      </div>`;
+
+  }finally{
+
+    loading = false;
+
+  }
+
+};
+
+
+/* =========================================================
+   BUILD HISTORY
+========================================================= */
+
+function buildHistory(){
+
+  const rows = [];
+
+  usersData.forEach(user => {
+
+    if(!Array.isArray(user.history))
+      return;
+
+    user.history.forEach(item => {
+
+      rows.push({
+
+        uid:user.docId,
+
+        userName:user.name || "Member",
+
+        email:user.email || "",
+
+        kind:item.kind || "Activity",
+
+        type:item.type || "",
+
+        plan:item.plan,
+
+        amount:item.amount,
+
+        reward:item.reward,
+
+        status:item.status || "",
+
+        date:item.date || ""
+
+      });
+
+    });
+
+  });
+
+
+  workData.forEach(item => {
+
+    rows.push({
+
+      uid:item.uid || "",
+
+      userName:
+        findUser(item.uid)?.name || "Member",
+
+      email:
+        findUser(item.uid)?.email || "",
+
+      kind:item.type || "Work",
+
+      type:item.language || "",
+
+      amount:"",
+
+      reward:item.reward,
+
+      status:item.status || "",
+
+      date:formatDate(item.createdAt)
+
+    });
+
+  });
+
+
+  withdrawalsData.forEach(item => {
+
+    rows.push({
+
+      uid:item.uid || "",
+
+      userName:
+        findUser(item.uid)?.name ||
+        item.name ||
+        "Member",
+
+      email:
+        findUser(item.uid)?.email || "",
+
+      kind:"Withdrawal",
+
+      type:item.method || "",
+
+      amount:item.amount,
+
+      reward:"",
+
+      status:item.status || "pending",
+
+      date:
+        item.date ||
+        formatDate(item.createdAt)
+
+    });
+
+  });
+
+
+  plansData.forEach(item => {
+
+    rows.push({
+
+      uid:item.uid || "",
+
+      userName:
+        findUser(item.uid)?.name ||
+        "Member",
+
+      email:
+        findUser(item.uid)?.email || "",
+
+      kind:"Plan Request",
+
+      type:item.type || "",
+
+      plan:item.plan,
+
+      amount:item.fee,
+
+      reward:item.earn,
+
+      status:item.status || "pending",
+
+      date:formatDate(item.submittedAt)
+
+    });
+
+  });
+
+
+  historyData = rows;
+
+}
+
+
+function findUser(uid){
+
+  return usersData.find(
+    u => u.docId === uid
+  );
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+  const pendingPlans =
+    plansData.filter(
+      x => (x.status || "pending") === "pending"
+    ).length;
+
+
+  const pendingWithdrawals =
+    withdrawalsData.filter(
+      x => (x.status || "pending") === "pending"
+    ).length;
+
+
+  const totalWallet =
+    usersData.reduce(
+      (sum,user) =>
+        sum + (Number(user.wallet) || 0),
+      0
+    );
+
+
+  const totalReferrals =
+    usersData.reduce(
+      (sum,user) =>
+        sum + (Number(user.referrals) || 0),
+      0
+    );
+
+
+  const approvedPlans =
+    plansData.filter(
+      x => x.status === "approved"
+    ).length;
+
+
+  $("totalMembers").textContent =
+    usersData.length;
+
+
+  $("totalWallet").textContent =
+    money(totalWallet);
+
+
+  $("totalReferrals").textContent =
+    totalReferrals;
+
+
+  $("pendingActions").textContent =
+    pendingPlans + pendingWithdrawals;
+
+
+  $("dashPlans").textContent =
+    plansData.length;
+
+
+  $("dashApprovedPlans").textContent =
+    approvedPlans;
+
+
+  $("dashPendingPlans").textContent =
+    pendingPlans;
+
+
+  $("dashPendingWithdrawals").textContent =
+    pendingWithdrawals;
+
+
+  $("planBadge").textContent =
+    pendingPlans;
+
+
+  $("withdrawBadge").textContent =
+    pendingWithdrawals;
+
+}
+
+
+/* =========================================================
+   MEMBERS
+========================================================= */
+
+window.renderMembers = function(){
+
+  const term =
+    String(
+      $("memberSearch")?.value || ""
+    )
+    .toLowerCase()
+    .trim();
+
+
+  const users =
+    usersData.filter(user => {
+
+      if(!term) return true;
+
+      return [
+
+        user.docId,
+
+        user.name,
+
+        user.email,
+
+        user.phone
+
+      ].some(value =>
+        String(value || "")
+          .toLowerCase()
+          .includes(term)
+      );
+
+    });
+
+
+  $("memberCount").textContent =
+    users.length;
+
+
+  if(!users.length){
+
+    $("membersTable").innerHTML =
+      `<div class="empty">
+        No members found.
+      </div>`;
+
+    return;
+
+  }
+
+
+  $("membersTable").innerHTML = `
+
+    <div class="tableWrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Member</th>
+
+            <th>Contact</th>
+
+            <th>Wallet</th>
+
+            <th>Referrals</th>
+
+            <th>Plans</th>
+
+            <th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          ${users.map(user => {
+
+            const assignment =
+              user.plans?.assignment;
+
+            const ads =
+              user.plans?.ads;
+
+            return `
+
+              <tr>
+
+                <td>
+
+                  <div class="memberName">
+                    ${esc(user.name || "Member")}
+                  </div>
+
+                  <div class="sub">
+                    UID: ${esc(user.docId)}
+                  </div>
+
+                </td>
+
+
+                <td>
+
+                  ${esc(user.email || "—")}
+
+                  <div class="sub">
+                    ${esc(user.phone || "—")}
+                    · Age ${esc(user.age || "—")}
+                  </div>
+
+                </td>
+
+
+                <td>
+
+                  <span class="wallet">
+                    ${money(user.wallet)}
+                  </span>
+
+                </td>
+
+
+                <td>
+
+                  <b>
+                    ${Number(user.referrals) || 0}
+                  </b>
+
+                  <button
+                    class="increaseBtn"
+                    onclick="openReferralModal('${esc(user.docId)}')"
+                    style="margin-left:6px"
+                  >
+                    ➕ Increase
+                  </button>
+
+                </td>
+
+
+                <td>
+
+                  <div>
+                    Assignment:
+                    ${
+                      assignment
+                      ? statusBadge(assignment.status)
+                      : "—"
+                    }
+                  </div>
+
+                  <div style="margin-top:6px">
+                    Ads:
+                    ${
+                      ads
+                      ? statusBadge(ads.status)
+                      : "—"
+                    }
+                  </div>
+
+                </td>
+
+
+                <td>
+
+                  <div class="actionRow">
+
+                    <button
+                      class="viewBtn"
+                      onclick="viewMember('${esc(user.docId)}')"
+                    >
+                      View
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            `;
+
+          }).join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+};
+
+
+/* =========================================================
+   VIEW MEMBER
+========================================================= */
+
+window.viewMember = function(uid){
+
+  const user =
+    usersData.find(
+      u => u.docId === uid
+    );
+
+
+  if(!user){
+
+    showMessage(
+      "Member no longer exists.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const plans =
+    user.plans || {};
+
+
+  const history =
+    Array.isArray(user.history)
+    ? user.history
+    : [];
+
+
+  $("memberDetails").innerHTML = `
+
+    <div class="detail">
+
+      <div class="detailLine">
+        <span>Name</span>
+        <b>${esc(user.name || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Email</span>
+        <b>${esc(user.email || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Phone</span>
+        <b>${esc(user.phone || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Age</span>
+        <b>${esc(user.age || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>UID</span>
+        <b>${esc(user.docId)}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Wallet</span>
+        <b>${money(user.wallet)}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Referrals</span>
+        <b>${Number(user.referrals) || 0}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Referred By</span>
+        <b>${esc(user.referredBy || "—")}</b>
+      </div>
+
+    </div>
+
+
+    <div class="detail">
+
+      <h3>📋 Plans</h3>
+
+      <div style="margin-top:10px">
+        Assignment:
+        ${
+          plans.assignment
+          ? statusBadge(plans.assignment.status)
+          : "—"
+        }
+      </div>
+
+      <div style="margin-top:10px">
+        Ads:
+        ${
+          plans.ads
+          ? statusBadge(plans.ads.status)
+          : "—"
+        }
+      </div>
+
+    </div>
+
+
+    <div class="detail">
+
+      <h3>🧾 History</h3>
+
+      <div style="margin-top:10px">
+
+        ${
+          history.length
+
+          ?
+
+          history
+            .slice(0,30)
+            .map(item => `
+
+              <div
+                style="
+                  padding:10px 0;
+                  border-bottom:1px solid #d7e7ed
+                "
+              >
+
+                <b>
+                  ${esc(item.kind || "Activity")}
+                </b>
+
+                ${
+                  item.plan
+                  ? ` — Plan ${esc(item.plan)}`
+                  : ""
+                }
+
+                ${
+                  item.amount
+                  ? ` — ${money(item.amount)}`
+                  : ""
+                }
+
+                ${
+                  item.reward
+                  ? ` — Reward ${money(item.reward)}`
+                  : ""
+                }
+
+                <div class="sub">
+
+                  ${esc(item.date || "")}
+
+                  ·
+
+                  ${statusBadge(item.status)}
+
+                </div>
+
+              </div>
+
+            `).join("")
+
+          :
+
+          "No history."
+
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  openModal("memberModal");
+
+};
+
+
+/* =========================================================
+   REFERRAL INCREASE
+========================================================= */
+
+window.openReferralModal = function(uid){
+
+  const user =
+    usersData.find(
+      u => u.docId === uid
+    );
+
+
+  if(!user){
+
+    showMessage(
+      "Member not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  currentReferralUid = uid;
+
+
+  const current =
+    Number(user.referrals) || 0;
+
+
+  $("referralIncrease").value = 1;
+
+  $("referralMsg").innerHTML = "";
+
+
+  $("referralInfo").innerHTML = `
+
+    <div class="detail">
+
+      <div class="detailLine">
+        <span>Member</span>
+        <b>${esc(user.name || "Member")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Email</span>
+        <b>${esc(user.email || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Current Referrals</span>
+        <b>${current}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>New Total</span>
+        <b id="referralPreview">
+          ${current + 1}
+        </b>
+      </div>
+
+    </div>
+
+    <div class="notice">
+      This changes the member's existing
+      <b>referrals</b> field. It does not create
+      fake Firebase user accounts.
+    </div>
+
+  `;
+
+
+  $("referralIncrease").oninput =
+    updateReferralPreview;
+
+
+  openModal("referralModal");
+
+};
+
+
+function updateReferralPreview(){
+
+  if(!currentReferralUid)
+    return;
+
+
+  const user =
+    usersData.find(
+      u => u.docId === currentReferralUid
+    );
+
+
+  if(!user)
+    return;
+
+
+  const current =
+    Number(user.referrals) || 0;
+
+
+  const increase =
+    Number(
+      $("referralIncrease").value || 0
+    );
+
+
+  const preview =
+    $("referralPreview");
+
+
+  if(preview){
+
+    preview.textContent =
+      current +
+      (Number.isFinite(increase)
+        ? increase
+        : 0);
+
+  }
+
+}
+
+
+window.setReferralIncrease =
+  function(value){
+
+    $("referralIncrease").value =
+      value;
+
+    updateReferralPreview();
+
+  };
+
+
+window.saveReferralIncrease =
+  async function(){
+
+    if(!currentReferralUid){
+
+      return;
+
+    }
+
+
+    const increase =
+      Number(
+        $("referralIncrease").value
+      );
+
+
+    if(
+      !Number.isInteger(increase) ||
+      increase < 1
+    ){
+
+      $("referralMsg").innerHTML =
+        `<div class="errorBox">
+          Please enter a whole number greater than 0.
+        </div>`;
+
+      return;
+
+    }
+
+
+    if(!(await verifyAdmin())){
+
+      $("referralMsg").innerHTML =
+        `<div class="errorBox">
+          Admin authorization failed.
+        </div>`;
+
+      return;
+
+    }
+
+
+    const uid =
+      currentReferralUid;
+
+
+    $("referralMsg").innerHTML =
+      `<div class="notice">
+        Saving...
+      </div>`;
+
+
+    try{
+
+      const userRef =
+        doc(db,"users",uid);
+
+
+      /*
+        Transaction makes sure we use the
+        latest referral value in Firebase.
+      */
+
+      await runTransaction(
+        db,
+        async transaction => {
+
+          const snap =
+            await transaction.get(userRef);
+
+
+          if(!snap.exists()){
+
+            throw new Error(
+              "Member document no longer exists."
+            );
+
+          }
+
+
+          const current =
+            Number(
+              snap.data().referrals
+            ) || 0;
+
+
+          transaction.update(
+            userRef,
+            {
+              referrals:
+                current + increase
+            }
+          );
+
+        }
+      );
+
+
+      closeModal("referralModal");
+
+
+      showMessage(
+        `Referrals increased by ${increase}.`,
+        "success"
+      );
+
+
+      await loadAllData();
+
+    }catch(error){
+
+      $("referralMsg").innerHTML =
+        `<div class="errorBox">
+          ${esc(firebaseError(error))}
+        </div>`;
+
+    }
+
+  };
+
+
+/* =========================================================
+   PLANS
+========================================================= */
+
+window.renderPlans = function(){
+
+  const filter =
+    $("planFilter")?.value || "all";
+
+
+  let plans =
+    [...plansData];
+
+
+  if(filter !== "all"){
+
+    plans =
+      plans.filter(
+        x => (x.status || "pending") === filter
+      );
+
+  }
+
+
+  plans.sort(
+    (a,b) =>
+      dateNumber(b.submittedAt) -
+      dateNumber(a.submittedAt)
+  );
+
+
+  if(!plans.length){
+
+    $("plansTable").innerHTML =
+      `<div class="empty">
+        No plan requests found.
+      </div>`;
+
+    return;
+
+  }
+
+
+  $("plansTable").innerHTML = `
+
+    <div class="tableWrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Member</th>
+            <th>Type</th>
+            <th>Plan</th>
+            <th>Fee</th>
+            <th>Earning</th>
+            <th>TRX</th>
+            <th>Status</th>
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          ${plans.map(plan => {
+
+            const user =
+              findUser(plan.uid);
+
+
+            const status =
+              plan.status || "pending";
+
+
+            return `
+
+              <tr>
+
+                <td>
+
+                  <div class="memberName">
+                    ${esc(
+                      user?.name ||
+                      "Member"
+                    )}
+                  </div>
+
+                  <div class="sub">
+                    ${esc(
+                      user?.email ||
+                      plan.uid ||
+                      ""
+                    )}
+                  </div>
+
+                </td>
+
+
+                <td>
+                  ${esc(plan.type || "—")}
+                </td>
+
+
+                <td>
+                  <b>${esc(plan.plan || "—")}</b>
+                </td>
+
+
+                <td>
+                  ${money(plan.fee)}
+                </td>
+
+
+                <td>
+                  ${money(plan.earn)}
+                </td>
+
+
+                <td>
+                  <span class="sub">
+                    ${esc(plan.trx || "—")}
+                  </span>
+                </td>
+
+
+                <td>
+                  ${statusBadge(status)}
+                </td>
+
+
+                <td>
+
+                  ${
+                    status === "pending"
+
+                    ?
+
+                    `
+                      <div class="actionRow">
+
+                        <button
+                          class="viewBtn"
+                          onclick="viewPlan('${esc(plan.docId)}')"
+                        >
+                          View
+                        </button>
+
+                        <button
+                          class="approveBtn"
+                          onclick="openPlanAction('${esc(plan.docId)}','approve')"
+                        >
+                          ✓ Approve
+                        </button>
+
+                        <button
+                          class="rejectBtn"
+                          onclick="openPlanAction('${esc(plan.docId)}','reject')"
+                        >
+                          ✕ Reject
+                        </button>
+
+                      </div>
+                    `
+
+                    :
+
+                    `
+                      <button
+                        class="viewBtn"
+                        onclick="viewPlan('${esc(plan.docId)}')"
+                      >
+                        View
+                      </button>
+                    `
+
+                  }
+
+                </td>
+
+              </tr>
+
+            `;
+
+          }).join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+};
+
+
+function dateNumber(value){
+
+  if(!value) return 0;
+
+  if(
+    typeof value === "object" &&
+    value.seconds
+  ){
+
+    return Number(value.seconds) * 1000;
+
+  }
+
+  const n =
+    new Date(value).getTime();
+
+  return isNaN(n) ? 0 : n;
+
+}
+
+
+window.viewPlan = function(docId){
+
+  const plan =
+    plansData.find(
+      x => x.docId === docId
+    );
+
+
+  if(!plan){
+
+    showMessage(
+      "Plan request no longer exists.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const user =
+    findUser(plan.uid);
+
+
+  $("memberDetails").innerHTML = `
+
+    <div class="detail">
+
+      <div class="detailLine">
+        <span>Member</span>
+        <b>${esc(user?.name || "Member")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Email</span>
+        <b>${esc(user?.email || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>UID</span>
+        <b>${esc(plan.uid || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Type</span>
+        <b>${esc(plan.type || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Plan</span>
+        <b>${esc(plan.plan || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Fee</span>
+        <b>${money(plan.fee)}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Daily Earning</span>
+        <b>${money(plan.earn)}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Transaction ID</span>
+        <b>${esc(plan.trx || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Status</span>
+        <b>${statusBadge(plan.status)}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Submitted</span>
+        <b>${formatDate(plan.submittedAt)}</b>
+      </div>
+
+    </div>
+
+  `;
+
+
+  openModal("memberModal");
+
+};
+
+
+/* =========================================================
+   PLAN ACTION
+========================================================= */
+
+window.openPlanAction =
+  function(docId,action){
+
+    const plan =
+      plansData.find(
+        x => x.docId === docId
+      );
+
+
+    if(!plan){
+
+      showMessage(
+        "Plan request no longer exists.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      (plan.status || "pending") !==
+      "pending"
+    ){
+
+      showMessage(
+        "This plan request has already been processed.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const user =
+      findUser(plan.uid);
+
+
+    currentAction = {
+
+      type:"plan",
+
+      docId,
+
+      action
+
+    };
+
+
+    $("actionTitle").textContent =
+      action === "approve"
+      ? "✓ Approve Plan"
+      : "✕ Reject Plan";
+
+
+    $("actionDetails").innerHTML = `
+
+      <div class="detailLine">
+        <span>Member</span>
+        <b>${esc(user?.name || "Member")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Email</span>
+        <b>${esc(user?.email || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Type</span>
+        <b>${esc(plan.type || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Plan</span>
+        <b>${esc(plan.plan || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Fee</span>
+        <b>${money(plan.fee)}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>TRX</span>
+        <b>${esc(plan.trx || "—")}</b>
+      </div>
+
+    `;
+
+
+    $("actionReason").value = "";
+
+    $("actionMsg").innerHTML = "";
+
+
+    const btn =
+      $("actionConfirmBtn");
+
+
+    btn.textContent =
+      action === "approve"
+      ? "✓ Approve"
+      : "✕ Reject";
+
+
+    btn.style.background =
+      action === "approve"
+      ? "#087eaa"
+      : "#b63b3b";
+
+
+    openModal("actionModal");
+
+  };
+
+
+/* =========================================================
+   WITHDRAWALS
+========================================================= */
+
+window.renderWithdrawals =
+  function(){
+
+    const term =
+      String(
+        $("withdrawSearch")?.value || ""
+      )
+      .toLowerCase()
+      .trim();
+
+
+    const filter =
+      $("withdrawFilter")?.value ||
+      "all";
+
+
+    let withdrawals =
+      [...withdrawalsData];
+
+
+    withdrawals =
+      withdrawals.filter(w => {
+
+        const status =
+          w.status || "pending";
+
+
+        if(
+          filter !== "all" &&
+          status !== filter
+        ){
+
+          return false;
+
+        }
+
+
+        if(!term)
+          return true;
+
+
+        const user =
+          findUser(w.uid);
+
+
+        return [
+
+          w.docId,
+
+          w.uid,
+
+          w.id,
+
+          w.name,
+
+          w.number,
+
+          w.method,
+
+          user?.name,
+
+          user?.email,
+
+          user?.phone
+
+        ].some(value =>
+          String(value || "")
+            .toLowerCase()
+            .includes(term)
+        );
+
+      });
+
+
+    withdrawals.sort(
+      (a,b) =>
+        dateNumber(b.createdAt) -
+        dateNumber(a.createdAt)
+    );
+
+
+    if(!withdrawals.length){
+
+      $("withdrawalsTable").innerHTML =
+        `<div class="empty">
+          No withdrawal requests found.
+        </div>`;
+
+      return;
+
+    }
+
+
+    $("withdrawalsTable").innerHTML = `
+
+      <div class="tableWrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Member</th>
+              <th>Method</th>
+              <th>Account</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Action</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            ${withdrawals.map(w => {
+
+              const user =
+                findUser(w.uid);
+
+
+              const status =
+                w.status || "pending";
+
+
+              return `
+
+                <tr>
+
+                  <td>
+
+                    <div class="memberName">
+
+                      ${esc(
+                        user?.name ||
+                        w.name ||
+                        "Member"
+                      )}
+
+                    </div>
+
+                    <div class="sub">
+
+                      ${esc(
+                        user?.email ||
+                        w.uid ||
+                        ""
+                      )}
+
+                    </div>
+
+                    <div class="sub">
+
+                      UID:
+                      ${esc(w.uid || "—")}
+
+                    </div>
+
+                  </td>
+
+
+                  <td>
+
+                    <b>
+                      ${esc(w.method || "—")}
+                    </b>
+
+                  </td>
+
+
+                  <td>
+
+                    <b>
+                      ${esc(w.number || "—")}
+                    </b>
+
+                    <div class="sub">
+                      ${esc(w.name || "—")}
+                    </div>
+
+                  </td>
+
+
+                  <td>
+
+                    <span class="wallet">
+                      ${money(w.amount)}
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    ${esc(
+                      w.date ||
+                      formatDate(w.createdAt)
+                    )}
+
+                  </td>
+
+
+                  <td>
+                    ${statusBadge(status)}
+                  </td>
+
+
+                  <td>
+
+                    ${
+                      status === "pending"
+
+                      ?
+
+                      `
+                        <div class="actionRow">
+
+                          <button
+                            class="viewBtn"
+                            onclick="viewWithdrawal('${esc(w.docId)}')"
+                          >
+                            View
+                          </button>
+
+                          <button
+                            class="approveBtn"
+                            onclick="openWithdrawalAction('${esc(w.docId)}','approve')"
+                          >
+                            ✓ Approve
+                          </button>
+
+                          <button
+                            class="rejectBtn"
+                            onclick="openWithdrawalAction('${esc(w.docId)}','reject')"
+                          >
+                            ✕ Reject
+                          </button>
+
+                        </div>
+                      `
+
+                      :
+
+                      `
+                        <button
+                          class="viewBtn"
+                          onclick="viewWithdrawal('${esc(w.docId)}')"
+                        >
+                          View
+                        </button>
+                      `
+
+                    }
+
+                  </td>
+
+                </tr>
+
+              `;
+
+            }).join("")}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    `;
+
+  };
+
+
+/* =========================================================
+   VIEW WITHDRAWAL
+========================================================= */
+
+window.viewWithdrawal =
+  function(docId){
+
+    const w =
+      withdrawalsData.find(
+        x => x.docId === docId
+      );
+
+
+    if(!w){
+
+      showMessage(
+        "Withdrawal request no longer exists.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const user =
+      findUser(w.uid);
+
+
+    $("memberDetails").innerHTML = `
+
+      <div class="detail">
+
+        <div class="detailLine">
+          <span>Member</span>
+          <b>
+            ${esc(
+              user?.name ||
+              w.name ||
+              "Member"
+            )}
+          </b>
+        </div>
+
+        <div class="detailLine">
+          <span>Email</span>
+          <b>${esc(user?.email || "—")}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>UID</span>
+          <b>${esc(w.uid || "—")}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>Method</span>
+          <b>${esc(w.method || "—")}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>Account Number</span>
+          <b>${esc(w.number || "—")}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>Account Name</span>
+          <b>${esc(w.name || "—")}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>Amount</span>
+          <b>${money(w.amount)}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>Status</span>
+          <b>${statusBadge(w.status)}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>Firestore Document ID</span>
+          <b>${esc(w.docId)}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>Request ID</span>
+          <b>${esc(w.id || "—")}</b>
+        </div>
+
+        <div class="detailLine">
+          <span>Date</span>
+          <b>
+            ${esc(
+              w.date ||
+              formatDate(w.createdAt)
+            )}
+          </b>
+        </div>
+
+      </div>
+
+    `;
+
+
+    openModal("memberModal");
+
+  };
+
+
+/* =========================================================
+   WITHDRAWAL ACTION
+========================================================= */
+
+window.openWithdrawalAction =
+  function(docId,action){
+
+    /*
+      IMPORTANT:
+      docId here is ALWAYS the actual
+      Firestore document ID.
+    */
+
+    const w =
+      withdrawalsData.find(
+        x => x.docId === docId
+      );
+
+
+    if(!w){
+
+      showMessage(
+        "Withdrawal request no longer exists.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      (w.status || "pending") !==
+      "pending"
+    ){
+
+      showMessage(
+        "This withdrawal has already been processed.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const user =
+      findUser(w.uid);
+
+
+    currentAction = {
+
+      type:"withdrawal",
+
+      docId,
+
+      action
+
+    };
+
+
+    $("actionTitle").textContent =
+      action === "approve"
+      ? "✓ Approve Withdrawal"
+      : "✕ Reject Withdrawal";
+
+
+    $("actionDetails").innerHTML = `
+
+      <div class="detailLine">
+        <span>Member</span>
+        <b>
+          ${esc(
+            user?.name ||
+            w.name ||
+            "Member"
+          )}
+        </b>
+      </div>
+
+      <div class="detailLine">
+        <span>Email</span>
+        <b>${esc(user?.email || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Method</span>
+        <b>${esc(w.method || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Account Number</span>
+        <b>${esc(w.number || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Account Name</span>
+        <b>${esc(w.name || "—")}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Amount</span>
+        <b>${money(w.amount)}</b>
+      </div>
+
+      <div class="detailLine">
+        <span>Firestore Doc ID</span>
+        <b>${esc(w.docId)}</b>
+      </div>
+
+    `;
+
+
+    $("actionReason").value = "";
+
+    $("actionMsg").innerHTML = "";
+
+
+    const btn =
+      $("actionConfirmBtn");
+
+
+    btn.textContent =
+      action === "approve"
+      ? "✓ Approve Withdrawal"
+      : "✕ Reject & Refund";
+
+
+    btn.style.background =
+      action === "approve"
+      ? "#087eaa"
+      : "#b63b3b";
+
+
+    openModal("actionModal");
+
+  };
+
+
+/* =========================================================
+   CONFIRM ACTION
+========================================================= */
+
+window.confirmAction =
+  async function(){
+
+    if(!currentAction){
+
+      return;
+
+    }
+
+
+    if(!(await verifyAdmin())){
+
+      $("actionMsg").innerHTML =
+        `<div class="errorBox">
+          Admin authorization failed.
+          Please login again.
+        </div>`;
+
+      return;
+
+    }
+
+
+    const action =
+      currentAction.action;
+
+    const type =
+      currentAction.type;
+
+    const docId =
+      currentAction.docId;
+
+
+    const btn =
+      $("actionConfirmBtn");
+
+
+    btn.disabled = true;
+
+    btn.textContent =
+      "Processing...";
+
+
+    $("actionMsg").innerHTML =
+      `<div class="notice">
+        Updating Firebase...
+      </div>`;
+
+
+    try{
+
+      if(type === "withdrawal"){
+
+        await processWithdrawal(
+          docId,
+          action,
+          $("actionReason").value.trim()
+        );
+
+      }else if(type === "plan"){
+
+        await processPlan(
+          docId,
+          action,
+          $("actionReason").value.trim()
+        );
+
+      }
+
+
+      closeModal("actionModal");
+
+
+      currentAction = null;
+
+
+      showMessage(
+        action === "approve"
+        ? "Request approved successfully."
+        : "Request rejected successfully.",
+        "success"
+      );
+
+
+      await loadAllData();
+
+
+    }catch(error){
+
+      console.error(error);
+
+      $("actionMsg").innerHTML =
+        `<div class="errorBox">
+          ${esc(firebaseError(error))}
+        </div>`;
+
+      btn.disabled = false;
+
+      btn.textContent =
+        action === "approve"
+        ? "✓ Approve"
+        : "✕ Reject";
+
+    }
+
+  };
+
+
+/* =========================================================
+   PROCESS WITHDRAWAL
+========================================================= */
+
+async function processWithdrawal(
+  withdrawalDocId,
+  action,
+  reason
+){
+
+  /*
+    THIS IS THE IMPORTANT FIX.
+
+    We use:
+      doc(db,"withdrawals", withdrawalDocId)
+
+    where withdrawalDocId is the actual
+    Firestore d.id.
+
+    We DO NOT use withdrawal.id.
+  */
+
+  const withdrawalRef =
+    doc(
+      db,
+      "withdrawals",
+      withdrawalDocId
+    );
+
+
+  await runTransaction(
+    db,
+    async transaction => {
+
+      const withdrawalSnap =
+        await transaction.get(
+          withdrawalRef
+        );
+
+
+      if(!withdrawalSnap.exists()){
+
+        throw new Error(
+          "Withdrawal request no longer exists."
+        );
+
+      }
+
+
+      const withdrawal =
+        withdrawalSnap.data();
+
+
+      const currentStatus =
+        withdrawal.status ||
+        "pending";
+
+
+      /*
+        Prevent double processing.
+      */
+
+      if(currentStatus !== "pending"){
+
+        throw new Error(
+          `Withdrawal is already ${currentStatus}.`
+        );
+
+      }
+
+
+      const uid =
+        withdrawal.uid;
+
+
+      if(!uid){
+
+        throw new Error(
+          "Withdrawal does not contain a user UID."
+        );
+
+      }
+
+
+      const userRef =
+        doc(
+          db,
+          "users",
+          uid
+        );
+
+
+      const userSnap =
+        await transaction.get(
+          userRef
+        );
+
+
+      if(!userSnap.exists()){
+
+        throw new Error(
+          "Member document no longer exists."
+        );
+
+      }
+
+
+      const user =
+        userSnap.data();
+
+
+      const history =
+        Array.isArray(user.history)
+        ? [...user.history]
+        : [];
+
+
+      /*
+        Find the existing withdrawal history
+        entry created by the user website.
+
+        Prefer the custom withdrawal `id`.
+        If not available, also match amount.
+      */
+
+      let historyIndex =
+        history.findIndex(item =>
+          item &&
+          item.kind === "Withdrawal" &&
+          withdrawal.id &&
+          item.id === withdrawal.id
+        );
+
+
+      if(historyIndex < 0){
+
+        historyIndex =
+          history.findIndex(item =>
+            item &&
+            item.kind === "Withdrawal" &&
+            String(item.number || "") ===
+              String(withdrawal.number || "") &&
+            Number(item.amount || 0) ===
+              Number(withdrawal.amount || 0) &&
+            String(item.status || "pending") ===
+              "pending"
+          );
+
+      }
+
+
+      const newStatus =
+        action === "approve"
+        ? "approved"
+        : "rejected";
+
+
+      if(historyIndex >= 0){
+
+        history[historyIndex] = {
+
+          ...history[historyIndex],
+
+          status:newStatus,
+
+          adminProcessedAt:
+            new Date().toISOString(),
+
+          adminNote:
+            reason || ""
+
+        };
+
+      }else{
+
+        /*
+          If the original history entry cannot
+          be found, add an admin record instead.
+        */
+
+        history.unshift({
+
+          kind:"Withdrawal",
+
+          id:
+            withdrawal.id ||
+            withdrawalDocId,
+
+          method:
+            withdrawal.method || "",
+
+          number:
+            withdrawal.number || "",
+
+          name:
+            withdrawal.name || "",
+
+          amount:
+            Number(withdrawal.amount) || 0,
+
+          status:newStatus,
+
+          date:
+            withdrawal.date ||
+            new Date().toLocaleString(),
+
+          adminNote:
+            reason || ""
+
+        });
+
+      }
+
+
+      /*
+        APPROVE:
+        User's wallet was already deducted when
+        the withdrawal was requested.
+
+        Therefore DO NOT deduct again.
+      */
+
+      if(action === "approve"){
+
+        transaction.update(
+
+          withdrawalRef,
+
+          {
+
+            status:"approved",
+
+            adminProcessedAt:
+              new Date().toISOString(),
+
+            adminNote:
+              reason || ""
+
+          }
+
+        );
+
+
+        transaction.update(
+
+          userRef,
+
+          {
+
+            history
+
+          }
+
+        );
+
+      }
+
+
+      /*
+        REJECT:
+        Refund the exact withdrawal amount once.
+      */
+
+      else{
+
+        const amount =
+          Number(
+            withdrawal.amount
+          ) || 0;
+
+
+        const currentWallet =
+          Number(
+            user.wallet
+          ) || 0;
+
+
+        const newWallet =
+          currentWallet + amount;
+
+
+        transaction.update(
+
+          withdrawalRef,
+
+          {
+
+            status:"rejected",
+
+            adminProcessedAt:
+              new Date().toISOString(),
+
+            adminNote:
+              reason || "",
+
+            refunded:
+              true,
+
+            refundedAmount:
+              amount
+
+          }
+
+        );
+
+
+        transaction.update(
+
+          userRef,
+
+          {
+
+            wallet:newWallet,
+
+            history
+
+          }
+
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PROCESS PLAN
+========================================================= */
+
+async function processPlan(
+  planDocId,
+  action,
+  reason
+){
+
+  const planRef =
+    doc(
+      db,
+      "planRequests",
+      planDocId
+    );
+
+
+  await runTransaction(
+    db,
+    async transaction => {
+
+      const planSnap =
+        await transaction.get(
+          planRef
+        );
+
+
+      if(!planSnap.exists()){
+
+        throw new Error(
+          "Plan request no longer exists."
+        );
+
+      }
+
+
+      const plan =
+        planSnap.data();
+
+
+      const currentStatus =
+        plan.status ||
+        "pending";
+
+
+      if(currentStatus !== "pending"){
+
+        throw new Error(
+          `Plan request is already ${currentStatus}.`
+        );
+
+      }
+
+
+      const uid =
+        plan.uid;
+
+
+      if(!uid){
+
+        throw new Error(
+          "Plan request does not contain a user UID."
+        );
+
+      }
+
+
+      const userRef =
+        doc(
+          db,
+          "users",
+          uid
+        );
+
+
+      const userSnap =
+        await transaction.get(
+          userRef
+        );
+
+
+      if(!userSnap.exists()){
+
+        throw new Error(
+          "Member document no longer exists."
+        );
+
+      }
+
+
+      const user =
+        userSnap.data();
+
+
+      const newStatus =
+        action === "approve"
+        ? "approved"
+        : "rejected";
+
+
+      /*
+        REJECT PLAN
+      */
+
+      if(action === "reject"){
+
+        transaction.update(
+
+          planRef,
+
+          {
+
+            status:"rejected",
+
+            adminProcessedAt:
+              new Date().toISOString(),
+
+            adminNote:
+              reason || ""
+
+          }
+
+        );
+
+
+        /*
+          Keep user's current plan unchanged
+          when request is rejected.
+        */
+
+        const history =
+          Array.isArray(user.history)
+          ? [...user.history]
+          : [];
+
+
+        let index =
+          history.findIndex(item =>
+            item &&
+            item.kind === "Plan" &&
+            item.type === plan.type &&
+            item.plan === plan.plan &&
+            item.status === "pending"
+          );
+
+
+        if(index >= 0){
+
+          history[index] = {
+
+            ...history[index],
+
+            status:"rejected",
+
+            adminNote:
+              reason || "",
+
+            adminProcessedAt:
+              new Date().toISOString()
+
+          };
+
+        }
+
+
+        transaction.update(
+
+          userRef,
+
+          {
+
+            history
+
+          }
+
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+        APPROVE PLAN
+      */
+
+      const currentPlans =
+        user.plans &&
+        typeof user.plans === "object"
+        ? {
+            ...user.plans
+          }
+        : {};
+
+
+      currentPlans[plan.type] = {
+
+        plan:
+          Number(plan.plan) || plan.plan,
+
+        fee:
+          Number(plan.fee) || 0,
+
+        earn:
+          Number(plan.earn) || 0,
+
+        status:
+          "approved",
+
+        trx:
+          plan.trx || "",
+
+        approvedAt:
+          new Date().toISOString()
+
+      };
+
+
+      const history =
+        Array.isArray(user.history)
+        ? [...user.history]
+        : [];
+
+
+      let historyIndex =
+        history.findIndex(item =>
+          item &&
+          item.kind === "Plan" &&
+          item.type === plan.type &&
+          Number(item.plan) ===
+            Number(plan.plan) &&
+          item.status === "pending"
+        );
+
+
+      if(historyIndex >= 0){
+
+        history[historyIndex] = {
+
+          ...history[historyIndex],
+
+          status:"approved",
+
+          adminNote:
+            reason || "",
+
+          adminProcessedAt:
+            new Date().toISOString()
+
+        };
+
+      }else{
+
+        history.unshift({
+
+          kind:"Plan",
+
+          type:
+            plan.type || "",
+
+          plan:
+            Number(plan.plan) || plan.plan,
+
+          fee:
+            Number(plan.fee) || 0,
+
+          status:"approved",
+
+          date:
+            new Date().toLocaleString(),
+
+          adminNote:
+            reason || ""
+
+        });
+
+      }
+
+
+      transaction.update(
+
+        planRef,
+
+        {
+
+          status:"approved",
+
+          adminProcessedAt:
+            new Date().toISOString(),
+
+          adminNote:
+            reason || ""
+
+        }
+
+      );
+
+
+      transaction.update(
+
+        userRef,
+
+        {
+
+          plans:currentPlans,
+
+          history
+
+        }
+
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   COMPLETE HISTORY
+========================================================= */
+
+window.renderHistory =
+  function(){
+
+    const term =
+      String(
+        $("historySearch")?.value || ""
+      )
+      .toLowerCase()
+      .trim();
+
+
+    let rows =
+      [...historyData];
+
+
+    if(term){
+
+      rows =
+        rows.filter(row =>
+          [
+
+            row.uid,
+
+            row.userName,
+
+            row.email,
+
+            row.kind,
+
+            row.type,
+
+            row.status,
+
+            row.plan,
+
+            row.amount,
+
+            row.reward
+
+          ].some(value =>
+            String(value || "")
+              .toLowerCase()
+              .includes(term)
+          )
+        );
+
+    }
+
+
+    rows =
+      rows.slice(0,500);
+
+
+    if(!rows.length){
+
+      $("historyTable").innerHTML =
+        `<div class="empty">
+          No activity found.
+        </div>`;
+
+      return;
+
+    }
+
+
+    $("historyTable").innerHTML = `
+
+      <div class="tableWrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Member</th>
+              <th>Activity</th>
+              <th>Type</th>
+              <th>Plan</th>
+              <th>Amount</th>
+              <th>Reward</th>
+              <th>Status</th>
+              <th>Date</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            ${rows.map(row => `
+
+              <tr>
+
+                <td>
+
+                  <div class="memberName">
+                    ${esc(row.userName || "Member")}
+                  </div>
+
+                  <div class="sub">
+                    ${esc(row.email || row.uid || "")}
+                  </div>
+
+                </td>
+
+
+                <td>
+                  <b>${esc(row.kind || "Activity")}</b>
+                </td>
+
+
+                <td>
+                  ${esc(row.type || "—")}
+                </td>
+
+
+                <td>
+                  ${esc(row.plan ?? "—")}
+                </td>
+
+
+                <td>
+                  ${
+                    row.amount !== "" &&
+                    row.amount != null
+                    ? money(row.amount)
+                    : "—"
+                  }
+                </td>
+
+
+                <td>
+                  ${
+                    row.reward !== "" &&
+                    row.reward != null
+                    ? money(row.reward)
+                    : "—"
+                  }
+                </td>
+
+
+                <td>
+                  ${statusBadge(row.status)}
+                </td>
+
+
+                <td>
+                  ${esc(row.date || "—")}
+                </td>
+
+              </tr>
+
+            `).join("")}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    `;
+
+  };
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+window.showSection =
+  function(section,button){
+
+    const sections = [
+
+      "dashboard",
+
+      "members",
+
+      "plans",
+
+      "withdrawals",
+
+      "history"
+
+    ];
+
+
+    sections.forEach(name => {
+
+      const el =
+        $("section-" + name);
+
+      if(el){
+
+        el.style.display =
+          name === section
+          ? "block"
+          : "none";
+
+      }
+
+    });
+
+
+    document
+      .querySelectorAll(".navBtn[data-section]")
+      .forEach(btn => {
+
+        btn.classList.remove("active");
+
+      });
+
+
+    if(button){
+
+      button.classList.add("active");
+
+    }else{
+
+      const btn =
+        document.querySelector(
+          `.navBtn[data-section="${section}"]`
+        );
+
+      if(btn)
+        btn.classList.add("active");
+
+    }
+
+
+    const titles = {
+
+      dashboard:"Dashboard",
+
+      members:"All Members",
+
+      plans:"Plan Requests",
+
+      withdrawals:"Withdrawals",
+
+      history:"Complete History"
+
+    };
+
+
+    $("pageTitle").textContent =
+      titles[section] ||
+      "Dashboard";
+
+
+    $("sidebar").classList.remove(
+      "open"
+    );
+
+  };
+
+
+window.toggleSidebar =
+  function(){
+
+    $("sidebar").classList.toggle(
+      "open"
+    );
+
+  };
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+function openModal(id){
+
+  $(id).classList.add("open");
+
+}
+
+
+window.openModal = openModal;
+
+
+window.closeModal =
+  function(id){
+
+    $(id).classList.remove("open");
+
+  };
+
+
+document
+  .querySelectorAll(".modal")
+  .forEach(modal => {
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if(event.target === modal){
+
+          modal.classList.remove(
+            "open"
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+window.logoutAdmin =
+  async function(){
+
+    try{
+
+      await signOut(auth);
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  };
+
+
+/* =========================================================
+   INITIAL PAGE
+========================================================= */
+
+showSection("dashboard");
+
+
+</script>
+
+</body>
+</html>

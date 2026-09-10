@@ -1,0 +1,5409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>PRO EARN — Admin</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#dff5ff;
+  --bg2:#c9ecff;
+  --card:#ffffff;
+  --card2:#eefaff;
+  --line:#a8d0e3;
+  --text:#102431;
+  --muted:#58717e;
+  --blue:#168dcc;
+  --blue2:#8bdcff;
+  --green:#159957;
+  --red:#df4545;
+  --yellow:#bd8b00;
+  --dark:#071722;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:linear-gradient(180deg,#dff5ff,#c9eaff);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.loginPage{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.loginCard{
+  width:100%;
+  max-width:520px;
+  background:linear-gradient(145deg,#fff,#eefaff);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:34px;
+  box-shadow:0 18px 50px #168dcc22;
+}
+
+.loginLogo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.logoBox{
+  width:62px;
+  height:62px;
+  border-radius:17px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#8bdcff,#4bb4e8);
+  border:2px solid #258fc1;
+  color:#071722;
+  font-size:36px;
+  font-weight:900;
+}
+
+.loginTitle{
+  font-size:32px;
+  font-weight:900;
+}
+
+.loginSubtitle{
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:25px;
+}
+
+label{
+  display:block;
+  color:#304d5a;
+  font-size:14px;
+  margin:13px 0 7px;
+}
+
+input,
+select{
+  width:100%;
+  background:#f5fcff;
+  border:1px solid #9bbdcc;
+  border-radius:12px;
+  padding:14px;
+  outline:none;
+  color:var(--text);
+}
+
+input:focus,
+select:focus{
+  border-color:var(--blue);
+}
+
+.loginBtn,
+.primaryBtn{
+  width:100%;
+  border:1px solid #4baed7;
+  border-radius:12px;
+  padding:14px;
+  margin-top:16px;
+  background:linear-gradient(135deg,#8ddcff,#bfeeff);
+  color:#06131b;
+  font-weight:900;
+}
+
+.message{
+  margin-top:15px;
+  padding:13px;
+  border-radius:11px;
+  line-height:1.5;
+  font-size:14px;
+  background:#eaf7ff;
+  border:1px solid var(--line);
+}
+
+.message.error{
+  color:#b62e2e;
+  border-color:#d46a6a;
+  background:#fff2f2;
+}
+
+.message.success{
+  color:#08763d;
+  border-color:#4b9c70;
+  background:#effff6;
+}
+
+
+/* =========================
+   ADMIN LAYOUT
+========================= */
+
+.adminApp{
+  min-height:100vh;
+  display:flex;
+}
+
+.sidebar{
+  width:255px;
+  min-height:100vh;
+  background:#071722;
+  color:white;
+  padding:20px 14px;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  z-index:50;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:10px 9px 22px;
+  border-bottom:1px solid #ffffff18;
+  margin-bottom:15px;
+}
+
+.brandIcon{
+  width:45px;
+  height:45px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:#8bdcff;
+  color:#071722;
+  font-size:25px;
+  font-weight:900;
+}
+
+.brand b{
+  display:block;
+  font-size:17px;
+}
+
+.brand small{
+  display:block;
+  margin-top:3px;
+  color:#9db5c1;
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+.sideBtn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#b8cbd3;
+  padding:13px 12px;
+  border-radius:11px;
+  text-align:left;
+  margin-bottom:5px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.sideBtn:hover,
+.sideBtn.active{
+  background:#ffffff13;
+  color:white;
+}
+
+.badge{
+  margin-left:auto;
+  min-width:22px;
+  padding:3px 6px;
+  text-align:center;
+  border-radius:20px;
+  background:#df4545;
+  color:white;
+  font-size:11px;
+}
+
+.sideBottom{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:18px;
+}
+
+.logoutBtn{
+  width:100%;
+  border:1px solid #ffffff25;
+  background:#ffffff0d;
+  color:white;
+  padding:12px;
+  border-radius:11px;
+  font-weight:800;
+}
+
+.main{
+  margin-left:255px;
+  width:calc(100% - 255px);
+  min-height:100vh;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:#effaffee;
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding:17px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.topTitle small{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.topTitle h1{
+  margin-top:4px;
+  font-size:25px;
+}
+
+.topActions{
+  display:flex;
+  gap:8px;
+}
+
+.refreshBtn,
+.closeBtn{
+  border:1px solid var(--line);
+  background:white;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:800;
+}
+
+.content{
+  padding:20px;
+  max-width:1500px;
+  margin:auto;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+
+/* =========================
+   KPI
+========================= */
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.kpi{
+  background:linear-gradient(145deg,#fff,#eefaff);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:18px;
+}
+
+.kpiIcon{
+  font-size:26px;
+}
+
+.kpi small{
+  display:block;
+  color:var(--muted);
+  margin-top:10px;
+  font-size:11px;
+  font-weight:900;
+}
+
+.kpi strong{
+  display:block;
+  font-size:27px;
+  margin-top:6px;
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.panel{
+  background:linear-gradient(145deg,#fff,#eefaff);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 8px 25px #328bb018;
+}
+
+.panelHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:15px;
+}
+
+.panelHead h2{
+  font-size:21px;
+}
+
+.panelHead span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.searchRow{
+  display:grid;
+  grid-template-columns:1fr 180px;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.tableWrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+th,
+td{
+  padding:12px 8px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:middle;
+  font-size:13px;
+}
+
+th{
+  font-size:11px;
+  color:#48616e;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  background:#eaf7ff;
+}
+
+.memberName{
+  font-weight:900;
+}
+
+.sub{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:11px;
+  word-break:break-all;
+}
+
+.status{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:900;
+  text-transform:capitalize;
+}
+
+.status.pending{
+  color:#9a7000;
+  border:1px solid #c9a82e;
+  background:#fffbea;
+}
+
+.status.approved{
+  color:#08763d;
+  border:1px solid #3b9868;
+  background:#effff6;
+}
+
+.status.rejected{
+  color:#b52d2d;
+  border:1px solid #d35a5a;
+  background:#fff2f2;
+}
+
+.actionRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.viewBtn,
+.approveBtn,
+.rejectBtn,
+.referralBtn{
+  border-radius:9px;
+  padding:8px 10px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.viewBtn{
+  border:1px solid #76b6d5;
+  background:#e9f8ff;
+  color:#096b9d;
+}
+
+.approveBtn{
+  border:1px solid #4a9a6d;
+  background:#edfff5;
+  color:#08763d;
+}
+
+.rejectBtn{
+  border:1px solid #d36b6b;
+  background:#fff1f1;
+  color:#b62e2e;
+}
+
+
+/* =========================
+   REFERRAL CONTROLS
+========================= */
+
+.referralBtn{
+  border:1px solid #4b9fc5;
+  background:#eaf9ff;
+  color:#08729f;
+}
+
+.referralBtn:hover{
+  background:#d9f3ff;
+}
+
+.referralBox{
+  background:#eaf7ff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:15px;
+}
+
+.referralCurrent{
+  font-size:16px;
+  font-weight:900;
+  margin-bottom:12px;
+}
+
+.referralCurrent span{
+  color:var(--blue);
+  font-size:24px;
+}
+
+.referralQuick{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.referralQuick button{
+  border:1px solid #76b6d5;
+  background:white;
+  color:#096b9d;
+  border-radius:9px;
+  padding:10px;
+  font-weight:900;
+}
+
+.referralQuick button:hover{
+  background:#eaf9ff;
+}
+
+.referralInput{
+  margin-top:5px;
+}
+
+.referralSave{
+  width:100%;
+  border:1px solid #4a9a6d;
+  background:#dffff0;
+  color:#08763d;
+  border-radius:11px;
+  padding:13px;
+  font-weight:900;
+  margin-top:10px;
+}
+
+.referralSave:hover{
+  background:#caffdf;
+}
+
+
+.empty{
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+.detailGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.detail{
+  background:#edf9ff;
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:12px;
+}
+
+.detail small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.detail b{
+  word-break:break-word;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#00131ccc;
+  z-index:200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modalBox{
+  width:100%;
+  max-width:540px;
+  max-height:90vh;
+  overflow:auto;
+  background:#f4fcff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 20px 70px #0007;
+}
+
+.modalHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.modalHead h2{
+  font-size:22px;
+}
+
+.modalClose{
+  border:0;
+  background:none;
+  font-size:28px;
+  color:#19303c;
+}
+
+.confirmText{
+  background:#eaf7ff;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:15px;
+  line-height:1.65;
+  margin-bottom:15px;
+}
+
+.confirmText b{
+  color:#102431;
+}
+
+.modalActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.cancelBtn{
+  border:1px solid #9eb5bf;
+  background:#edf5f8;
+  color:#263d47;
+  border-radius:11px;
+  padding:13px;
+  font-weight:900;
+}
+
+.modalApprove{
+  border:1px solid #4a9a6d;
+  background:#dffff0;
+  color:#08763d;
+  border-radius:11px;
+  padding:13px;
+  font-weight:900;
+}
+
+.modalReject{
+  border:1px solid #d36b6b;
+  background:#ffecec;
+  color:#b62e2e;
+  border-radius:11px;
+  padding:13px;
+  font-weight:900;
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:500;
+  max-width:380px;
+  padding:14px 17px;
+  border-radius:12px;
+  background:#071722;
+  color:white;
+  box-shadow:0 10px 35px #0005;
+  display:none;
+  line-height:1.45;
+  font-size:13px;
+}
+
+.toast.show{
+  display:block;
+}
+
+.toast.success{
+  border-left:5px solid #36a96d;
+}
+
+.toast.error{
+  border-left:5px solid #df4545;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobileMenu{
+  display:none;
+  border:1px solid var(--line);
+  background:white;
+  border-radius:10px;
+  padding:9px 12px;
+  font-size:20px;
+}
+
+@media(max-width:950px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+  }
+
+  .mobileMenu{
+    display:block;
+  }
+
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .topTitle{
+    flex:1;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .content{
+    padding:12px;
+  }
+
+  .topbar{
+    padding:12px;
+  }
+
+  .topTitle h1{
+    font-size:20px;
+  }
+
+  .topTitle small{
+    display:none;
+  }
+
+  .refreshBtn{
+    padding:9px 10px;
+    font-size:12px;
+  }
+
+  .kpis{
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+  }
+
+  .kpi{
+    padding:13px;
+  }
+
+  .kpi strong{
+    font-size:21px;
+  }
+
+  .searchRow{
+    grid-template-columns:1fr;
+  }
+
+  .detailGrid{
+    grid-template-columns:1fr;
+  }
+
+  .loginCard{
+    padding:22px;
+  }
+
+  .loginTitle{
+    font-size:26px;
+  }
+
+  .referralQuick{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<div id="loginPage" class="loginPage">
+
+  <div class="loginCard">
+
+    <div class="loginLogo">
+
+      <div class="logoBox">$</div>
+
+      <div class="loginTitle">
+        PRO EARN ADMIN
+      </div>
+
+    </div>
+
+    <div class="loginSubtitle">
+      Secure administrator login
+    </div>
+
+    <form id="loginForm">
+
+      <label>Email</label>
+
+      <input
+        id="adminEmail"
+        type="email"
+        autocomplete="email"
+        required
+        placeholder="Admin email"
+      >
+
+      <label>Password</label>
+
+      <input
+        id="adminPassword"
+        type="password"
+        autocomplete="current-password"
+        required
+        placeholder="Password"
+      >
+
+      <button
+        class="loginBtn"
+        type="submit"
+      >
+        LOGIN AS ADMIN
+      </button>
+
+    </form>
+
+    <div id="loginMessage"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADMIN APP
+===================================================== -->
+
+<div
+  id="adminApp"
+  class="adminApp hidden"
+>
+
+
+  <!-- SIDEBAR -->
+
+  <aside
+    id="sidebar"
+    class="sidebar"
+  >
+
+    <div class="brand">
+
+      <div class="brandIcon">
+        🛡️
+      </div>
+
+      <div>
+
+        <b>PRO EARN</b>
+
+        <small>
+          ADMIN DASHBOARD
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="sideBtn active"
+      data-section="dashboard"
+      onclick="showSection('dashboard',this)"
+    >
+      📊 Dashboard
+    </button>
+
+
+    <button
+      class="sideBtn"
+      data-section="users"
+      onclick="showSection('users',this)"
+    >
+      👥 Users
+    </button>
+
+
+    <button
+      class="sideBtn"
+      data-section="plans"
+      onclick="showSection('plans',this)"
+    >
+      📋 Plan Requests
+
+      <span
+        id="planBadge"
+        class="badge"
+      >
+        0
+      </span>
+
+    </button>
+
+
+    <button
+      class="sideBtn"
+      data-section="withdrawals"
+      onclick="showSection('withdrawals',this)"
+    >
+      💸 Withdrawals
+
+      <span
+        id="withdrawBadge"
+        class="badge"
+      >
+        0
+      </span>
+
+    </button>
+
+
+    <button
+      class="sideBtn"
+      data-section="work"
+      onclick="showSection('work',this)"
+    >
+      📝 Work Records
+    </button>
+
+
+    <button
+      class="sideBtn"
+      data-section="history"
+      onclick="showSection('history',this)"
+    >
+      🧾 Activity History
+    </button>
+
+
+    <div class="sideBottom">
+
+      <button
+        class="logoutBtn"
+        onclick="adminLogout()"
+      >
+        🚪 Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <button
+        class="mobileMenu"
+        onclick="toggleSidebar()"
+      >
+        ☰
+      </button>
+
+
+      <div class="topTitle">
+
+        <small>
+          PRO EARN CONTROL CENTER
+        </small>
+
+        <h1 id="pageTitle">
+          Dashboard
+        </h1>
+
+      </div>
+
+
+      <div class="topActions">
+
+        <button
+          class="refreshBtn"
+          onclick="loadAllData()"
+        >
+          ↻ Refresh
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <div class="content">
+
+      <div id="globalMessage"></div>
+
+
+      <!-- =================================================
+           DASHBOARD
+      ================================================== -->
+
+      <section
+        id="section-dashboard"
+        class="section active"
+      >
+
+        <div class="kpis">
+
+
+          <div class="kpi">
+
+            <div class="kpiIcon">
+              👥
+            </div>
+
+            <small>
+              TOTAL USERS
+            </small>
+
+            <strong id="totalUsers">
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="kpi">
+
+            <div class="kpiIcon">
+              💰
+            </div>
+
+            <small>
+              TOTAL WALLET
+            </small>
+
+            <strong id="totalWallet">
+              Rs. 0
+            </strong>
+
+          </div>
+
+
+          <div class="kpi">
+
+            <div class="kpiIcon">
+              📋
+            </div>
+
+            <small>
+              PENDING PLANS
+            </small>
+
+            <strong id="pendingPlans">
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="kpi">
+
+            <div class="kpiIcon">
+              💸
+            </div>
+
+            <small>
+              PENDING WITHDRAWALS
+            </small>
+
+            <strong id="pendingWithdrawals">
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="kpi">
+
+            <div class="kpiIcon">
+              ✅
+            </div>
+
+            <small>
+              APPROVED PLANS
+            </small>
+
+            <strong id="approvedPlans">
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="kpi">
+
+            <div class="kpiIcon">
+              💵
+            </div>
+
+            <small>
+              APPROVED WITHDRAWALS
+            </small>
+
+            <strong id="approvedWithdrawals">
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="kpi">
+
+            <div class="kpiIcon">
+              📝
+            </div>
+
+            <small>
+              WORK RECORDS
+            </small>
+
+            <strong id="totalWork">
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="kpi">
+
+            <div class="kpiIcon">
+              👨‍👩‍👧‍👦
+            </div>
+
+            <small>
+              TOTAL REFERRALS
+            </small>
+
+            <strong id="totalReferrals">
+              0
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>
+              ⚡ Quick Overview
+            </h2>
+
+            <span id="lastUpdated">
+              Not loaded
+            </span>
+
+          </div>
+
+
+          <div class="detailGrid">
+
+            <div class="detail">
+
+              <small>
+                ADMIN EMAIL
+              </small>
+
+              <b id="adminEmailDisplay">
+                -
+              </b>
+
+            </div>
+
+
+            <div class="detail">
+
+              <small>
+                FIREBASE PROJECT
+              </small>
+
+              <b>
+                pro-earn-81f64
+              </b>
+
+            </div>
+
+
+            <div class="detail">
+
+              <small>
+                PLAN COLLECTION
+              </small>
+
+              <b>
+                planRequests
+              </b>
+
+            </div>
+
+
+            <div class="detail">
+
+              <small>
+                WITHDRAWAL COLLECTION
+              </small>
+
+              <b>
+                withdrawals
+              </b>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           USERS
+      ================================================== -->
+
+      <section
+        id="section-users"
+        class="section"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>
+              👥 All Users
+            </h2>
+
+            <span id="usersCount">
+              0 users
+            </span>
+
+          </div>
+
+
+          <div class="searchRow">
+
+            <input
+              id="userSearch"
+              placeholder="Search name / email / phone / UID..."
+              oninput="renderUsers()"
+            >
+
+            <button
+              class="refreshBtn"
+              onclick="renderUsers()"
+            >
+              Search
+            </button>
+
+          </div>
+
+
+          <div
+            id="usersTable"
+            class="tableWrap"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           PLAN REQUESTS
+      ================================================== -->
+
+      <section
+        id="section-plans"
+        class="section"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>
+              📋 Plan Requests
+            </h2>
+
+            <span>
+              Approve or reject member plans
+            </span>
+
+          </div>
+
+
+          <div class="searchRow">
+
+            <input
+              id="planSearch"
+              placeholder="Search UID / TRX / email / type..."
+              oninput="renderPlans()"
+            >
+
+
+            <select
+              id="planFilter"
+              onchange="renderPlans()"
+            >
+
+              <option value="all">
+                All
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="approved">
+                Approved
+              </option>
+
+              <option value="rejected">
+                Rejected
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div
+            id="plansTable"
+            class="tableWrap"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           WITHDRAWALS
+      ================================================== -->
+
+      <section
+        id="section-withdrawals"
+        class="section"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>
+              💸 Withdrawal Requests
+            </h2>
+
+            <span>
+              Review and process withdrawals
+            </span>
+
+          </div>
+
+
+          <div class="searchRow">
+
+            <input
+              id="withdrawSearch"
+              placeholder="Search UID / name / number / email..."
+              oninput="renderWithdrawals()"
+            >
+
+
+            <select
+              id="withdrawFilter"
+              onchange="renderWithdrawals()"
+            >
+
+              <option value="all">
+                All
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="approved">
+                Approved
+              </option>
+
+              <option value="rejected">
+                Rejected
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div
+            id="withdrawalsTable"
+            class="tableWrap"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           WORK RECORDS
+      ================================================== -->
+
+      <section
+        id="section-work"
+        class="section"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>
+              📝 Work Records
+            </h2>
+
+            <span>
+              Assignment and ads activity
+            </span>
+
+          </div>
+
+
+          <div class="searchRow">
+
+            <input
+              id="workSearch"
+              placeholder="Search UID / type / language..."
+              oninput="renderWorkRecords()"
+            >
+
+
+            <button
+              class="refreshBtn"
+              onclick="renderWorkRecords()"
+            >
+              Search
+            </button>
+
+          </div>
+
+
+          <div
+            id="workTable"
+            class="tableWrap"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           HISTORY
+      ================================================== -->
+
+      <section
+        id="section-history"
+        class="section"
+      >
+
+        <div class="panel">
+
+          <div class="panelHead">
+
+            <h2>
+              🧾 Activity History
+            </h2>
+
+            <span>
+              Plans, withdrawals and work
+            </span>
+
+          </div>
+
+
+          <div
+            id="historyTable"
+            class="tableWrap"
+          ></div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- =====================================================
+     ACTION CONFIRMATION MODAL
+===================================================== -->
+
+<div
+  id="actionModal"
+  class="modal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHead">
+
+      <h2 id="actionTitle">
+        Confirm Action
+      </h2>
+
+      <button
+        class="modalClose"
+        onclick="closeActionModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      id="actionDetails"
+      class="confirmText"
+    ></div>
+
+
+    <div
+      id="actionButtons"
+      class="modalActions"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW MODAL
+===================================================== -->
+
+<div
+  id="viewModal"
+  class="modal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHead">
+
+      <h2 id="viewTitle">
+        Details
+      </h2>
+
+      <button
+        class="modalClose"
+        onclick="closeViewModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div id="viewContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+import {
+  initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+  runTransaction,
+  serverTimestamp
+} from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyA43W8SRPUeoDXpNWhD_sZcEDdpI9Hov8s",
+
+  authDomain:
+    "pro-earn-81f64.firebaseapp.com",
+
+  projectId:
+    "pro-earn-81f64",
+
+  storageBucket:
+    "pro-earn-81f64.firebasestorage.app",
+
+  messagingSenderId:
+    "617371449142",
+
+  appId:
+    "1:617371449142:web:9974ae12a54c20bb1ee597",
+
+  measurementId:
+    "G-7Y2J707H21"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
+
+let currentAdmin = null;
+
+let usersData = [];
+
+let plansData = [];
+
+let withdrawalsData = [];
+
+let workData = [];
+
+let busy = false;
+
+let pendingAction = null;
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/[&<>"']/g,function(m){
+
+      return {
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+
+      }[m];
+
+    });
+
+}
+
+
+function money(value){
+
+  return "Rs. " +
+    Number(value || 0).toLocaleString();
+
+}
+
+
+function dateValue(value){
+
+  if(!value) return 0;
+
+
+  if(
+    typeof value === "object" &&
+    typeof value.toDate === "function"
+  ){
+
+    return value.toDate().getTime();
+
+  }
+
+
+  const d =
+    new Date(value);
+
+
+  return isNaN(d.getTime())
+    ? 0
+    : d.getTime();
+
+}
+
+
+function dateText(value){
+
+  const t =
+    dateValue(value);
+
+
+  if(!t) return "-";
+
+
+  return new Date(t)
+    .toLocaleString();
+
+}
+
+
+function statusHTML(status){
+
+  const s =
+    status || "pending";
+
+
+  return `
+
+    <span class="status ${esc(s)}">
+
+      ${esc(s)}
+
+    </span>
+
+  `;
+
+}
+
+
+function firebaseError(error){
+
+  const code =
+    error?.code || "";
+
+
+  if(
+    code.includes("permission-denied")
+  ){
+
+    return `
+      Firebase permission denied.
+      Check Firestore Rules and make sure
+      this account has an active admin
+      document.
+    `;
+
+  }
+
+
+  if(
+    code.includes("unauthenticated")
+  ){
+
+    return "Your admin session has expired. Please login again.";
+
+  }
+
+
+  return error?.message ||
+    "Something went wrong.";
+
+}
+
+
+function showToast(
+  message,
+  type="success"
+){
+
+  const t =
+    $("toast");
+
+
+  t.textContent =
+    message;
+
+
+  t.className =
+    "toast show " + type;
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+    setTimeout(
+      () => {
+
+        t.className =
+          "toast";
+
+      },
+      4000
+    );
+
+}
+
+
+/* =====================================================
+   ADMIN CHECK
+===================================================== */
+
+async function verifyAdmin(){
+
+  if(!auth.currentUser){
+
+    return false;
+
+  }
+
+
+  const ref =
+    doc(
+      db,
+      "admins",
+      auth.currentUser.uid
+    );
+
+
+  const snap =
+    await getDoc(ref);
+
+
+  if(!snap.exists()){
+
+    return false;
+
+  }
+
+
+  const data =
+    snap.data();
+
+
+  return (
+    data.role === "admin" &&
+    data.active === true
+  );
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+$("loginForm").addEventListener(
+  "submit",
+  async function(e){
+
+    e.preventDefault();
+
+
+    const email =
+      $("adminEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+      $("adminPassword")
+        .value;
+
+
+    $("loginMessage").innerHTML =
+      `
+
+      <div class="message">
+        Signing in...
+      </div>
+
+      `;
+
+
+    try{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+
+      $("loginMessage").innerHTML =
+        `
+
+        <div class="message error">
+
+          ${esc(firebaseError(error))}
+
+        </div>
+
+        `;
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(!user){
+
+      currentAdmin =
+        null;
+
+
+      $("loginPage")
+        .classList
+        .remove("hidden");
+
+
+      $("adminApp")
+        .classList
+        .add("hidden");
+
+
+      return;
+
+    }
+
+
+    try{
+
+      const allowed =
+        await verifyAdmin();
+
+
+      if(!allowed){
+
+        await signOut(auth);
+
+
+        $("loginMessage").innerHTML =
+          `
+
+          <div class="message error">
+
+            This Firebase account is not authorized
+            as an administrator.
+
+            <br><br>
+
+            Your Firestore admin document must be:
+
+            <br>
+
+            <b>/admins/${esc(user.uid)}</b>
+
+            <br><br>
+
+            <b>role = admin</b>
+
+            <br>
+
+            <b>active = true</b>
+
+          </div>
+
+          `;
+
+
+        return;
+
+      }
+
+
+      currentAdmin =
+        user;
+
+
+      $("adminEmailDisplay")
+        .textContent =
+        user.email || "-";
+
+
+      $("loginPage")
+        .classList
+        .add("hidden");
+
+
+      $("adminApp")
+        .classList
+        .remove("hidden");
+
+
+      await loadAllData();
+
+
+    }catch(error){
+
+      console.error(error);
+
+
+      $("loginMessage").innerHTML =
+        `
+
+        <div class="message error">
+
+          ${esc(firebaseError(error))}
+
+        </div>
+
+        `;
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+window.adminLogout =
+async function(){
+
+  await signOut(auth);
+
+};
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+window.toggleSidebar =
+function(){
+
+  $("sidebar")
+    .classList
+    .toggle("open");
+
+};
+
+
+window.showSection =
+function(name,button){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+
+  const target =
+    $("section-" + name);
+
+
+  if(target){
+
+    target.classList.add("active");
+
+  }
+
+
+  document
+    .querySelectorAll(".sideBtn")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+
+  if(button){
+
+    button.classList.add("active");
+
+  }
+
+
+  const titles = {
+
+    dashboard:"Dashboard",
+
+    users:"Users",
+
+    plans:"Plan Requests",
+
+    withdrawals:"Withdrawals",
+
+    work:"Work Records",
+
+    history:"Activity History"
+
+  };
+
+
+  $("pageTitle")
+    .textContent =
+    titles[name] || "Dashboard";
+
+
+  $("sidebar")
+    .classList
+    .remove("open");
+
+};
+
+
+/* =====================================================
+   LOAD ALL FIREBASE DATA
+===================================================== */
+
+window.loadAllData =
+async function(){
+
+  if(busy) return;
+
+
+  busy = true;
+
+
+  $("globalMessage").innerHTML =
+    `
+
+    <div class="message">
+      Loading Firebase data...
+    </div>
+
+    `;
+
+
+  try{
+
+    const [
+      usersSnap,
+      plansSnap,
+      withdrawalsSnap,
+      workSnap
+    ] =
+    await Promise.all([
+
+      getDocs(
+        collection(db,"users")
+      ),
+
+      getDocs(
+        collection(db,"planRequests")
+      ),
+
+      getDocs(
+        collection(db,"withdrawals")
+      ),
+
+      getDocs(
+        collection(db,"workRecords")
+      )
+
+    ]);
+
+
+    usersData =
+      usersSnap.docs.map(
+        d => ({
+
+          id:d.id,
+
+          ...d.data()
+
+        })
+      );
+
+
+    plansData =
+      plansSnap.docs.map(
+        d => ({
+
+          id:d.id,
+
+          ...d.data()
+
+        })
+      );
+
+
+    withdrawalsData =
+      withdrawalsSnap.docs.map(
+        d => ({
+
+          id:d.id,
+
+          ...d.data()
+
+        })
+      );
+
+
+    workData =
+      workSnap.docs.map(
+        d => ({
+
+          id:d.id,
+
+          ...d.data()
+
+        })
+      );
+
+
+    plansData.sort(
+      (a,b) =>
+        dateValue(b.submittedAt) -
+        dateValue(a.submittedAt)
+    );
+
+
+    withdrawalsData.sort(
+      (a,b) =>
+        dateValue(b.createdAt || b.date) -
+        dateValue(a.createdAt || a.date)
+    );
+
+
+    workData.sort(
+      (a,b) =>
+        dateValue(b.createdAt) -
+        dateValue(a.createdAt)
+    );
+
+
+    renderDashboard();
+
+    renderUsers();
+
+    renderPlans();
+
+    renderWithdrawals();
+
+    renderWorkRecords();
+
+    renderHistory();
+
+
+    $("lastUpdated")
+      .textContent =
+      "Updated: " +
+      new Date().toLocaleTimeString();
+
+
+    $("globalMessage").innerHTML =
+      `
+
+      <div class="message success">
+        Firebase data loaded successfully.
+      </div>
+
+      `;
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    $("globalMessage").innerHTML =
+      `
+
+      <div class="message error">
+
+        ${esc(firebaseError(error))}
+
+      </div>
+
+      `;
+
+  }finally{
+
+    busy = false;
+
+  }
+
+};
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function renderDashboard(){
+
+  const pendingPlans =
+    plansData.filter(
+      x =>
+        (x.status || "pending")
+        === "pending"
+    ).length;
+
+
+  const pendingWithdrawals =
+    withdrawalsData.filter(
+      x =>
+        (x.status || "pending")
+        === "pending"
+    ).length;
+
+
+  const approvedPlans =
+    plansData.filter(
+      x =>
+        x.status === "approved"
+    ).length;
+
+
+  const approvedWithdrawals =
+    withdrawalsData.filter(
+      x =>
+        x.status === "approved"
+    ).length;
+
+
+  const totalWallet =
+    usersData.reduce(
+      (sum,u) =>
+        sum + Number(u.wallet || 0),
+      0
+    );
+
+
+  const totalReferrals =
+    usersData.reduce(
+      (sum,u) =>
+        sum + Number(u.referrals || 0),
+      0
+    );
+
+
+  $("totalUsers")
+    .textContent =
+    usersData.length;
+
+
+  $("totalWallet")
+    .textContent =
+    money(totalWallet);
+
+
+  $("pendingPlans")
+    .textContent =
+    pendingPlans;
+
+
+  $("pendingWithdrawals")
+    .textContent =
+    pendingWithdrawals;
+
+
+  $("approvedPlans")
+    .textContent =
+    approvedPlans;
+
+
+  $("approvedWithdrawals")
+    .textContent =
+    approvedWithdrawals;
+
+
+  $("totalWork")
+    .textContent =
+    workData.length;
+
+
+  $("totalReferrals")
+    .textContent =
+    totalReferrals;
+
+
+  $("planBadge")
+    .textContent =
+    pendingPlans;
+
+
+  $("withdrawBadge")
+    .textContent =
+    pendingWithdrawals;
+
+}
+
+
+/* =====================================================
+   USERS
+===================================================== */
+
+window.renderUsers =
+function(){
+
+  const q =
+    ($("userSearch")?.value || "")
+      .trim()
+      .toLowerCase();
+
+
+  let rows =
+    usersData.filter(u => {
+
+      if(!q) return true;
+
+
+      return (
+
+        String(u.id || "")
+          .toLowerCase()
+          .includes(q)
+
+        ||
+
+        String(u.name || "")
+          .toLowerCase()
+          .includes(q)
+
+        ||
+
+        String(u.email || "")
+          .toLowerCase()
+          .includes(q)
+
+        ||
+
+        String(u.phone || "")
+          .toLowerCase()
+          .includes(q)
+
+      );
+
+    });
+
+
+  $("usersCount")
+    .textContent =
+    rows.length +
+    " users";
+
+
+  if(!rows.length){
+
+    $("usersTable").innerHTML =
+      `<div class="empty">No users found.</div>`;
+
+    return;
+
+  }
+
+
+  $("usersTable").innerHTML = `
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Member</th>
+
+          <th>Phone</th>
+
+          <th>Wallet</th>
+
+          <th>Referrals</th>
+
+          <th>Assignment</th>
+
+          <th>Ads</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        ${rows.map(u => {
+
+          const assignment =
+            u.plans?.assignment;
+
+
+          const ads =
+            u.plans?.ads;
+
+
+          return `
+
+            <tr>
+
+              <td>
+
+                <div class="memberName">
+                  ${esc(u.name || "Member")}
+                </div>
+
+                <div class="sub">
+                  ${esc(u.email || "")}
+                </div>
+
+                <div class="sub">
+                  UID: ${esc(u.id)}
+                </div>
+
+              </td>
+
+
+              <td>
+                ${esc(u.phone || "-")}
+              </td>
+
+
+              <td>
+                <b>${money(u.wallet)}</b>
+              </td>
+
+
+              <td>
+
+                <div style="font-weight:900;margin-bottom:7px;">
+                  ${Number(u.referrals || 0)}
+                </div>
+
+
+                <button
+                  class="referralBtn"
+                  onclick="increaseMemberReferrals('${esc(u.id)}')"
+                >
+                  ➕ Increase
+                </button>
+
+              </td>
+
+
+              <td>
+
+                ${
+                  assignment
+
+                  ? statusHTML(
+                      assignment.status
+                    )
+
+                  : "-"
+
+                }
+
+              </td>
+
+
+              <td>
+
+                ${
+                  ads
+
+                  ? statusHTML(
+                      ads.status
+                    )
+
+                  : "-"
+
+                }
+
+              </td>
+
+
+              <td>
+
+                <button
+                  class="viewBtn"
+                  onclick="viewUser('${esc(u.id)}')"
+                >
+                  View
+                </button>
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }).join("")}
+
+      </tbody>
+
+    </table>
+
+  `;
+
+};
+
+
+/* =====================================================
+   VIEW USER
+===================================================== */
+
+window.viewUser =
+function(uid){
+
+  const u =
+    usersData.find(
+      x => x.id === uid
+    );
+
+
+  if(!u) return;
+
+
+  $("viewTitle")
+    .textContent =
+    "Member Details";
+
+
+  const assignment =
+    u.plans?.assignment;
+
+
+  const ads =
+    u.plans?.ads;
+
+
+  $("viewContent").innerHTML = `
+
+    <div class="detailGrid">
+
+
+      <div class="detail">
+
+        <small>
+          FULL NAME
+        </small>
+
+        <b>
+          ${esc(u.name || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          EMAIL
+        </small>
+
+        <b>
+          ${esc(u.email || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          PHONE
+        </small>
+
+        <b>
+          ${esc(u.phone || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          AGE
+        </small>
+
+        <b>
+          ${esc(u.age || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          WALLET
+        </small>
+
+        <b>
+          ${money(u.wallet)}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          REFERRALS
+        </small>
+
+        <b>
+          ${Number(u.referrals || 0)}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          ASSIGNMENT PLAN
+        </small>
+
+        <b>
+
+          ${
+            assignment
+
+            ? "Plan " +
+              esc(assignment.plan) +
+              " — " +
+              esc(assignment.status)
+
+            : "None"
+
+          }
+
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          ADS PLAN
+        </small>
+
+        <b>
+
+          ${
+            ads
+
+            ? "Plan " +
+              esc(ads.plan) +
+              " — " +
+              esc(ads.status)
+
+            : "None"
+
+          }
+
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          USER UID
+        </small>
+
+        <b>
+          ${esc(u.id)}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          REFERRED BY
+        </small>
+
+        <b>
+          ${esc(u.referredBy || "-")}
+        </b>
+
+      </div>
+
+
+    </div>
+
+  `;
+
+
+  $("viewModal")
+    .classList
+    .add("open");
+
+};
+
+
+/* =====================================================
+   INCREASE MEMBER REFERRALS
+===================================================== */
+
+window.increaseMemberReferrals =
+function(uid){
+
+  const u =
+    usersData.find(
+      x => x.id === uid
+    );
+
+
+  if(!u){
+
+    showToast(
+      "❌ Member not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const current =
+    Number(
+      u.referrals || 0
+    );
+
+
+  $("viewTitle")
+    .textContent =
+    "Increase Member Referrals";
+
+
+  $("viewContent").innerHTML = `
+
+    <div class="referralBox">
+
+      <div class="referralCurrent">
+
+        Current Referrals:
+
+        <span>
+          ${current}
+        </span>
+
+      </div>
+
+
+      <div class="sub" style="margin-bottom:12px;">
+
+        Member:
+        ${esc(u.name || "Member")}
+
+        <br>
+
+        Email:
+        ${esc(u.email || "-")}
+
+      </div>
+
+
+      <label>
+        Quick Increase
+      </label>
+
+
+      <div class="referralQuick">
+
+
+        <button
+          type="button"
+          onclick="setReferralIncrease(1)"
+        >
+          +1
+        </button>
+
+
+        <button
+          type="button"
+          onclick="setReferralIncrease(5)"
+        >
+          +5
+        </button>
+
+
+        <button
+          type="button"
+          onclick="setReferralIncrease(10)"
+        >
+          +10
+        </button>
+
+
+      </div>
+
+
+      <label>
+        Custom Increase
+      </label>
+
+
+      <input
+        id="referralIncreaseInput"
+        class="referralInput"
+        type="number"
+        min="1"
+        step="1"
+        placeholder="Example: 3"
+      >
+
+
+      <button
+        class="referralSave"
+        type="button"
+        onclick="saveReferralIncrease('${esc(uid)}')"
+      >
+        💾 Save Referral Increase
+      </button>
+
+
+    </div>
+
+
+    <div class="detailGrid">
+
+
+      <div class="detail">
+
+        <small>
+          MEMBER
+        </small>
+
+        <b>
+          ${esc(u.name || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          EMAIL
+        </small>
+
+        <b>
+          ${esc(u.email || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          CURRENT REFERRALS
+        </small>
+
+        <b>
+          ${current}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          UID
+        </small>
+
+        <b>
+          ${esc(uid)}
+        </b>
+
+      </div>
+
+
+    </div>
+
+  `;
+
+
+  $("viewModal")
+    .classList
+    .add("open");
+
+};
+
+
+/* =====================================================
+   QUICK REFERRAL VALUE
+===================================================== */
+
+window.setReferralIncrease =
+function(value){
+
+  const input =
+    $("referralIncreaseInput");
+
+
+  if(input){
+
+    input.value =
+      Number(value);
+
+  }
+
+};
+
+
+/* =====================================================
+   SAVE REFERRAL INCREASE
+===================================================== */
+
+window.saveReferralIncrease =
+async function(uid){
+
+  const u =
+    usersData.find(
+      x => x.id === uid
+    );
+
+
+  if(!u){
+
+    showToast(
+      "❌ Member not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const input =
+    $("referralIncreaseInput");
+
+
+  const increase =
+    Number(
+      input?.value || 0
+    );
+
+
+  if(
+    !Number.isInteger(increase) ||
+    increase < 1
+  ){
+
+    showToast(
+      "❌ Enter a valid whole number, minimum 1.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    if(!await verifyAdmin()){
+
+      throw new Error(
+        "Admin authorization failed."
+      );
+
+    }
+
+
+    const userRef =
+      doc(
+        db,
+        "users",
+        uid
+      );
+
+
+    const current =
+      Number(
+        u.referrals || 0
+      );
+
+
+    const newTotal =
+      current + increase;
+
+
+    await updateDoc(
+      userRef,
+      {
+
+        referrals:
+          newTotal
+
+      }
+    );
+
+
+    /*
+      Update local Firebase data
+      so the new value appears
+      immediately in admin panel.
+    */
+
+    u.referrals =
+      newTotal;
+
+
+    renderDashboard();
+
+    renderUsers();
+
+
+    closeViewModal();
+
+
+    showToast(
+      "✅ Referrals increased by " +
+      increase +
+      ". New total: " +
+      newTotal,
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "REFERRAL UPDATE ERROR:",
+      error
+    );
+
+
+    showToast(
+      "❌ " +
+      firebaseError(error),
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   PLAN REQUESTS
+===================================================== */
+
+window.renderPlans =
+function(){
+
+  const q =
+    ($("planSearch")?.value || "")
+      .trim()
+      .toLowerCase();
+
+
+  const filter =
+    $("planFilter")?.value ||
+    "all";
+
+
+  let rows =
+    plansData.filter(r => {
+
+      const status =
+        r.status || "pending";
+
+
+      if(
+        filter !== "all" &&
+        status !== filter
+      ){
+
+        return false;
+
+      }
+
+
+      if(!q) return true;
+
+
+      const u =
+        usersData.find(
+          x => x.id === r.uid
+        ) || {};
+
+
+      const text =
+        [
+          r.id,
+          r.uid,
+          r.trx,
+          r.type,
+          r.plan,
+          r.status,
+          u.name,
+          u.email,
+          u.phone
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+      return text.includes(q);
+
+    });
+
+
+  if(!rows.length){
+
+    $("plansTable").innerHTML =
+      `
+      <div class="empty">
+        No plan requests found.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  $("plansTable").innerHTML = `
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Member</th>
+          <th>Type</th>
+          <th>Plan</th>
+          <th>Fee</th>
+          <th>TRX</th>
+          <th>Submitted</th>
+          <th>Status</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        ${rows.map(r => {
+
+          const u =
+            usersData.find(
+              x => x.id === r.uid
+            ) || {};
+
+
+          const status =
+            r.status || "pending";
+
+
+          return `
+
+            <tr>
+
+
+              <td>
+
+                <div class="memberName">
+                  ${esc(u.name || "Member")}
+                </div>
+
+                <div class="sub">
+                  ${esc(u.email || "")}
+                </div>
+
+                <div class="sub">
+                  UID: ${esc(r.uid)}
+                </div>
+
+              </td>
+
+
+              <td>
+
+                <b>
+                  ${esc(r.type || "-")}
+                </b>
+
+              </td>
+
+
+              <td>
+                Plan ${esc(r.plan || "-")}
+              </td>
+
+
+              <td>
+
+                <b>
+                  ${money(r.fee)}
+                </b>
+
+              </td>
+
+
+              <td>
+
+                <span class="sub">
+                  ${esc(r.trx || "-")}
+                </span>
+
+              </td>
+
+
+              <td>
+                ${dateText(r.submittedAt)}
+              </td>
+
+
+              <td>
+                ${statusHTML(status)}
+              </td>
+
+
+              <td>
+
+                <div class="actionRow">
+
+
+                  <button
+                    class="viewBtn"
+                    onclick="viewPlan('${esc(r.id)}')"
+                  >
+                    View
+                  </button>
+
+
+                  ${
+                    status === "pending"
+
+                    ?
+
+                    `
+
+                    <button
+                      class="approveBtn"
+                      onclick="openPlanAction('${esc(r.id)}','approved')"
+                    >
+                      ✓ Approve
+                    </button>
+
+
+                    <button
+                      class="rejectBtn"
+                      onclick="openPlanAction('${esc(r.id)}','rejected')"
+                    >
+                      ✕ Reject
+                    </button>
+
+                    `
+
+                    :
+
+                    "—"
+
+                  }
+
+
+                </div>
+
+              </td>
+
+
+            </tr>
+
+          `;
+
+        }).join("")}
+
+      </tbody>
+
+    </table>
+
+  `;
+
+};
+
+
+/* =====================================================
+   VIEW PLAN
+===================================================== */
+
+window.viewPlan =
+function(id){
+
+  const r =
+    plansData.find(
+      x => x.id === id
+    );
+
+
+  if(!r) return;
+
+
+  const u =
+    usersData.find(
+      x => x.id === r.uid
+    ) || {};
+
+
+  $("viewTitle")
+    .textContent =
+    "Plan Request Details";
+
+
+  $("viewContent").innerHTML = `
+
+    <div class="detailGrid">
+
+
+      <div class="detail">
+
+        <small>
+          MEMBER NAME
+        </small>
+
+        <b>
+          ${esc(u.name || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          EMAIL
+        </small>
+
+        <b>
+          ${esc(u.email || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          UID
+        </small>
+
+        <b>
+          ${esc(r.uid || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          TYPE
+        </small>
+
+        <b>
+          ${esc(r.type || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          PLAN
+        </small>
+
+        <b>
+          Plan ${esc(r.plan || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          FEE
+        </small>
+
+        <b>
+          ${money(r.fee)}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          DAILY EARNING
+        </small>
+
+        <b>
+          ${money(r.earn)}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          TRANSACTION ID
+        </small>
+
+        <b>
+          ${esc(r.trx || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          STATUS
+        </small>
+
+        <b>
+          ${statusHTML(r.status || "pending")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          SUBMITTED
+        </small>
+
+        <b>
+          ${dateText(r.submittedAt)}
+        </b>
+
+      </div>
+
+
+    </div>
+
+  `;
+
+
+  $("viewModal")
+    .classList
+    .add("open");
+
+};
+
+
+/* =====================================================
+   PLAN ACTION MODAL
+===================================================== */
+
+window.openPlanAction =
+function(id,status){
+
+  const r =
+    plansData.find(
+      x => x.id === id
+    );
+
+
+  if(!r) return;
+
+
+  const u =
+    usersData.find(
+      x => x.id === r.uid
+    ) || {};
+
+
+  pendingAction = {
+
+    collection:"planRequests",
+
+    id:id,
+
+    uid:r.uid,
+
+    status:status
+
+  };
+
+
+  const approving =
+    status === "approved";
+
+
+  $("actionTitle")
+    .textContent =
+    approving
+    ? "Approve Plan Request?"
+    : "Reject Plan Request?";
+
+
+  $("actionDetails").innerHTML = `
+
+    <b>Member:</b>
+    ${esc(u.name || "Member")}
+
+    <br>
+
+    <b>Email:</b>
+    ${esc(u.email || "-")}
+
+    <br>
+
+    <b>Type:</b>
+    ${esc(r.type || "-")}
+
+    <br>
+
+    <b>Plan:</b>
+    ${esc(r.plan || "-")}
+
+    <br>
+
+    <b>Fee:</b>
+    ${money(r.fee)}
+
+    <br>
+
+    <b>TRX:</b>
+    ${esc(r.trx || "-")}
+
+    <br><br>
+
+    ${
+      approving
+
+      ?
+
+      "This will approve the member's plan and make it available."
+
+      :
+
+      "This will reject the member's plan request."
+
+    }
+
+  `;
+
+
+  $("actionButtons").innerHTML = `
+
+    <button
+      class="cancelBtn"
+      onclick="closeActionModal()"
+    >
+      Cancel
+    </button>
+
+
+    <button
+      class="${approving ? "modalApprove" : "modalReject"}"
+      onclick="executePlanAction()"
+    >
+
+      ${
+        approving
+        ? "✓ Yes, Approve"
+        : "✕ Yes, Reject"
+      }
+
+    </button>
+
+  `;
+
+
+  $("actionModal")
+    .classList
+    .add("open");
+
+};
+
+
+/* =====================================================
+   EXECUTE PLAN ACTION
+===================================================== */
+
+window.executePlanAction =
+async function(){
+
+  if(!pendingAction) return;
+
+
+  const action =
+    pendingAction;
+
+
+  const requestId =
+    action.id;
+
+
+  const newStatus =
+    action.status;
+
+
+  $("actionButtons")
+    .innerHTML =
+    `
+
+      <button
+        class="cancelBtn"
+        disabled
+      >
+        Processing...
+      </button>
+
+
+      <button
+        class="${newStatus === "approved" ? "modalApprove" : "modalReject"}"
+        disabled
+      >
+        Please wait...
+      </button>
+
+    `;
+
+
+  try{
+
+    if(!await verifyAdmin()){
+
+      throw new Error(
+        "Admin authorization failed."
+      );
+
+    }
+
+
+    const requestRef =
+      doc(
+        db,
+        "planRequests",
+        requestId
+      );
+
+
+    const userRef =
+      doc(
+        db,
+        "users",
+        action.uid
+      );
+
+
+    await runTransaction(
+      db,
+      async transaction => {
+
+
+        const requestSnap =
+          await transaction.get(
+            requestRef
+          );
+
+
+        if(!requestSnap.exists()){
+
+          throw new Error(
+            "Plan request no longer exists."
+          );
+
+        }
+
+
+        const requestData =
+          requestSnap.data();
+
+
+        if(
+          (requestData.status || "pending")
+          !== "pending"
+        ){
+
+          throw new Error(
+            "This plan request has already been processed."
+          );
+
+        }
+
+
+        const userSnap =
+          await transaction.get(
+            userRef
+          );
+
+
+        if(!userSnap.exists()){
+
+          throw new Error(
+            "User account not found."
+          );
+
+        }
+
+
+        const userData =
+          userSnap.data();
+
+
+        const plans =
+          {
+            ...(userData.plans || {})
+          };
+
+
+        const type =
+          requestData.type;
+
+
+        const oldPlan =
+          plans[type] || {};
+
+
+        const updatedPlan =
+          {
+
+            ...oldPlan,
+
+            plan:
+              Number(
+                requestData.plan ||
+                oldPlan.plan ||
+                0
+              ),
+
+            fee:
+              Number(
+                requestData.fee ||
+                oldPlan.fee ||
+                0
+              ),
+
+            earn:
+              Number(
+                requestData.earn ||
+                oldPlan.earn ||
+                0
+              ),
+
+            trx:
+              requestData.trx ||
+              oldPlan.trx ||
+              "",
+
+            status:
+              newStatus,
+
+            reviewedAt:
+              serverTimestamp(),
+
+            reviewedBy:
+              currentAdmin.uid
+
+          };
+
+
+        plans[type] =
+          updatedPlan;
+
+
+        transaction.update(
+          requestRef,
+          {
+
+            status:
+              newStatus,
+
+            reviewedAt:
+              serverTimestamp(),
+
+            reviewedBy:
+              currentAdmin.uid
+
+          }
+        );
+
+
+        transaction.update(
+          userRef,
+          {
+
+            plans:plans
+
+          }
+        );
+
+      }
+    );
+
+
+    closeActionModal();
+
+
+    showToast(
+      newStatus === "approved"
+      ? "✅ Plan approved successfully."
+      : "❌ Plan rejected successfully.",
+      "success"
+    );
+
+
+    await loadAllData();
+
+
+  }catch(error){
+
+    console.error(
+      "PLAN ACTION ERROR:",
+      error
+    );
+
+
+    closeActionModal();
+
+
+    showToast(
+      "❌ " +
+      firebaseError(error),
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   WITHDRAWALS
+===================================================== */
+
+window.renderWithdrawals =
+function(){
+
+  const q =
+    ($("withdrawSearch")?.value || "")
+      .trim()
+      .toLowerCase();
+
+
+  const filter =
+    $("withdrawFilter")?.value ||
+    "all";
+
+
+  let rows =
+    withdrawalsData.filter(r => {
+
+      const status =
+        r.status || "pending";
+
+
+      if(
+        filter !== "all" &&
+        status !== filter
+      ){
+
+        return false;
+
+      }
+
+
+      if(!q) return true;
+
+
+      const u =
+        usersData.find(
+          x => x.id === r.uid
+        ) || {};
+
+
+      const text =
+        [
+          r.id,
+          r.uid,
+          r.method,
+          r.number,
+          r.name,
+          r.status,
+          u.name,
+          u.email,
+          u.phone
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+      return text.includes(q);
+
+    });
+
+
+  if(!rows.length){
+
+    $("withdrawalsTable").innerHTML =
+      `
+      <div class="empty">
+        No withdrawal requests found.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  $("withdrawalsTable").innerHTML = `
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Member</th>
+          <th>Method</th>
+          <th>Account</th>
+          <th>Amount</th>
+          <th>User Wallet</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        ${rows.map(r => {
+
+          const u =
+            usersData.find(
+              x => x.id === r.uid
+            ) || {};
+
+
+          const status =
+            r.status || "pending";
+
+
+          return `
+
+            <tr>
+
+
+              <td>
+
+                <div class="memberName">
+                  ${esc(u.name || r.name || "Member")}
+                </div>
+
+                <div class="sub">
+                  ${esc(u.email || "")}
+                </div>
+
+                <div class="sub">
+                  UID: ${esc(r.uid)}
+                </div>
+
+              </td>
+
+
+              <td>
+
+                <b>
+                  ${esc(r.method || "-")}
+                </b>
+
+              </td>
+
+
+              <td>
+
+                ${esc(r.number || "-")}
+
+                <div class="sub">
+                  ${esc(r.name || "-")}
+                </div>
+
+              </td>
+
+
+              <td>
+
+                <b>
+                  ${money(r.amount)}
+                </b>
+
+              </td>
+
+
+              <td>
+                ${money(u.wallet)}
+              </td>
+
+
+              <td>
+                ${dateText(r.createdAt || r.date)}
+              </td>
+
+
+              <td>
+                ${statusHTML(status)}
+              </td>
+
+
+              <td>
+
+                <div class="actionRow">
+
+
+                  <button
+                    class="viewBtn"
+                    onclick="viewWithdrawal('${esc(r.id)}')"
+                  >
+                    View
+                  </button>
+
+
+                  ${
+                    status === "pending"
+
+                    ?
+
+                    `
+
+                    <button
+                      class="approveBtn"
+                      onclick="openWithdrawalAction('${esc(r.id)}','approved')"
+                    >
+                      ✓ Approve
+                    </button>
+
+
+                    <button
+                      class="rejectBtn"
+                      onclick="openWithdrawalAction('${esc(r.id)}','rejected')"
+                    >
+                      ✕ Reject
+                    </button>
+
+                    `
+
+                    :
+
+                    "—"
+
+                  }
+
+
+                </div>
+
+              </td>
+
+
+            </tr>
+
+          `;
+
+        }).join("")}
+
+      </tbody>
+
+    </table>
+
+  `;
+
+};
+
+
+/* =====================================================
+   VIEW WITHDRAWAL
+===================================================== */
+
+window.viewWithdrawal =
+function(id){
+
+  const r =
+    withdrawalsData.find(
+      x => x.id === id
+    );
+
+
+  if(!r) return;
+
+
+  const u =
+    usersData.find(
+      x => x.id === r.uid
+    ) || {};
+
+
+  $("viewTitle")
+    .textContent =
+    "Withdrawal Details";
+
+
+  $("viewContent").innerHTML = `
+
+    <div class="detailGrid">
+
+
+      <div class="detail">
+
+        <small>
+          MEMBER NAME
+        </small>
+
+        <b>
+          ${esc(u.name || r.name || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          EMAIL
+        </small>
+
+        <b>
+          ${esc(u.email || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          UID
+        </small>
+
+        <b>
+          ${esc(r.uid || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          METHOD
+        </small>
+
+        <b>
+          ${esc(r.method || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          ACCOUNT NUMBER
+        </small>
+
+        <b>
+          ${esc(r.number || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          ACCOUNT NAME
+        </small>
+
+        <b>
+          ${esc(r.name || "-")}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          AMOUNT
+        </small>
+
+        <b>
+          ${money(r.amount)}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          USER WALLET
+        </small>
+
+        <b>
+          ${money(u.wallet)}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          REFERRALS
+        </small>
+
+        <b>
+          ${Number(u.referrals || 0)}
+        </b>
+
+      </div>
+
+
+      <div class="detail">
+
+        <small>
+          STATUS
+        </small>
+
+        <b>
+          ${statusHTML(r.status || "pending")}
+        </b>
+
+      </div>
+
+
+    </div>
+
+  `;
+
+
+  $("viewModal")
+    .classList
+    .add("open");
+
+};
+
+
+/* =====================================================
+   WITHDRAWAL ACTION MODAL
+===================================================== */
+
+window.openWithdrawalAction =
+function(id,status){
+
+  const r =
+    withdrawalsData.find(
+      x => x.id === id
+    );
+
+
+  if(!r) return;
+
+
+  const u =
+    usersData.find(
+      x => x.id === r.uid
+    ) || {};
+
+
+  pendingAction = {
+
+    collection:"withdrawals",
+
+    id:id,
+
+    uid:r.uid,
+
+    status:status
+
+  };
+
+
+  const approving =
+    status === "approved";
+
+
+  $("actionTitle")
+    .textContent =
+    approving
+    ? "Approve Withdrawal?"
+    : "Reject Withdrawal?";
+
+
+  $("actionDetails").innerHTML = `
+
+    <b>Member:</b>
+    ${esc(u.name || r.name || "Member")}
+
+    <br>
+
+    <b>Email:</b>
+    ${esc(u.email || "-")}
+
+    <br>
+
+    <b>Method:</b>
+    ${esc(r.method || "-")}
+
+    <br>
+
+    <b>Account:</b>
+    ${esc(r.number || "-")}
+
+    <br>
+
+    <b>Amount:</b>
+    ${money(r.amount)}
+
+    <br>
+
+    <b>Current Wallet:</b>
+    ${money(u.wallet)}
+
+    <br><br>
+
+    ${
+      approving
+
+      ?
+
+      "Approve this withdrawal after checking the payment/account details."
+
+      :
+
+      "Rejecting this withdrawal will refund the requested amount back to the member's wallet."
+
+    }
+
+  `;
+
+
+  $("actionButtons").innerHTML = `
+
+    <button
+      class="cancelBtn"
+      onclick="closeActionModal()"
+    >
+      Cancel
+    </button>
+
+
+    <button
+      class="${approving ? "modalApprove" : "modalReject"}"
+      onclick="executeWithdrawalAction()"
+    >
+
+      ${
+        approving
+        ? "✓ Yes, Approve"
+        : "✕ Yes, Reject"
+      }
+
+    </button>
+
+  `;
+
+
+  $("actionModal")
+    .classList
+    .add("open");
+
+};
+
+
+/* =====================================================
+   EXECUTE WITHDRAWAL ACTION
+===================================================== */
+
+window.executeWithdrawalAction =
+async function(){
+
+  if(!pendingAction) return;
+
+
+  const action =
+    pendingAction;
+
+
+  const newStatus =
+    action.status;
+
+
+  $("actionButtons")
+    .innerHTML =
+    `
+
+      <button
+        class="cancelBtn"
+        disabled
+      >
+        Processing...
+      </button>
+
+
+      <button
+        class="${newStatus === "approved" ? "modalApprove" : "modalReject"}"
+        disabled
+      >
+        Please wait...
+      </button>
+
+    `;
+
+
+  try{
+
+    if(!await verifyAdmin()){
+
+      throw new Error(
+        "Admin authorization failed."
+      );
+
+    }
+
+
+    const withdrawalRef =
+      doc(
+        db,
+        "withdrawals",
+        action.id
+      );
+
+
+    const userRef =
+      doc(
+        db,
+        "users",
+        action.uid
+      );
+
+
+    await runTransaction(
+      db,
+      async transaction => {
+
+
+        const withdrawalSnap =
+          await transaction.get(
+            withdrawalRef
+          );
+
+
+        if(!withdrawalSnap.exists()){
+
+          throw new Error(
+            "Withdrawal request no longer exists."
+          );
+
+        }
+
+
+        const withdrawal =
+          withdrawalSnap.data();
+
+
+        if(
+          (withdrawal.status || "pending")
+          !== "pending"
+        ){
+
+          throw new Error(
+            "This withdrawal has already been processed."
+          );
+
+        }
+
+
+        const userSnap =
+          await transaction.get(
+            userRef
+          );
+
+
+        if(!userSnap.exists()){
+
+          throw new Error(
+            "User account not found."
+          );
+
+        }
+
+
+        const user =
+          userSnap.data();
+
+
+        let wallet =
+          Number(
+            user.wallet || 0
+          );
+
+
+        /*
+          User-side website already subtracts
+          withdrawal amount when request is created.
+
+          APPROVE:
+          Do NOT subtract again.
+
+          REJECT:
+          Refund amount once.
+        */
+
+
+        if(
+          newStatus === "rejected"
+        ){
+
+          wallet +=
+            Number(
+              withdrawal.amount || 0
+            );
+
+        }
+
+
+        transaction.update(
+          withdrawalRef,
+          {
+
+            status:
+              newStatus,
+
+            reviewedAt:
+              serverTimestamp(),
+
+            reviewedBy:
+              currentAdmin.uid,
+
+            refunded:
+              newStatus === "rejected"
+
+          }
+        );
+
+
+        const withdrawals =
+          Array.isArray(user.withdrawals)
+          ? [...user.withdrawals]
+          : [];
+
+
+        const index =
+          withdrawals.findIndex(
+            x =>
+              x.id === action.id
+          );
+
+
+        if(index >= 0){
+
+          withdrawals[index] = {
+
+            ...withdrawals[index],
+
+            status:
+              newStatus
+
+          };
+
+        }
+
+
+        const history =
+          Array.isArray(user.history)
+          ? [...user.history]
+          : [];
+
+
+        history.unshift({
+
+          kind:"Withdrawal",
+
+          amount:
+            Number(
+              withdrawal.amount || 0
+            ),
+
+          status:
+            newStatus,
+
+          date:
+            new Date().toLocaleString(),
+
+          reviewedBy:
+            currentAdmin.uid
+
+        });
+
+
+        transaction.update(
+          userRef,
+          {
+
+            wallet:wallet,
+
+            withdrawals:withdrawals,
+
+            history:history
+
+          }
+        );
+
+      }
+    );
+
+
+    closeActionModal();
+
+
+    showToast(
+      newStatus === "approved"
+      ? "✅ Withdrawal approved successfully."
+      : "❌ Withdrawal rejected and amount refunded.",
+      "success"
+    );
+
+
+    await loadAllData();
+
+
+  }catch(error){
+
+    console.error(
+      "WITHDRAWAL ACTION ERROR:",
+      error
+    );
+
+
+    closeActionModal();
+
+
+    showToast(
+      "❌ " +
+      firebaseError(error),
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   WORK RECORDS
+===================================================== */
+
+window.renderWorkRecords =
+function(){
+
+  const q =
+    ($("workSearch")?.value || "")
+      .trim()
+      .toLowerCase();
+
+
+  let rows =
+    workData.filter(r => {
+
+      if(!q) return true;
+
+
+      const u =
+        usersData.find(
+          x => x.id === r.uid
+        ) || {};
+
+
+      const text =
+        [
+          r.id,
+          r.uid,
+          r.type,
+          r.language,
+          r.status,
+          u.name,
+          u.email
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+      return text.includes(q);
+
+    });
+
+
+  if(!rows.length){
+
+    $("workTable").innerHTML =
+      `
+      <div class="empty">
+        No work records found.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  $("workTable").innerHTML = `
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Member</th>
+          <th>Type</th>
+          <th>Language</th>
+          <th>Reward</th>
+          <th>Status</th>
+          <th>Date</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        ${rows.map(r => {
+
+          const u =
+            usersData.find(
+              x => x.id === r.uid
+            ) || {};
+
+
+          return `
+
+            <tr>
+
+
+              <td>
+
+                <div class="memberName">
+                  ${esc(u.name || "Member")}
+                </div>
+
+                <div class="sub">
+                  ${esc(u.email || "")}
+                </div>
+
+                <div class="sub">
+                  UID: ${esc(r.uid)}
+                </div>
+
+              </td>
+
+
+              <td>
+                ${esc(r.type || "-")}
+              </td>
+
+
+              <td>
+                ${esc(r.language || "-")}
+              </td>
+
+
+              <td>
+                <b>
+                  ${money(r.reward)}
+                </b>
+              </td>
+
+
+              <td>
+                ${statusHTML(r.status || "completed")}
+              </td>
+
+
+              <td>
+                ${dateText(r.createdAt)}
+              </td>
+
+
+            </tr>
+
+          `;
+
+        }).join("")}
+
+      </tbody>
+
+    </table>
+
+  `;
+
+};
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+function renderHistory(){
+
+  let rows = [];
+
+
+  plansData.forEach(r => {
+
+    const u =
+      usersData.find(
+        x => x.id === r.uid
+      ) || {};
+
+
+    rows.push({
+
+      time:
+        dateValue(r.submittedAt),
+
+
+      html:`
+
+        <b>
+          📋 Plan Request
+        </b>
+
+        — ${esc(u.name || "Member")}
+
+        requested
+
+        ${esc(r.type || "")}
+
+        Plan ${esc(r.plan || "")}
+
+        for
+
+        ${money(r.fee)}
+
+        <br>
+
+        <span class="sub">
+
+          TRX:
+          ${esc(r.trx || "-")}
+
+          · UID:
+          ${esc(r.uid)}
+
+          ·
+          ${statusHTML(r.status || "pending")}
+
+        </span>
+
+      `
+
+    });
+
+  });
+
+
+  withdrawalsData.forEach(r => {
+
+    const u =
+      usersData.find(
+        x => x.id === r.uid
+      ) || {};
+
+
+    rows.push({
+
+      time:
+        dateValue(
+          r.createdAt || r.date
+        ),
+
+
+      html:`
+
+        <b>
+          💸 Withdrawal
+        </b>
+
+        — ${esc(u.name || "Member")}
+
+        requested
+
+        ${money(r.amount)}
+
+        via
+
+        ${esc(r.method || "-")}
+
+        <br>
+
+        <span class="sub">
+
+          Account:
+          ${esc(r.number || "-")}
+
+          · UID:
+          ${esc(r.uid)}
+
+          ·
+          ${statusHTML(r.status || "pending")}
+
+        </span>
+
+      `
+
+    });
+
+  });
+
+
+  workData.forEach(r => {
+
+    const u =
+      usersData.find(
+        x => x.id === r.uid
+      ) || {};
+
+
+    rows.push({
+
+      time:
+        dateValue(r.createdAt),
+
+
+      html:`
+
+        <b>
+          📝 Work Completed
+        </b>
+
+        — ${esc(u.name || "Member")}
+
+        completed
+
+        ${esc(r.type || "-")}
+
+        ${r.language
+          ? "(" + esc(r.language) + ")"
+          : ""
+        }
+
+        and earned
+
+        ${money(r.reward)}
+
+        <br>
+
+        <span class="sub">
+
+          UID:
+          ${esc(r.uid)}
+
+          ·
+          ${statusHTML(r.status || "completed")}
+
+        </span>
+
+      `
+
+    });
+
+  });
+
+
+  rows.sort(
+    (a,b) =>
+      b.time - a.time
+  );
+
+
+  if(!rows.length){
+
+    $("historyTable").innerHTML =
+      `
+      <div class="empty">
+        No activity history found.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  $("historyTable").innerHTML = `
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Date
+          </th>
+
+          <th>
+            Activity
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        ${rows.map(x => `
+
+          <tr>
+
+            <td style="width:190px">
+
+              ${x.time
+                ? new Date(x.time).toLocaleString()
+                : "-"
+              }
+
+            </td>
+
+
+            <td>
+              ${x.html}
+            </td>
+
+          </tr>
+
+        `).join("")}
+
+      </tbody>
+
+    </table>
+
+  `;
+
+}
+
+
+/* =====================================================
+   CLOSE ACTION MODAL
+===================================================== */
+
+window.closeActionModal =
+function(){
+
+  pendingAction =
+    null;
+
+
+  $("actionModal")
+    .classList
+    .remove("open");
+
+};
+
+
+/* =====================================================
+   CLOSE VIEW MODAL
+===================================================== */
+
+window.closeViewModal =
+function(){
+
+  $("viewModal")
+    .classList
+    .remove("open");
+
+};
+
+
+/* =====================================================
+   MODAL OUTSIDE CLICK
+===================================================== */
+
+$("actionModal")
+.addEventListener(
+  "click",
+  function(e){
+
+    if(
+      e.target ===
+      $("actionModal")
+    ){
+
+      closeActionModal();
+
+    }
+
+  }
+);
+
+
+$("viewModal")
+.addEventListener(
+  "click",
+  function(e){
+
+    if(
+      e.target ===
+      $("viewModal")
+    ){
+
+      closeViewModal();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key === "Escape"){
+
+      closeActionModal();
+
+      closeViewModal();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
