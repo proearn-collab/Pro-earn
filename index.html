@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,40 +6,54 @@
 <title>PRO EARN</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
 
 :root{
---bg:#dff3ff;
---bg2:#ccecff;
---card:#fff;
---card2:#eef9ff;
---line:#a9cfe2;
---text:#102431;
---muted:#506b79;
---blue:#188dcc;
---blue2:#7dd3ff;
---green:#159957;
---red:#e54848;
---yellow:#c18b00
+--bg:#08111f;
+--bg2:#0d1b2e;
+--card:#101d30;
+--card2:#14243a;
+--line:#284968;
+--text:#eef8ff;
+--muted:#9bb2c6;
+--blue:#28a9ed;
+--blue2:#63d2ff;
+--green:#27c982;
+--red:#ff6262;
+--yellow:#f0c34f
 }
 
 body{
 font-family:Arial,sans-serif;
-background:linear-gradient(180deg,#dff5ff,#c9eaff);
+background:
+radial-gradient(circle at 10% 0%,#1674a633,transparent 28%),
+radial-gradient(circle at 90% 15%,#6238b52b,transparent 30%),
+radial-gradient(circle at 50% 100%,#087caf22,transparent 35%),
+linear-gradient(145deg,#07101d,#0c1829 48%,#101b31);
 color:var(--text);
 min-height:100vh
 }
 
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
+button,input,select,textarea{
+font:inherit
+}
+
+button{
+cursor:pointer
+}
 
 .top{
 position:sticky;
 top:0;
 z-index:20;
-background:#e9f8ffff;
-border-bottom:1px solid var(--line);
-backdrop-filter:blur(12px)
+background:#0b1728e8;
+border-bottom:1px solid #294866;
+backdrop-filter:blur(16px);
+box-shadow:0 4px 22px #00000035
 }
 
 .header{
@@ -60,25 +74,74 @@ letter-spacing:.7px
 }
 
 .logoBox{
-width:44px;
-height:44px;
-border:2px solid var(--blue);
-border-radius:12px;
+width:46px;
+height:46px;
+border-radius:50%;
 display:grid;
 place-items:center;
-font-size:25px;
-background:var(--blue2);
-color:#071018;
-box-shadow:0 0 18px #188dcc33
+position:relative;
+font-size:28px;
+font-weight:900;
+font-family:Arial,sans-serif;
+color:#ffffff;
+
+background:
+radial-gradient(
+circle at 30% 25%,
+#ffffff 0%,
+#b9f1ff 8%,
+#42c8ff 30%,
+#168dcc 65%,
+#075582 100%
+);
+
+border:2px solid #8be5ff;
+
+box-shadow:
+0 0 0 3px #168dcc22,
+0 6px 22px #168dcc66,
+0 0 30px #35c5ff33,
+inset 0 2px 4px #ffffff99,
+inset 0 -3px 6px #03456b88;
+
+text-shadow:
+0 2px 3px #03405f,
+0 0 8px #ffffff55;
+
+overflow:hidden;
+}
+
+.logoBox::before{
+content:"";
+position:absolute;
+top:5px;
+left:8px;
+width:18px;
+height:9px;
+border-radius:50%;
+background:#ffffff66;
+transform:rotate(-25deg);
+filter:blur(1px);
+}
+
+.logoBox::after{
+content:"";
+position:absolute;
+inset:4px;
+border-radius:50%;
+border:1px solid #ffffff55;
+pointer-events:none;
 }
 
 .settings{
-border:1px solid var(--line);
-background:#d5effc;
-color:#102431;
-border-radius:11px;
+border:1px solid #3a7093;
+background:
+linear-gradient(135deg,#172d45,#10253a);
+color:#eaf8ff;
+border-radius:12px;
 padding:9px 12px;
-font-size:18px
+font-size:18px;
+box-shadow:0 5px 15px #00000025
 }
 
 .container{
@@ -87,21 +150,39 @@ margin:auto;
 padding:18px 14px 100px
 }
 
-.screen{display:none}
-.screen.active{display:block}
-
-.card{
-background:linear-gradient(145deg,#fff,#eef9ff);
-border:1px solid var(--line);
-border-radius:17px;
-padding:16px;
-margin-bottom:14px;
-box-shadow:0 7px 25px #328bb018
+.screen{
+display:none
 }
 
-h1{font-size:25px;margin-bottom:8px}
-h2{font-size:19px;margin-bottom:12px}
-h3{font-size:16px}
+.screen.active{
+display:block
+}
+
+.card{
+background:
+linear-gradient(145deg,#122137,#0e1b2d);
+border:1px solid #294966;
+border-radius:18px;
+padding:16px;
+margin-bottom:14px;
+box-shadow:
+0 10px 30px #00000035,
+inset 0 1px 0 #ffffff08
+}
+
+h1{
+font-size:25px;
+margin-bottom:8px
+}
+
+h2{
+font-size:19px;
+margin-bottom:12px
+}
+
+h3{
+font-size:16px
+}
 
 .muted{
 color:var(--muted);
@@ -116,29 +197,40 @@ gap:12px
 }
 
 .stat{
-background:#eaf7ff;
-border:1px solid var(--line);
+background:
+linear-gradient(145deg,#172a42,#102237);
+border:1px solid #2b4d69;
 padding:16px;
-border-radius:15px
+border-radius:15px;
+box-shadow:0 5px 18px #00000020
 }
 
 .stat b{
 display:block;
 font-size:21px;
-margin-top:6px
+margin-top:6px;
+color:#f2fbff
 }
 
 .workButton{
 width:100%;
-border:1px solid #58afd8;
-background:linear-gradient(135deg,#8fd8ff,#c9efff);
-color:#08131b;
-border-radius:15px;
+border:1px solid #3d91bd;
+background:
+linear-gradient(135deg,#173c59,#105277,#12334e);
+color:#f4fbff;
+border-radius:16px;
 padding:18px 14px;
 text-align:left;
 font-weight:900;
 margin-bottom:12px;
-box-shadow:0 5px 18px #188dcc20
+box-shadow:
+0 8px 24px #00000030,
+inset 0 1px 0 #ffffff12;
+transition:.2s
+}
+
+.workButton:active{
+transform:scale(.985)
 }
 
 .workButton .bigIcon{
@@ -151,18 +243,22 @@ margin-bottom:7px
 display:block;
 margin-top:5px;
 font-weight:600;
-opacity:.8
+color:#a9c5d8
 }
 
 .workBadge{
-border:1px solid var(--line);
-background:#f2fbff;
+border:1px solid #294c68;
+background:
+linear-gradient(145deg,#12243a,#0e1c2e);
 border-radius:16px;
 padding:16px;
-margin:12px 0
+margin:12px 0;
+box-shadow:0 7px 22px #00000025
 }
 
-.workBadge .icon{font-size:30px}
+.workBadge .icon{
+font-size:30px
+}
 
 .badgeTitle{
 font-weight:900;
@@ -174,32 +270,37 @@ margin:8px 0
 display:inline-block;
 padding:6px 9px;
 border-radius:8px;
-background:#e6f2f8;
-color:#405967;
+background:#1b3042;
+color:#a8c0d0;
 font-size:12px
 }
 
 .status.approved{
-color:var(--green);
-border:1px solid #238653
+color:#35dc91;
+border:1px solid #238653;
+background:#0c3023
 }
 
 .status.pending{
-color:var(--yellow);
-border:1px solid #c9a82e
+color:#f2ca5d;
+border:1px solid #927a27;
+background:#332d12
 }
 
 .status.rejected{
-color:var(--red);
-border:1px solid #d35a5a
+color:#ff7070;
+border:1px solid #a84444;
+background:#351919
 }
 
 .plan{
-background:#edf9ff;
-border:1px solid var(--line);
-border-radius:14px;
+background:
+linear-gradient(145deg,#172a42,#102137);
+border:1px solid #315572;
+border-radius:15px;
 padding:14px;
-margin:10px 0
+margin:10px 0;
+box-shadow:0 6px 18px #00000022
 }
 
 .planTop{
@@ -208,7 +309,10 @@ justify-content:space-between;
 gap:8px
 }
 
-.fee{font-weight:900}
+.fee{
+font-weight:900;
+color:#f4fbff
+}
 
 .earn{
 color:var(--green);
@@ -216,47 +320,81 @@ font-weight:900;
 margin-top:7px
 }
 
-.primary,.plan button{
+.primary,
+.plan button{
 width:100%;
-border:1px solid #58afd8;
-border-radius:11px;
+border:1px solid #42b6e9;
+border-radius:12px;
 padding:12px;
 margin-top:11px;
-background:linear-gradient(135deg,#8fd8ff,#c4edff);
-color:#071018;
-font-weight:900
+background:
+linear-gradient(135deg,#42c3f4,#087fc1);
+color:#fff;
+font-weight:900;
+box-shadow:
+0 7px 18px #087fc133,
+inset 0 1px 0 #ffffff44;
+transition:.2s
+}
+
+.primary:hover,
+.plan button:hover{
+filter:brightness(1.08)
+}
+
+.primary:active,
+.plan button:active{
+transform:translateY(1px)
 }
 
 .secondary{
 width:100%;
-border:1px solid #7da4b7;
-background:#e0f2fb;
-color:#102431;
-border-radius:11px;
+border:1px solid #3b5d77;
+background:
+linear-gradient(135deg,#172c43,#112136);
+color:#eaf7ff;
+border-radius:12px;
 padding:12px;
 margin-top:9px;
-font-weight:800
+font-weight:800;
+box-shadow:0 5px 14px #00000022;
+transition:.2s
+}
+
+.secondary:active{
+transform:scale(.99)
 }
 
 label{
 display:block;
-color:#304c5a;
+color:#b5ccdc;
 font-size:13px;
 margin:11px 0 6px
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
 width:100%;
-background:#f3fbff;
-border:1px solid #9abccd;
-color:#102431;
-border-radius:10px;
+background:#0c192a;
+border:1px solid #3b5d77;
+color:#eef8ff;
+border-radius:11px;
 padding:12px;
-outline:none
+outline:none;
+transition:.2s
 }
 
-input:focus,select:focus,textarea:focus{
-border-color:var(--blue)
+input::placeholder,
+textarea::placeholder{
+color:#71899b
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:var(--blue);
+box-shadow:0 0 0 3px #188dcc22
 }
 
 textarea{
@@ -276,22 +414,24 @@ margin:35px auto
 
 .notice{
 padding:12px;
-border-radius:10px;
+border-radius:11px;
 margin:10px 0;
 font-size:13px;
 line-height:1.5;
-background:#eaf7ff;
-border:1px solid var(--line)
+background:#12283d;
+border:1px solid #31536c
 }
 
 .success{
 border-color:#238653;
-color:#08763d
+color:#52e19b;
+background:#0d2c21
 }
 
 .error{
-border-color:#d35a5a;
-color:#c52f2f
+border-color:#a84444;
+color:#ff7a7a;
+background:#32191b
 }
 
 .reward{
@@ -305,9 +445,10 @@ bottom:0;
 left:0;
 right:0;
 z-index:30;
-background:#effaffee;
-border-top:1px solid var(--line);
-backdrop-filter:blur(12px)
+background:#0b1728ee;
+border-top:1px solid #294866;
+backdrop-filter:blur(16px);
+box-shadow:0 -6px 22px #00000035
 }
 
 .nav{
@@ -320,12 +461,16 @@ grid-template-columns:repeat(5,1fr)
 .nav button{
 border:0;
 background:none;
-color:#55717f;
+color:#7892a5;
 padding:9px 2px 10px;
-font-size:11px
+font-size:11px;
+transition:.2s
 }
 
-.nav button.active{color:var(--blue)}
+.nav button.active{
+color:#45c5ff;
+font-weight:900
+}
 
 .nav i{
 font-style:normal;
@@ -335,8 +480,8 @@ margin-bottom:3px
 }
 
 .ref{
-background:#eefaff;
-border:1px dashed #70a5bd;
+background:#10263a;
+border:1px dashed #47728c;
 border-radius:10px;
 padding:10px;
 word-break:break-all;
@@ -350,9 +495,10 @@ border-collapse:collapse;
 font-size:13px
 }
 
-td,th{
+td,
+th{
 padding:10px 5px;
-border-bottom:1px solid var(--line);
+border-bottom:1px solid #294966;
 text-align:left
 }
 
@@ -367,37 +513,48 @@ font-weight:900;
 padding:13px 5px
 }
 
-.affiliateTable td:first-child{font-size:17px}
+.affiliateTable td:first-child{
+font-size:17px
+}
 
-.affiliateTable .membersBig{font-size:18px}
-.affiliateTable .salaryBig{font-size:17px}
+.affiliateTable .membersBig{
+font-size:18px
+}
+
+.affiliateTable .salaryBig{
+font-size:17px
+}
 
 .modal{
 display:none;
 position:fixed;
 inset:0;
-background:#00131c99;
+background:#000b18c9;
 z-index:100;
 padding:18px;
 overflow:auto
 }
 
-.modal.open{display:block}
+.modal.open{
+display:block
+}
 
 .modalBox{
 max-width:520px;
 margin:40px auto;
-background:#f2fbff;
-border:1px solid var(--line);
-border-radius:17px;
-padding:17px
+background:
+linear-gradient(145deg,#14263d,#0d1b2d);
+border:1px solid #31536e;
+border-radius:18px;
+padding:17px;
+box-shadow:0 18px 50px #00000066
 }
 
 .close{
 float:right;
 border:0;
 background:none;
-color:#102431;
+color:#eaf7ff;
 font-size:23px
 }
 
@@ -409,7 +566,7 @@ color:var(--muted)
 .supportEmail{
 font-size:20px;
 font-weight:900;
-color:var(--blue);
+color:#42c3f4;
 word-break:break-word;
 margin-top:8px
 }
@@ -422,14 +579,65 @@ margin-bottom:8px
 
 .privacyCompact{
 font-size:14px;
-line-height:1.35;
-color:#203f4d
+line-height:1.5;
+color:#c2d5e2
+}
+
+.privacyIntro{
+padding:13px;
+border-radius:12px;
+background:#10283b;
+border:1px solid #31536c;
+margin-bottom:13px;
+line-height:1.55
+}
+
+.privacySection{
+margin-top:15px;
+padding:14px;
+border:1px solid #294966;
+background:linear-gradient(145deg,#12243a,#0d1b2d);
+border-radius:13px
+}
+
+.privacySectionTitle{
+font-size:16px;
+font-weight:900;
+color:#eaf8ff;
+margin-bottom:9px
+}
+
+.privacyRules{
+font-size:13px;
+line-height:1.55
 }
 
 .privacyRules div{
 margin:0;
-padding:0;
-line-height:1.35
+padding:7px 0;
+border-bottom:1px solid #29496655
+}
+
+.privacyRules div:last-child{
+border-bottom:0
+}
+
+.privacyRules div::before{
+content:"•";
+color:#45c5ff;
+font-weight:900;
+margin-right:7px
+}
+
+.privacyImportant{
+margin-top:15px;
+padding:13px;
+border-radius:12px;
+border:1px solid #927a27;
+background:#332d12;
+color:#f2d77a;
+font-size:13px;
+line-height:1.55
 }
 
 .affiliateBig{
@@ -450,12 +658,12 @@ overflow:hidden;
 margin:15px 0;
 border-radius:18px;
 background:
-radial-gradient(circle at 100% 0%,#68d6ff44,transparent 32%),
+radial-gradient(circle at 100% 0%,#68d6ff33,transparent 32%),
 linear-gradient(135deg,#061b29,#0b405e,#087caf);
 border:1px solid #61c8ed;
 color:#fff;
 padding:18px;
-box-shadow:0 12px 30px #0875a52e
+box-shadow:0 12px 30px #00000045
 }
 
 .paymentHeader{
@@ -521,7 +729,9 @@ font-size:10px;
 margin-bottom:4px
 }
 
-.paymentDetail b{font-size:13px}
+.paymentDetail b{
+font-size:13px
+}
 
 .paymentCopy{
 margin-top:15px;
@@ -535,8 +745,8 @@ font-weight:900
 }
 
 .selectedPayment{
-border:1px solid #8bcde6;
-background:#e9f8ff;
+border:1px solid #3b6c88;
+background:#10283b;
 border-radius:13px;
 padding:13px;
 margin:12px 0
@@ -544,7 +754,7 @@ margin:12px 0
 
 .selectedPaymentTitle{
 font-size:11px;
-color:#55717f;
+color:#8daabd;
 font-weight:800;
 text-transform:uppercase
 }
@@ -570,9 +780,10 @@ color:var(--green)
 .lockBox{
 text-align:center;
 padding:20px 15px;
-border:1px solid #8ab1c4;
+border:1px solid #3b5f78;
 border-radius:12px;
-background:#e8f7ff
+background:
+linear-gradient(145deg,#132940,#0e1d2f)
 }
 
 .lockIcon{
@@ -589,13 +800,14 @@ font-weight:900
 font-size:24px;
 font-weight:900;
 margin-top:10px;
-color:#188dcc
+color:#45c5ff;
+letter-spacing:.5px
 }
 
 .assignmentDone{
 border:1px solid #238653;
-color:#08763d;
-background:#edfdf5;
+color:#52e19b;
+background:#0d2c21;
 border-radius:10px;
 padding:9px;
 margin:8px 0;
@@ -611,7 +823,7 @@ overflow:hidden;
 border-radius:18px;
 background:linear-gradient(135deg,#061522,#0b3150,#126b9c);
 border:1px solid #55bce8;
-box-shadow:0 12px 35px #0574a52b
+box-shadow:0 12px 35px #00000045
 }
 
 .adTopBar{
@@ -726,38 +938,73 @@ background:linear-gradient(135deg,#8de2ff,#258fc7);
 color:#04111a;
 border-radius:12px;
 padding:13px;
-font-weight:900
+font-weight:900;
+box-shadow:0 6px 18px #188dcc20
 }
 
-.adStart:disabled{opacity:.65}
+.adStart:disabled{
+opacity:.65
+}
 
 .adComplete{
 display:none;
 margin-top:12px;
 padding:12px;
 border-radius:11px;
-background:#eafff4;
+background:#0d3022;
 border:1px solid #2c9b62;
-color:#08763d;
+color:#52e19b;
 text-align:center;
 font-size:13px;
 font-weight:900
 }
 
-.adComplete.show{display:block}
+.adComplete.show{
+display:block
+}
 
-.adRewardButton{margin-top:10px}
+.adRewardButton{
+margin-top:10px
+}
 
 @media(max-width:430px){
-.grid{grid-template-columns:1fr}
-h1{font-size:22px}
-.supportEmail{font-size:18px}
-.affiliateBig{font-size:20px}
-.affiliateTable th{font-size:12px}
-.affiliateTable td{font-size:14px}
-.adStage{height:310px}
-.adScene h3{font-size:23px}
-.paymentNumber{font-size:21px}
+
+.grid{
+grid-template-columns:1fr
+}
+
+h1{
+font-size:22px
+}
+
+.supportEmail{
+font-size:18px
+}
+
+.affiliateBig{
+font-size:20px
+}
+
+.affiliateTable th{
+font-size:12px
+}
+
+.affiliateTable td{
+font-size:14px
+}
+
+.adStage{
+height:310px
+}
+
+.adScene h3{
+font-size:23px
+}
+
+.paymentNumber{
+font-size:21px
+}
+
 }
 </style>
 </head>
@@ -769,73 +1016,104 @@ h1{font-size:22px}
 <div class="auth card">
 
 <div class="formTitle">
+
 <div class="logo" style="justify-content:center">
+
 <span class="logoBox">$</span>
+
 <span>PRO EARN</span>
+
 </div>
 
 <p class="muted" style="margin-top:10px">
 Complete available work, earn rewards and manage your account.
 </p>
+
 </div>
 
 <div class="grid">
-<button class="primary" onclick="showSignup()">SIGN UP</button>
-<button class="secondary" onclick="showLogin()">LOGIN</button>
+
+<button class="primary" onclick="showSignup()">
+SIGN UP
+</button>
+
+<button class="secondary" onclick="showLogin()">
+LOGIN
+</button>
+
 </div>
 
 <form id="signupForm" onsubmit="signup(event)">
 
 <label>Full Name</label>
+
 <input id="suName" required>
 
 <label>Email</label>
+
 <input id="suEmail" type="email" required>
 
 <label>Age</label>
+
 <input id="suAge" type="number" min="18" required>
 
 <label>Phone Number</label>
+
 <input id="suPhone" required>
 
 <label>Password</label>
+
 <input id="suPass" type="password" minlength="6" required>
 
-<button class="primary">Create Account</button>
+<button class="primary">
+Create Account
+</button>
 
 </form>
 
 <form id="loginForm" style="display:none" onsubmit="login(event)">
 
 <label>Email</label>
+
 <input id="liEmail" type="email" required>
 
 <label>Password</label>
+
 <input id="liPass" type="password" required>
 
-<button class="primary">Login</button>
+<button class="primary">
+Login
+</button>
 
 </form>
 
 <div id="authMsg"></div>
 
 </div>
+
 </div>
 
 
 <div id="app" style="display:none">
 
 <header class="top">
+
 <div class="header">
 
 <div class="logo">
+
 <span class="logoBox">$</span>
+
 <span>PRO EARN</span>
-</div>
-
-<button class="settings" onclick="openSettings()">⚙️</button>
 
 </div>
+
+<button class="settings" onclick="openSettings()">
+⚙️
+</button>
+
+</div>
+
 </header>
 
 
@@ -856,33 +1134,61 @@ Select a work category below.
 <div class="grid" style="margin-top:12px">
 
 <div class="stat">
-<p class="muted">Wallet</p>
-<b>Rs. <span id="dashboardWallet">0</span></b>
+
+<p class="muted">
+Wallet
+</p>
+
+<b>
+Rs. <span id="dashboardWallet">0</span>
+</b>
+
 </div>
 
 <div class="stat">
-<p class="muted">Referrals</p>
-<b id="dashboardReferrals">0</b>
-</div>
+
+<p class="muted">
+Referrals
+</p>
+
+<b id="dashboardReferrals">
+0
+</b>
 
 </div>
 
 </div>
+
+</div>
+
 
 <button class="workButton" onclick="openWork('assignment')">
-<span class="bigIcon">📝</span>
+
+<span class="bigIcon">
+📝
+</span>
+
 Assignment Work
+
 <small>
 Complete approved assignments and collect your available reward.
 </small>
+
 </button>
 
+
 <button class="workButton" onclick="openWork('ads')">
-<span class="bigIcon">🎞</span>
+
+<span class="bigIcon">
+🎞
+</span>
+
 Ads Watching
+
 <small>
 Watch the assigned advertisement completely and collect your reward.
 </small>
+
 </button>
 
 </section>
@@ -892,7 +1198,9 @@ Watch the assigned advertisement completely and collect your reward.
 
 <div class="card">
 
-<h1>Work 📝</h1>
+<h1>
+Work 📝
+</h1>
 
 <p class="muted">
 Your available work categories are shown below.
@@ -911,14 +1219,24 @@ Your available work categories are shown below.
 
 <div class="card">
 
-<h1>Affiliate Program 🤝</h1>
+<h1>
+Affiliate Program 🤝
+</h1>
 
 <div class="notice">
 
-<b>Your Referral Network</b>
+<b>
+Your Referral Network
+</b>
 
 <div style="margin-top:8px;font-size:32px;font-weight:900;color:var(--blue)">
-<span id="affiliateMemberCount">0</span> / 35
+
+<span id="affiliateMemberCount">
+0
+</span>
+/
+35
+
 </div>
 
 <div class="small" style="margin-top:4px">
@@ -931,13 +1249,27 @@ Members
 <div class="grid">
 
 <div class="stat">
-<p class="muted">Current Level</p>
-<b id="affiliateCurrentLevel">Below Level 1</b>
+
+<p class="muted">
+Current Level
+</p>
+
+<b id="affiliateCurrentLevel">
+Below Level 1
+</b>
+
 </div>
 
 <div class="stat">
-<p class="muted">Monthly Reward</p>
-<b id="affiliateCurrentReward">No reward</b>
+
+<p class="muted">
+Monthly Reward
+</p>
+
+<b id="affiliateCurrentReward">
+No reward
+</b>
+
 </div>
 
 </div>
@@ -981,7 +1313,9 @@ Copy Referral Link
 
 <div class="card">
 
-<h2>Affiliate Levels & Rewards</h2>
+<h2>
+Affiliate Levels & Rewards
+</h2>
 
 <div class="muted" style="margin-bottom:12px">
 Reach the required number of members to qualify for each level.
@@ -1036,12 +1370,21 @@ Reach the required number of members to qualify for each level.
 
 <div class="card">
 
-<h1>Wallet 💳</h1>
+<h1>
+Wallet 💳
+</h1>
 
-<p class="muted">Total Money</p>
+<p class="muted">
+Total Money
+</p>
 
 <div style="font-size:34px;font-weight:900;margin:7px 0" class="reward">
-Rs. <span id="walletTotal">0</span>
+
+Rs.
+<span id="walletTotal">
+0
+</span>
+
 </div>
 
 </div>
@@ -1049,28 +1392,45 @@ Rs. <span id="walletTotal">0</span>
 
 <div class="card">
 
-<h2>Withdraw</h2>
+<h2>
+Withdraw
+</h2>
 
 <p class="small">
 Minimum withdrawal: Rs. 700
 </p>
 
-<label>Method</label>
+<label>
+Method
+</label>
 
 <select id="wdMethod">
-<option>EasyPaisa</option>
-<option>JazzCash</option>
+
+<option>
+EasyPaisa
+</option>
+
+<option>
+JazzCash
+</option>
+
 </select>
 
-<label>Account Number</label>
+<label>
+Account Number
+</label>
 
 <input id="wdNumber" placeholder="03XXXXXXXXX">
 
-<label>Account Holder Name</label>
+<label>
+Account Holder Name
+</label>
 
 <input id="wdName">
 
-<label>Amount</label>
+<label>
+Amount
+</label>
 
 <input id="wdAmount" type="number" min="700" placeholder="700">
 
@@ -1089,7 +1449,9 @@ Request Withdrawal
 
 <div class="card">
 
-<h1>Status 📊</h1>
+<h1>
+Status 📊
+</h1>
 
 <p class="muted">
 Plan and withdrawal history.
@@ -1104,7 +1466,9 @@ Plan and withdrawal history.
 
 <div class="card">
 
-<h2>Current Plan Requests</h2>
+<h2>
+Current Plan Requests
+</h2>
 
 <div id="statusCurrent"></div>
 
@@ -1113,7 +1477,9 @@ Plan and withdrawal history.
 
 <div class="card">
 
-<h2>Withdrawal History 💸</h2>
+<h2>
+Withdrawal History 💸
+</h2>
 
 <div id="withdrawalHistory"></div>
 
@@ -1122,7 +1488,9 @@ Plan and withdrawal history.
 
 <div class="card">
 
-<h2>Complete History</h2>
+<h2>
+Complete History
+</h2>
 
 <div id="history"></div>
 
@@ -1139,23 +1507,28 @@ Plan and withdrawal history.
 <nav class="nav">
 
 <button class="active" onclick="go('dashboard',this)">
-<i>🔰</i>Dashboard
+<i>🔰</i>
+Dashboard
 </button>
 
 <button onclick="go('work',this)">
-<i>📝</i>Work
+<i>📝</i>
+Work
 </button>
 
 <button onclick="go('affiliate',this)">
-<i>🤝</i>Affiliate
+<i>🤝</i>
+Affiliate
 </button>
 
 <button onclick="go('wallet',this)">
-<i>💳</i>Wallet
+<i>💳</i>
+Wallet
 </button>
 
 <button onclick="go('status',this)">
-<i>📊</i>Status
+<i>📊</i>
+Status
 </button>
 
 </nav>
@@ -1165,13 +1538,19 @@ Plan and withdrawal history.
 </div>
 
 
+<!-- SETTINGS MODAL -->
+
 <div id="settingsModal" class="modal">
 
 <div class="modalBox">
 
-<button class="close" onclick="closeSettings()">×</button>
+<button class="close" onclick="closeSettings()">
+×
+</button>
 
-<h2>Account Settings</h2>
+<h2>
+Account Settings
+</h2>
 
 <div class="card">
 
@@ -1201,60 +1580,457 @@ Plan and withdrawal history.
 Logout
 </button>
 
-<hr style="border-color:#a9cfe2;margin:18px 0">
+<hr style="border-color:#294966;margin:18px 0">
 
-<h2>Support</h2>
+<h2>
+Support
+</h2>
 
 <div class="card">
+
 <div class="supportEmail">
 support.proearn@gmail.com
 </div>
+
+<p class="muted" style="margin-top:8px">
+For account, security, privacy or work-related support, contact the official PRO EARN support email.
+</p>
+
 </div>
 
+
+<!-- UPDATED LONG PRIVACY & SECURITY SECTION -->
+
 <h2 class="privacyTitle">
-Privacy & Safety
+Security & Privacy
 </h2>
 
 <div class="privacyCompact">
 
-Keep your account information private and never share account details with others.
-Use a strong password.
+<div class="privacyIntro">
+
+<b style="font-size:16px;color:#eef8ff">
+Protect Your Account & Information
+</b>
+
+<p style="margin-top:7px">
+Your account, personal information and work activity are important. Every member is responsible for protecting their own account and using PRO EARN carefully and honestly. Please read the following security, privacy and responsible-use guidelines before using the platform.
+</p>
+
+</div>
+
+
+<div class="privacySection">
+
+<div class="privacySectionTitle">
+🔐 Account Security
+</div>
 
 <div class="privacyRules">
 
 <div>
-Use your account on your own mobile device and avoid logging in on another device.
+Protect your PRO EARN account and keep your login information private at all times.
 </div>
 
 <div>
-Never make your password public or share it with unknown people.
+Use a strong password that is difficult for other people to guess.
 </div>
 
 <div>
-Refresh your dashboard daily and complete available work on time.
+Never share your password with friends, family members, unknown persons or anyone claiming to need it.
 </div>
 
 <div>
-Use safe sources when promoting your referral link.
+Do not publicly post your password, email password, verification information or other sensitive account details.
 </div>
 
 <div>
-Do not promote your referral link to family members.
+Use your account on your own trusted mobile device whenever possible.
 </div>
 
 <div>
-Creating accounts through your own referral link, or promoting it for family-member accounts, may result in account suspension.
+Avoid logging into your account on public, shared or unknown devices.
 </div>
 
 <div>
-For withdrawals, use the same account/bank details consistently once you have used them.
+If you use another device temporarily, make sure you log out after finishing your session.
 </div>
 
 <div>
-You may have one withdrawal request at a time; after it is completed, another request can be submitted.
+Never allow another person to use your PRO EARN account as if it were their own account.
+</div>
+
+<div>
+Do not give another person permission to access your account, even if they claim they can help you with your work.
+</div>
+
+<div>
+Regularly check your account activity and dashboard so you can notice anything unusual.
+</div>
+
+<div>
+If you believe someone has accessed your account without permission, change your password and contact official support as soon as possible.
+</div>
+
+<div>
+PRO EARN support should not require you to publicly disclose your password. Keep sensitive login information private.
 </div>
 
 </div>
+
+</div>
+
+
+<div class="privacySection">
+
+<div class="privacySectionTitle">
+👤 Members' Information & Privacy
+</div>
+
+<div class="privacyRules">
+
+<div>
+Treat other members' personal information with respect and keep it private.
+</div>
+
+<div>
+Do not share another member's name, email address, phone number, payment information or account details without permission.
+</div>
+
+<div>
+Do not collect unnecessary personal information from other members.
+</div>
+
+<div>
+Do not copy, publish, misuse or distribute another member's private account information.
+</div>
+
+<div>
+Do not post members' personal or payment information in public groups, social media pages or other public places.
+</div>
+
+<div>
+Use only the information that is genuinely required for an authorized work or communication purpose.
+</div>
+
+<div>
+Do not attempt to access another member's account, password, wallet, withdrawal information or private activity.
+</div>
+
+<div>
+Respect the privacy of every member and do not use another person's information for an unauthorized purpose.
+</div>
+
+<div>
+Keep your own personal information accurate and only provide information that is required by the platform.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="privacySection">
+
+<div class="privacySectionTitle">
+🤝 Honest & Responsible Work
+</div>
+
+<div class="privacyRules">
+
+<div>
+Complete your available work honestly and responsibly.
+</div>
+
+<div>
+Follow the instructions provided for each assignment and work category.
+</div>
+
+<div>
+Do not submit false, misleading or intentionally incorrect information just to claim a reward.
+</div>
+
+<div>
+Do not copy and paste assignments simply to receive a reward. Complete the assignment according to the instructions provided.
+</div>
+
+<div>
+Do not submit another member's work as your own.
+</div>
+
+<div>
+Do not use another person's account or identity to complete work or claim rewards.
+</div>
+
+<div>
+Do not intentionally manipulate the work system or attempt to receive rewards for work that was not genuinely completed.
+</div>
+
+<div>
+Use the platform in a responsible manner and keep your work activity genuine.
+</div>
+
+<div>
+If an assignment is unclear, review the instructions carefully or contact official support instead of submitting random information.
+</div>
+
+<div>
+Honest work helps maintain a fair and organized environment for all members.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="privacySection">
+
+<div class="privacySectionTitle">
+⚠️ Rules & Violations
+</div>
+
+<div class="privacyRules">
+
+<div>
+Follow the applicable PRO EARN rules and instructions when using your account.
+</div>
+
+<div>
+Do not intentionally bypass platform restrictions, security controls or account limits.
+</div>
+
+<div>
+Do not attempt unauthorized access to the website, Firebase data, another member's account or any private system information.
+</div>
+
+<div>
+Do not create or use multiple accounts for the purpose of manipulating rewards, referrals, work records or other platform activity.
+</div>
+
+<div>
+Do not provide false information when creating or using an account.
+</div>
+
+<div>
+Do not use another person's identity or account information.
+</div>
+
+<div>
+Do not misuse referral links or attempt to manipulate the referral system.
+</div>
+
+<div>
+Do not create an account through your own referral link or use prohibited referral arrangements involving your own accounts.
+</div>
+
+<div>
+Do not promote your referral link to family members where such activity is prohibited by the platform rules.
+</div>
+
+<div>
+Do not use misleading claims or false information when sharing your referral link with other people.
+</div>
+
+<div>
+Do not attempt to bypass approval, withdrawal or work-related procedures.
+</div>
+
+<div>
+Do not interfere with another member's account, work, rewards or withdrawal activity.
+</div>
+
+<div>
+If a security issue or unusual activity is discovered, report it to official support instead of attempting to misuse it.
+</div>
+
+<div>
+Violation of applicable rules may result in review, restriction, suspension or other action on the account where appropriate.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="privacySection">
+
+<div class="privacySectionTitle">
+🔗 Referral & Affiliate Safety
+</div>
+
+<div class="privacyRules">
+
+<div>
+Use your referral link responsibly and provide clear and truthful information when sharing it.
+</div>
+
+<div>
+Do not pressure, mislead or deceive people when explaining the referral program.
+</div>
+
+<div>
+Do not use spam, suspicious websites or unsafe sources to distribute your referral link.
+</div>
+
+<div>
+Do not promote your referral link to family members where the platform rules prohibit such activity.
+</div>
+
+<div>
+Do not create accounts yourself through your own referral link.
+</div>
+
+<div>
+Do not attempt to manipulate the number of referrals or create artificial referral activity.
+</div>
+
+<div>
+Referral activity should represent genuine members using their own accounts.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="privacySection">
+
+<div class="privacySectionTitle">
+💳 Payment & Withdrawal Safety
+</div>
+
+<div class="privacyRules">
+
+<div>
+Check your payment method, account number, account holder name and withdrawal amount carefully before submitting a withdrawal request.
+</div>
+
+<div>
+Use your own correct payment information when submitting a withdrawal request.
+</div>
+
+<div>
+Do not share your payment account details publicly or with unknown persons.
+</div>
+
+<div>
+Use the same withdrawal account or bank/payment details consistently once you have used them, according to the applicable platform rules.
+</div>
+
+<div>
+Do not submit incorrect payment information intentionally.
+</div>
+
+<div>
+You may have one pending withdrawal request at a time according to the current platform rules.
+</div>
+
+<div>
+Wait for the existing withdrawal request to be completed before submitting another request when the platform requires this.
+</div>
+
+<div>
+Review the withdrawal amount carefully before submitting the request.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="privacySection">
+
+<div class="privacySectionTitle">
+📱 Safe Platform Usage
+</div>
+
+<div class="privacyRules">
+
+<div>
+Keep your device protected with a screen lock, password or other suitable security method.
+</div>
+
+<div>
+Keep your browser and mobile device updated whenever updates are available.
+</div>
+
+<div>
+Avoid opening suspicious links that claim to be related to your PRO EARN account.
+</div>
+
+<div>
+Do not enter your PRO EARN password into unknown websites or forms.
+</div>
+
+<div>
+Use official PRO EARN pages and official support channels when dealing with account-related matters.
+</div>
+
+<div>
+Check the website address before entering sensitive account information.
+</div>
+
+<div>
+If you receive a suspicious message asking for your password or account access, do not provide the information and contact official support.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="privacySection">
+
+<div class="privacySectionTitle">
+📋 Account Responsibility
+</div>
+
+<div class="privacyRules">
+
+<div>
+Every member is responsible for protecting their own login credentials and account information.
+</div>
+
+<div>
+Every member is responsible for the work submitted through their own account.
+</div>
+
+<div>
+Every member should keep their account information accurate and up to date.
+</div>
+
+<div>
+Members should review the available instructions before completing work or submitting requests.
+</div>
+
+<div>
+Members should check their dashboard regularly for updates to their work, plans, wallet and withdrawal status.
+</div>
+
+<div>
+If you no longer trust a device where your account was used, log out and secure your account before continuing.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="privacyImportant">
+
+<b>IMPORTANT:</b>
+
+<br><br>
+
+Protect your account, keep your personal information private, work honestly and follow the applicable PRO EARN rules. Do not attempt to violate, bypass or misuse the platform's rules, security controls or work procedures.
+
+<br><br>
+
+If you notice suspicious activity, an account-security problem or a privacy concern, contact the official PRO EARN support team instead of sharing sensitive information publicly.
+
+<br><br>
+
+Using PRO EARN means you should use the platform responsibly, protect your account and respect the privacy and information of other members.
 
 </div>
 
@@ -1267,7 +2043,9 @@ You may have one withdrawal request at a time; after it is completed, another re
 
 <div class="modalBox">
 
-<button class="close" onclick="closePlan()">×</button>
+<button class="close" onclick="closePlan()">
+×
+</button>
 
 <h2 id="planModalTitle">
 Activate Plan
@@ -1290,7 +2068,9 @@ Review your selected plan, complete the payment, and enter the transaction ID be
 JAZZ
 </div>
 
-<span>JazzCash Wallet</span>
+<span>
+JazzCash Wallet
+</span>
 
 </div>
 
@@ -1314,7 +2094,9 @@ WALLET NUMBER
 
 <div class="paymentDetail">
 
-<small>ACCOUNT NAME</small>
+<small>
+ACCOUNT NAME
+</small>
 
 <b>
 Jan Alam Khan
@@ -1325,7 +2107,9 @@ Jan Alam Khan
 
 <div class="paymentDetail">
 
-<small>PAYMENT METHOD</small>
+<small>
+PAYMENT METHOD
+</small>
 
 <b>
 JazzCash
@@ -1354,18 +2138,36 @@ Send the exact plan fee
 </div>
 
 <div class="selectedPaymentRow">
-<span>Wallet</span>
-<b>JazzCash</b>
+<span>
+Wallet
+</span>
+
+<b>
+JazzCash
+</b>
+
 </div>
 
 <div class="selectedPaymentRow">
-<span>Account Name</span>
-<b>Jan Alam Khan</b>
+<span>
+Account Name
+</span>
+
+<b>
+Jan Alam Khan
+</b>
+
 </div>
 
 <div class="selectedPaymentRow">
-<span>Number</span>
-<b>03141281253</b>
+<span>
+Number
+</span>
+
+<b>
+03141281253
+</b>
+
 </div>
 
 </div>
@@ -1426,21 +2228,32 @@ orderBy
 
 
 const firebaseConfig={
+
 apiKey:"AIzaSyA43W8SRPUeoDXpNWhD_sZcEDdpI9Hov8s",
+
 authDomain:"pro-earn-81f64.firebaseapp.com",
+
 projectId:"pro-earn-81f64",
+
 storageBucket:"pro-earn-81f64.firebasestorage.app",
+
 messagingSenderId:"617371449142",
+
 appId:"1:617371449142:web:9974ae12a54c20bb1ee597",
+
 measurementId:"G-7Y2J707H21"
+
 };
 
 
-const firebaseApp=initializeApp(firebaseConfig);
+const firebaseApp=
+initializeApp(firebaseConfig);
 
-const auth=getAuth(firebaseApp);
+const auth=
+getAuth(firebaseApp);
 
-const firestore=getFirestore(firebaseApp);
+const firestore=
+getFirestore(firebaseApp);
 
 
 let firebaseUser=null;
@@ -1455,7 +2268,8 @@ let withdrawalRecords=[];
 
 const DAY_MS=86400000;
 
-const $=id=>document.getElementById(id);
+const $=id=>
+document.getElementById(id);
 
 
 /* =========================
@@ -1465,30 +2279,44 @@ HELPERS
 function defaults(){
 
 return{
+
 name:"",
+
 email:"",
+
 age:"",
+
 phone:"",
+
 wallet:0,
+
 referrals:0,
+
 plans:{
 assignment:null,
 ads:null
 },
+
 assignmentSubmitted:{
 en:false,
 ur:false
 },
+
 assignmentLockUntil:0,
+
 withdrawals:[],
+
 history:[]
+
 };
 
 }
 
 
 function current(){
+
 return userData;
+
 }
 
 
@@ -1539,16 +2367,24 @@ AUTH
 ========================= */
 
 window.showSignup=()=>{
+
 $("signupForm").style.display="block";
+
 $("loginForm").style.display="none";
+
 $("authMsg").innerHTML="";
+
 };
 
 
 window.showLogin=()=>{
+
 $("signupForm").style.display="none";
+
 $("loginForm").style.display="block";
+
 $("authMsg").innerHTML="";
+
 };
 
 
@@ -1559,15 +2395,20 @@ e.preventDefault();
 $("authMsg").innerHTML=
 '<div class="notice">Creating your Firebase account...</div>';
 
-let name=$("suName").value.trim();
+let name=
+$("suName").value.trim();
 
-let email=$("suEmail").value.trim().toLowerCase();
+let email=
+$("suEmail").value.trim().toLowerCase();
 
-let age=Number($("suAge").value);
+let age=
+Number($("suAge").value);
 
-let phone=$("suPhone").value.trim();
+let phone=
+$("suPhone").value.trim();
 
-let password=$("suPass").value;
+let password=
+$("suPass").value;
 
 if(age<18){
 
@@ -1591,9 +2432,13 @@ password
 let d=defaults();
 
 d.name=name;
+
 d.email=email;
+
 d.age=age;
+
 d.phone=phone;
+
 d.createdAt=serverTimestamp();
 
 let ref=
@@ -1671,17 +2516,26 @@ LOAD USER
 async function loadUser(){
 
 let r=
-doc(firestore,"users",firebaseUser.uid);
+doc(
+firestore,
+"users",
+firebaseUser.uid
+);
 
-let s=await getDoc(r);
+let s=
+await getDoc(r);
 
 if(!s.exists()){
 
 userData=defaults();
 
-userData.email=firebaseUser.email||"";
+userData.email=
+firebaseUser.email||"";
 
-await setDoc(r,userData);
+await setDoc(
+r,
+userData
+);
 
 }else{
 
@@ -1720,24 +2574,36 @@ async function loadFirebaseData(){
 
 try{
 
-const uid=firebaseUser.uid;
+const uid=
+firebaseUser.uid;
 
 
 /*
 PLAN REQUESTS
 */
 
-let ps=await getDocs(
+let ps=
+await getDocs(
 query(
-collection(firestore,"planRequests"),
-where("uid","==",uid)
+collection(
+firestore,
+"planRequests"
+),
+where(
+"uid",
+"==",
+uid
+)
 )
 );
 
 planRequests=
 ps.docs.map(d=>({
+
 id:d.id,
+
 ...d.data()
+
 }));
 
 
@@ -1745,17 +2611,28 @@ id:d.id,
 WORK RECORDS
 */
 
-let wr=await getDocs(
+let wr=
+await getDocs(
 query(
-collection(firestore,"workRecords"),
-where("uid","==",uid)
+collection(
+firestore,
+"workRecords"
+),
+where(
+"uid",
+"==",
+uid
+)
 )
 );
 
 workRecords=
 wr.docs.map(d=>({
+
 id:d.id,
+
 ...d.data()
+
 }));
 
 
@@ -1763,17 +2640,28 @@ id:d.id,
 WITHDRAWALS
 */
 
-let ws=await getDocs(
+let ws=
+await getDocs(
 query(
-collection(firestore,"withdrawals"),
-where("uid","==",uid)
+collection(
+firestore,
+"withdrawals"
+),
+where(
+"uid",
+"==",
+uid
+)
 )
 );
 
 withdrawalRecords=
 ws.docs.map(d=>({
+
 id:d.id,
+
 ...d.data()
+
 }));
 
 
@@ -1800,7 +2688,9 @@ function buildCurrentPlans(){
 
 let assignment=
 planRequests
-.filter(x=>x.type==="assignment")
+.filter(
+x=>x.type==="assignment"
+)
 .sort(
 (a,b)=>
 getTime(b.submittedAt)-
@@ -1809,7 +2699,9 @@ getTime(a.submittedAt)
 
 let ads=
 planRequests
-.filter(x=>x.type==="ads")
+.filter(
+x=>x.type==="ads"
+)
 .sort(
 (a,b)=>
 getTime(b.submittedAt)-
@@ -1818,8 +2710,13 @@ getTime(a.submittedAt)
 
 
 userData.plans={
-assignment:assignment||null,
-ads:ads||null
+
+assignment:
+assignment||null,
+
+ads:
+ads||null
+
 };
 
 }
@@ -1837,7 +2734,8 @@ return 0;
 if(v.toDate)
 return v.toDate().getTime();
 
-let n=new Date(v).getTime();
+let n=
+new Date(v).getTime();
 
 return isNaN(n)?0:n;
 
@@ -1868,7 +2766,9 @@ WALLET CALCULATION
 function getEarnedMoney(){
 
 return workRecords
-.filter(x=>x.status==="completed")
+.filter(
+x=>x.status==="completed"
+)
 .reduce(
 (total,x)=>
 total+(Number(x.reward)||0),
@@ -1897,11 +2797,16 @@ total+(Number(x.amount)||0),
 
 function getWallet(){
 
-let earned=getEarnedMoney();
+let earned=
+getEarnedMoney();
 
-let reserved=getReservedWithdrawals();
+let reserved=
+getReservedWithdrawals();
 
-return Math.max(0,earned-reserved);
+return Math.max(
+0,
+earned-reserved
+);
 
 }
 
@@ -1975,13 +2880,17 @@ window.go=(id,btn)=>{
 
 document
 .querySelectorAll(".screen")
-.forEach(x=>x.classList.remove("active"));
+.forEach(
+x=>x.classList.remove("active")
+);
 
 $(id).classList.add("active");
 
 document
 .querySelectorAll(".nav button")
-.forEach(x=>x.classList.remove("active"));
+.forEach(
+x=>x.classList.remove("active")
+);
 
 btn.classList.add("active");
 
@@ -2013,7 +2922,8 @@ behavior:"smooth"
 
 window.openSettings=()=>{
 
-$("settingsModal").classList.add("open");
+$("settingsModal")
+.classList.add("open");
 
 renderSettings();
 
@@ -2021,22 +2931,28 @@ renderSettings();
 
 
 window.closeSettings=()=>
-$("settingsModal").classList.remove("open");
+$("settingsModal")
+.classList.remove("open");
 
 
 function renderSettings(){
 
 let u=current();
 
-if(!u)return;
+if(!u)
+return;
 
-$("setName").textContent=u.name||"";
+$("setName").textContent=
+u.name||"";
 
-$("setEmail").textContent=u.email||"";
+$("setEmail").textContent=
+u.email||"";
 
-$("setAge").textContent=u.age||"";
+$("setAge").textContent=
+u.age||"";
 
-$("setPhone").textContent=u.phone||"";
+$("setPhone").textContent=
+u.phone||"";
 
 }
 
@@ -2049,9 +2965,11 @@ function render(){
 
 let u=current();
 
-if(!u)return;
+if(!u)
+return;
 
-let wallet=getWallet();
+let wallet=
+getWallet();
 
 $("welcomeName").textContent=
 u.name||"Member";
@@ -2092,11 +3010,14 @@ Number(current().referrals)||0
 )
 );
 
-$("affiliateMemberCount").textContent=n;
+$("affiliateMemberCount")
+.textContent=n;
 
-let level="Below Level 1";
+let level=
+"Below Level 1";
 
-let reward="No reward";
+let reward=
+"No reward";
 
 let next="";
 
@@ -2104,12 +3025,16 @@ let next="";
 if(n>=35){
 
 level="Level 5";
+
 reward="Rs. 30,000";
-next="You have reached the maximum affiliate level.";
+
+next=
+"You have reached the maximum affiliate level.";
 
 }else if(n>=20){
 
 level="Level 4";
+
 reward="Rs. 20,000";
 
 next=
@@ -2118,6 +3043,7 @@ next=
 }else if(n>=13){
 
 level="Level 3";
+
 reward="Rs. 13,000";
 
 next=
@@ -2126,6 +3052,7 @@ next=
 }else if(n>=10){
 
 level="Level 2";
+
 reward="Rs. 8,000";
 
 next=
@@ -2134,6 +3061,7 @@ next=
 }else if(n>=5){
 
 level="Level 1";
+
 reward="No reward";
 
 next=
@@ -2147,11 +3075,14 @@ next=
 }
 
 
-$("affiliateCurrentLevel").textContent=level;
+$("affiliateCurrentLevel")
+.textContent=level;
 
-$("affiliateCurrentReward").textContent=reward;
+$("affiliateCurrentReward")
+.textContent=reward;
 
-$("affiliateNextText").textContent=next;
+$("affiliateNextText")
+.textContent=next;
 
 }
 
@@ -2165,16 +3096,17 @@ function plans(t){
 return t==="assignment"
 
 ?[
-["Assignment Plan 1",1100,500],
-["Assignment Plan 2",1900,900],
-["Assignment Plan 3",3000,1800]
+["Assignment Plan 1",1100,400],
+["Assignment Plan 2",2000,800],
+["Assignment Plan 3",2500,1000],
+["Assignment Plan 4",3200,1300]
 ]
 
 :[
-["Ads Plan 1",880,280],
+["Ads Plan 1",950,300],
 ["Ads Plan 2",1400,450],
 ["Ads Plan 3",1900,780],
-["Ads Plan 4",2500,1100]
+["Ads Plan 4",2500,900]
 ];
 
 }
@@ -2189,7 +3121,9 @@ return plans(t)
 
 <div class="planTop">
 
-<b>${x[0]}</b>
+<b>
+${x[0]}
+</b>
 
 <span class="fee">
 Rs. ${x[1]}
@@ -2233,16 +3167,20 @@ getTime(b.createdAt)-
 getTime(a.createdAt)
 );
 
-if(!rows.length)return 0;
+if(!rows.length)
+return 0;
 
-return getTime(rows[0].createdAt)+DAY_MS;
+return getTime(
+rows[0].createdAt
+)+DAY_MS;
 
 }
 
 
 function assignmentLocked(){
 
-let end=assignmentLockEnd();
+let end=
+assignmentLockEnd();
 
 return end>0&&Date.now()<end;
 
@@ -2264,16 +3202,20 @@ getTime(b.createdAt)-
 getTime(a.createdAt)
 );
 
-if(!rows.length)return 0;
+if(!rows.length)
+return 0;
 
-return getTime(rows[0].createdAt)+DAY_MS;
+return getTime(
+rows[0].createdAt
+)+DAY_MS;
 
 }
 
 
 function adsLocked(){
 
-let end=adsLockEnd();
+let end=
+adsLockEnd();
 
 return end>0&&Date.now()<end;
 
@@ -2281,34 +3223,103 @@ return end>0&&Date.now()<end;
 
 
 /* =========================
-COUNTDOWN
+SEPARATE COUNTDOWNS
 ========================= */
 
-let countdownTimer;
+let assignmentCountdownTimer=null;
 
-function startCountdown(id,getEnd){
+let adsCountdownTimer=null;
 
-clearInterval(countdownTimer);
 
-countdownTimer=setInterval(()=>{
+function startAssignmentCountdown(){
 
-let el=$(id);
+clearInterval(
+assignmentCountdownTimer
+);
 
-let end=getEnd();
+assignmentCountdownTimer=
+setInterval(()=>{
+
+let el=
+$("assignmentCountdown");
+
+let end=
+assignmentLockEnd();
 
 if(!el){
 
-clearInterval(countdownTimer);
+clearInterval(
+assignmentCountdownTimer
+);
+
+assignmentCountdownTimer=null;
 
 return;
 
 }
 
-let r=end-Date.now();
+let r=
+end-Date.now();
 
 if(r<=0){
 
-clearInterval(countdownTimer);
+clearInterval(
+assignmentCountdownTimer
+);
+
+assignmentCountdownTimer=null;
+
+reloadUserData();
+
+return;
+
+}
+
+el.textContent=
+formatRemaining(r);
+
+},1000);
+
+}
+
+
+function startAdsCountdown(){
+
+clearInterval(
+adsCountdownTimer
+);
+
+adsCountdownTimer=
+setInterval(()=>{
+
+let el=
+$("adsCountdown");
+
+let end=
+adsLockEnd();
+
+if(!el){
+
+clearInterval(
+adsCountdownTimer
+);
+
+adsCountdownTimer=null;
+
+return;
+
+}
+
+let r=
+end-Date.now();
+
+if(r<=0){
+
+clearInterval(
+adsCountdownTimer
+);
+
+adsCountdownTimer=null;
 
 reloadUserData();
 
@@ -2332,7 +3343,8 @@ function renderWork(){
 
 let u=current();
 
-if(!u)return;
+if(!u)
+return;
 
 
 /*
@@ -2341,13 +3353,16 @@ ASSIGNMENT
 
 if(assignmentLocked()){
 
-let end=assignmentLockEnd();
+let end=
+assignmentLockEnd();
 
 $("assignmentArea").innerHTML=`
 
 <div class="lockBox">
 
-<div class="lockIcon">🔒</div>
+<div class="lockIcon">
+🔒
+</div>
 
 <div class="lockTitle">
 Assignment Work Completed
@@ -2365,16 +3380,15 @@ ${formatRemaining(end-Date.now())}
 
 `;
 
-startCountdown(
-"assignmentCountdown",
-assignmentLockEnd
-);
+startAssignmentCountdown();
 
 }else if(!u.plans.assignment){
 
 $("assignmentArea").innerHTML=`
 
-<div class="icon">📝</div>
+<div class="icon">
+📝
+</div>
 
 <div class="badgeTitle">
 Assignment Work
@@ -2397,7 +3411,9 @@ u.plans.assignment.status==="pending"
 
 $("assignmentArea").innerHTML=`
 
-<div class="icon">📝</div>
+<div class="icon">
+📝
+</div>
 
 <div class="badgeTitle">
 Assignment Work
@@ -2415,7 +3431,9 @@ u.plans.assignment.status==="rejected"
 
 $("assignmentArea").innerHTML=`
 
-<div class="icon">📝</div>
+<div class="icon">
+📝
+</div>
 
 <div class="badgeTitle">
 Assignment Work
@@ -2436,13 +3454,17 @@ Select Another Plan
 
 $("assignmentArea").innerHTML=`
 
-<div class="icon">📝</div>
+<div class="icon">
+📝
+</div>
 
 <div class="badgeTitle">
 Assignment Work
+
 <span class="status approved">
 Approved
 </span>
+
 </div>
 
 ${taskUI("assignment")}
@@ -2458,13 +3480,16 @@ ADS
 
 if(adsLocked()){
 
-let end=adsLockEnd();
+let end=
+adsLockEnd();
 
 $("adsArea").innerHTML=`
 
 <div class="lockBox">
 
-<div class="lockIcon">🔒</div>
+<div class="lockIcon">
+🔒
+</div>
 
 <div class="lockTitle">
 Advertisement Completed
@@ -2482,16 +3507,15 @@ ${formatRemaining(end-Date.now())}
 
 `;
 
-startCountdown(
-"adsCountdown",
-adsLockEnd
-);
+startAdsCountdown();
 
 }else if(!u.plans.ads){
 
 $("adsArea").innerHTML=`
 
-<div class="icon">🎞</div>
+<div class="icon">
+🎞
+</div>
 
 <div class="badgeTitle">
 Ads Watching
@@ -2514,7 +3538,9 @@ u.plans.ads.status==="pending"
 
 $("adsArea").innerHTML=`
 
-<div class="icon">🎞</div>
+<div class="icon">
+🎞
+</div>
 
 <div class="badgeTitle">
 Ads Watching
@@ -2532,7 +3558,9 @@ u.plans.ads.status==="rejected"
 
 $("adsArea").innerHTML=`
 
-<div class="icon">🎞</div>
+<div class="icon">
+🎞
+</div>
 
 <div class="badgeTitle">
 Ads Watching
@@ -2553,13 +3581,17 @@ Select Another Plan
 
 $("adsArea").innerHTML=`
 
-<div class="icon">🎞</div>
+<div class="icon">
+🎞
+</div>
 
 <div class="badgeTitle">
 Ads Watching
+
 <span class="status approved">
 Approved
 </span>
+
 </div>
 
 ${taskUI("ads")}
@@ -2579,7 +3611,9 @@ window.showAssignmentPlans=()=>{
 
 $("assignmentArea").innerHTML=`
 
-<div class="icon">📝</div>
+<div class="icon">
+📝
+</div>
 
 <div class="badgeTitle">
 Assignment Work
@@ -2600,7 +3634,9 @@ window.showAdsPlans=()=>{
 
 $("adsArea").innerHTML=`
 
-<div class="icon">🎞</div>
+<div class="icon">
+🎞
+</div>
 
 <div class="badgeTitle">
 Ads Watching
@@ -2627,28 +3663,46 @@ let u=current();
 
 if(type==="assignment"){
 
-let completedEn=
-workRecords.some(
+let latestAssignment=
+workRecords
+.filter(
 x=>
 x.type==="assignment"&&
-x.language==="en"&&
 x.status==="completed"
-);
+)
+.sort(
+(a,b)=>
+getTime(b.createdAt)-
+getTime(a.createdAt)
+)[0];
+
+let latestAssignmentTime=
+latestAssignment
+?
+getTime(latestAssignment.createdAt)
+:
+0;
+
+let currentCycleCompleted=
+latestAssignmentTime>0&&
+Date.now()-latestAssignmentTime<DAY_MS;
+
+let completedEn=
+currentCycleCompleted &&
+latestAssignment.language==="en";
 
 let completedUr=
-workRecords.some(
-x=>
-x.type==="assignment"&&
-x.language==="ur"&&
-x.status==="completed"
-);
+currentCycleCompleted &&
+latestAssignment.language==="ur";
 
 
 return`
 
 <div class="notice">
 
-<b>English Assignment</b>
+<b>
+English Assignment
+</b>
 
 <br><br>
 
@@ -2677,7 +3731,9 @@ completedEn
 
 <div class="notice">
 
-<b>Urdu Assignment</b>
+<b>
+Urdu Assignment
+</b>
 
 <br><br>
 
@@ -2710,15 +3766,13 @@ completedUr
 }
 
 
-/*
-ADS
-*/
-
 return`
 
 <div class="notice">
 
-<b>Featured Advertisement</b>
+<b>
+Featured Advertisement
+</b>
 
 <br><br>
 
@@ -2850,7 +3904,8 @@ const AD_DURATION=20;
 
 window.startBuiltInAd=()=>{
 
-if(adPlaying)return;
+if(adPlaying)
+return;
 
 adFinished=false;
 
@@ -2880,11 +3935,17 @@ if("speechSynthesis"in window){
 speechSynthesis.cancel();
 
 let voices=[
+
 "Welcome to Pro Earn.",
+
 "Work with purpose.",
+
 "Simple, clear and organized.",
+
 "Build your progress.",
+
 "Pro Earn. Stay focused and keep moving forward."
+
 ];
 
 let i=0;
@@ -2915,18 +3976,23 @@ speak();
 }
 
 
-let st=Date.now();
+let st=
+Date.now();
 
-adTimer=setInterval(()=>{
+adTimer=
+setInterval(()=>{
 
-let e=(Date.now()-st)/1000;
+let e=
+(Date.now()-st)/1000;
 
-let p=Math.min(
+let p=
+Math.min(
 e/AD_DURATION,
 1
 );
 
-$("adProgressFill").style.width=
+$("adProgressFill")
+.style.width=
 p*100+"%";
 
 $("adTimer").textContent=
@@ -2934,9 +4000,14 @@ $("adTimer").textContent=
 String(
 Math.max(
 0,
-Math.ceil(AD_DURATION-e)
+Math.ceil(
+AD_DURATION-e
 )
-).padStart(2,"0");
+)
+).padStart(
+2,
+"0"
+);
 
 
 let idx=
@@ -2967,7 +4038,8 @@ finishBuiltInAd();
 
 function finishBuiltInAd(){
 
-if(!adPlaying)return;
+if(!adPlaying)
+return;
 
 adPlaying=false;
 
@@ -2980,16 +4052,20 @@ adTimer=null;
 if("speechSynthesis"in window)
 speechSynthesis.cancel();
 
-$("adProgressFill").style.width="100%";
+$("adProgressFill")
+.style.width="100%";
 
-$("adTimer").textContent="0:00";
+$("adTimer").textContent=
+"0:00";
 
 $("adStartButton").textContent=
 "✓ Advertisement Completed";
 
-$("adComplete").classList.add("show");
+$("adComplete")
+.classList.add("show");
 
-$("finishAdButton").disabled=false;
+$("finishAdButton").disabled=
+false;
 
 $("finishAdButton").textContent=
 "🎁 Collect Reward";
@@ -3016,9 +4092,11 @@ type==="ads"&&adsLocked()
 return;
 
 
-$("planModal").classList.add("open");
+$("planModal")
+.classList.add("open");
 
-$("planModalTitle").textContent=
+$("planModalTitle")
+.textContent=
 type==="assignment"
 ?"Activate Assignment Plan"
 :"Activate Ads Plan";
@@ -3041,7 +4119,9 @@ Plan ${i+1}
 
 <div class="selectedPaymentRow">
 
-<span>Plan Fee</span>
+<span>
+Plan Fee
+</span>
 
 <b>
 Rs. ${fee}
@@ -3051,7 +4131,9 @@ Rs. ${fee}
 
 <div class="selectedPaymentRow">
 
-<span>Daily Earning</span>
+<span>
+Daily Earning
+</span>
 
 <b>
 Rs. ${earn}
@@ -3064,13 +4146,17 @@ Rs. ${earn}
 `;
 
 
-$("planModal").dataset.type=type;
+$("planModal").dataset.type=
+type;
 
-$("planModal").dataset.index=i;
+$("planModal").dataset.index=
+i;
 
-$("planModal").dataset.fee=fee;
+$("planModal").dataset.fee=
+fee;
 
-$("planModal").dataset.earn=earn;
+$("planModal").dataset.earn=
+earn;
 
 $("trxId").value="";
 
@@ -3080,7 +4166,8 @@ $("planMsg").innerHTML="";
 
 
 window.closePlan=()=>
-$("planModal").classList.remove("open");
+$("planModal")
+.classList.remove("open");
 
 
 /* =========================
@@ -3092,10 +4179,13 @@ NO users UPDATE HERE
 window.submitPlan=async()=>{
 
 let type=
-$("planModal").dataset.type;
+$("planModal")
+.dataset.type;
 
 let trx=
-$("trxId").value.trim();
+$("trxId")
+.value
+.trim();
 
 if(!trx){
 
@@ -3109,17 +4199,20 @@ return;
 
 let planNumber=
 Number(
-$("planModal").dataset.index
+$("planModal")
+.dataset.index
 )+1;
 
 let fee=
 Number(
-$("planModal").dataset.fee
+$("planModal")
+.dataset.fee
 );
 
 let earn=
 Number(
-$("planModal").dataset.earn
+$("planModal")
+.dataset.earn
 );
 
 
@@ -3129,23 +4222,39 @@ $("planMsg").innerHTML=
 
 try{
 
-/*
-ONLY CREATE planRequests.
-No updateDoc on users.
-*/
-
 await addDoc(
-collection(firestore,"planRequests"),
+collection(
+firestore,
+"planRequests"
+),
 {
-uid:firebaseUser.uid,
+
+uid:
+firebaseUser.uid,
+
 type:type,
-plan:planNumber,
-fee:fee,
-earn:earn,
-status:"pending",
-trx:trx,
-submittedAt:serverTimestamp(),
-lockUntil:0
+
+plan:
+planNumber,
+
+fee:
+fee,
+
+earn:
+earn,
+
+status:
+"pending",
+
+trx:
+trx,
+
+submittedAt:
+serverTimestamp(),
+
+lockUntil:
+0
+
 }
 );
 
@@ -3182,7 +4291,8 @@ window.submitAssignment=async lang=>{
 
 let u=current();
 
-let p=u.plans.assignment;
+let p=
+u.plans.assignment;
 
 if(
 !p||
@@ -3212,12 +4322,19 @@ lang==="en"
 
 
 let el=
-$(lang==="en"?"enAnswer":"urAnswer");
+$(
+lang==="en"
+?"enAnswer"
+:"urAnswer"
+);
 
-if(!el)return;
+if(!el)
+return;
 
 
-if(el.value.trim()!==expected){
+if(
+el.value.trim()!==expected
+){
 
 $("taskMsg").innerHTML=
 '<div class="notice error">Assignment is incorrect. Please write the exact sentence shown above.</div>';
@@ -3229,20 +4346,31 @@ return;
 
 try{
 
-/*
-NO user update.
-Only create immutable work record.
-*/
-
 await addDoc(
-collection(firestore,"workRecords"),
+collection(
+firestore,
+"workRecords"
+),
 {
-uid:firebaseUser.uid,
-type:"assignment",
-language:lang,
-reward:Number(p.earn),
-status:"completed",
-createdAt:serverTimestamp()
+
+uid:
+firebaseUser.uid,
+
+type:
+"assignment",
+
+language:
+lang,
+
+reward:
+Number(p.earn),
+
+status:
+"completed",
+
+createdAt:
+serverTimestamp()
+
 }
 );
 
@@ -3277,7 +4405,8 @@ window.finishAd=async()=>{
 
 let u=current();
 
-let p=u.plans.ads;
+let p=
+u.plans.ads;
 
 if(
 !p||
@@ -3306,19 +4435,28 @@ return;
 
 try{
 
-/*
-NO users update.
-Only create work record.
-*/
-
 await addDoc(
-collection(firestore,"workRecords"),
+collection(
+firestore,
+"workRecords"
+),
 {
-uid:firebaseUser.uid,
-type:"ads",
-reward:Number(p.earn),
-status:"completed",
-createdAt:serverTimestamp()
+
+uid:
+firebaseUser.uid,
+
+type:
+"ads",
+
+reward:
+Number(p.earn),
+
+status:
+"completed",
+
+createdAt:
+serverTimestamp()
+
 }
 );
 
@@ -3373,7 +4511,8 @@ return;
 }
 
 
-let wallet=getWallet();
+let wallet=
+getWallet();
 
 
 if(amount>wallet){
@@ -3413,10 +4552,14 @@ return;
 
 
 let number=
-$("wdNumber").value.trim();
+$("wdNumber")
+.value
+.trim();
 
 let name=
-$("wdName").value.trim();
+$("wdName")
+.value
+.trim();
 
 
 if(!number||!name){
@@ -3441,15 +4584,21 @@ Math.random()
 method:
 $("wdMethod").value,
 
-number:number,
+number:
+number,
 
-name:name,
+name:
+name,
 
-amount:amount,
+amount:
+amount,
 
-status:"pending",
+status:
+"pending",
 
-date:new Date().toLocaleString()
+date:
+new Date()
+.toLocaleString()
 
 };
 
@@ -3460,17 +4609,21 @@ $("wdMsg").innerHTML=
 
 try{
 
-/*
-NO users update.
-Only create withdrawal record.
-*/
-
 await addDoc(
-collection(firestore,"withdrawals"),
+collection(
+firestore,
+"withdrawals"
+),
 {
-uid:firebaseUser.uid,
+
+uid:
+firebaseUser.uid,
+
 ...w,
-createdAt:serverTimestamp()
+
+createdAt:
+serverTimestamp()
+
 }
 );
 
@@ -3505,8 +4658,11 @@ function renderStatus(){
 let u=current();
 
 let ps=[
+
 ["Assignment",u.plans.assignment],
+
 ["Ads Watching",u.plans.ads]
+
 ];
 
 
@@ -3523,7 +4679,9 @@ p
 
 <div class="notice">
 
-<b>${n}</b>
+<b>
+${n}
+</b>
 
 —
 
@@ -3552,13 +4710,16 @@ ${p.trx||"Not provided"}
 
 <div class="notice">
 
-<b>${n}</b>
+<b>
+${n}
+</b>
 
 — none
 
 </div>
 
 `
+
 )
 .join("");
 
@@ -3638,11 +4799,6 @@ ${x.date||""}
 '<div class="notice">No withdrawal history yet.</div>';
 
 
-/*
-COMPLETE HISTORY
-DERIVED FROM FIREBASE COLLECTIONS
-*/
-
 let rows=[];
 
 
@@ -3650,13 +4806,18 @@ planRequests.forEach(x=>{
 
 rows.push({
 
-time:getTime(x.submittedAt),
+time:
+getTime(x.submittedAt),
 
-html:`
+html:
+
+`
 
 <div class="notice">
 
-<b>Plan Request</b>
+<b>
+Plan Request
+</b>
 
 —
 
@@ -3683,7 +4844,8 @@ ${x.status||"pending"}
 
 <span class="small">
 
-TRX: ${x.trx||"Not provided"}
+TRX:
+${x.trx||"Not provided"}
 
 </span>
 
@@ -3700,9 +4862,12 @@ workRecords.forEach(x=>{
 
 rows.push({
 
-time:getTime(x.createdAt),
+time:
+getTime(x.createdAt),
 
-html:`
+html:
+
+`
 
 <div class="notice">
 
@@ -3737,13 +4902,20 @@ withdrawalRecords.forEach(x=>{
 
 rows.push({
 
-time:getTime(x.createdAt||x.date),
+time:
+getTime(
+x.createdAt||x.date
+),
 
-html:`
+html:
+
+`
 
 <div class="notice">
 
-<b>Withdrawal</b>
+<b>
+Withdrawal
+</b>
 
 —
 
@@ -3783,7 +4955,9 @@ rows.length
 
 ?
 
-rows.map(x=>x.html).join("")
+rows
+.map(x=>x.html)
+.join("")
 
 :
 
@@ -3808,7 +4982,9 @@ render();
 
 console.error(e);
 
-alert(firebaseError(e));
+alert(
+firebaseError(e)
+);
 
 }
 
@@ -3855,7 +5031,9 @@ fallbackCopy(v);
 function fallbackCopy(v){
 
 let t=
-document.createElement("textarea");
+document.createElement(
+"textarea"
+);
 
 t.value=v;
 
@@ -3865,7 +5043,9 @@ t.select();
 
 try{
 
-document.execCommand("copy");
+document.execCommand(
+"copy"
+);
 
 }catch(e){}
 
@@ -3885,6 +5065,12 @@ window.addEventListener(
 if(adTimer)
 clearInterval(adTimer);
 
+if(assignmentCountdownTimer)
+clearInterval(assignmentCountdownTimer);
+
+if(adsCountdownTimer)
+clearInterval(adsCountdownTimer);
+
 if("speechSynthesis"in window)
 speechSynthesis.cancel();
 
@@ -3894,4 +5080,4 @@ speechSynthesis.cancel();
 </script>
 
 </body>
-</html>
+  </html>
